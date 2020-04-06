@@ -1,0 +1,37 @@
+body {
+    margin: 0px;
+    padding-bottom: 0px;
+    background-color: black;
+}
+
+table {
+    width: 960px;
+    height: 960px;
+    border-spacing: 0px;
+    margin: auto;
+}
+
+tr {
+    width: 100%;
+    height: 12.5%;
+}
+
+.boardSquare {
+    width: 12.5%;
+}
+
+.boardPiece {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+
+    /* boardSquare colorings */
+.white {
+    background-image: url(images/tanBoardColor.jpeg);
+}
+
+.black {
+    background-image: url(images/brownBoardColor.jpeg);
+}
