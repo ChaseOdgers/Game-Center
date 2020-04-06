@@ -1,6 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     createBoard();
     setupBoard();
+
+    let thePieces = document.getElementsByClassName("boardPiece");
+    for (let i = 0; i < thePieces.length; i++) {
+        thePieces[i].addEventListener("click", () => showMoves(getPossibleMoves(thePieces[i])));
+    }
+    
 });
 
 function createBoard() {
@@ -52,4 +58,42 @@ function setupBoard() {
         aWhitePawn.className = "boardPiece";
         aSquare.appendChild(aWhitePawn);
     }
+}
+
+function getPossibleMoves(aBoardPiece) {
+    let currentLocation = aBoardPiece.parentNode.id;
+    let currentColumn = currentLocation.charAt(0).charCodeAt(0);
+    let currentRow = parseInt(currentLocation.charAt(1));
+
+    let pieceType = aBoardPiece.id.substring(0, aBoardPiece.id.length - 1);
+    let possibleMoves = [];
+
+    if (pieceType == "pawn") {
+        let pieceColor = aBoardPiece.id.charAt(aBoardPiece.id.length - 1);
+        if (pieceColor == "W") {
+            possibleMoves.push(String.fromCharCode(currentColumn) + (currentRow + 1));
+            if (currentRow == 2) {
+                possibleMoves.push(String.fromCharCode(currentColumn) + (currentRow + 2));
+            }
+        }
+        else {
+            possibleMoves.push(String.fromCharCode(currentColumn) + (currentRow - 1));
+            if (currentRow == 7) {
+                possibleMoves.push(String.fromCharCode(currentColumn) + (currentRow - 2));
+            }
+        }
+    }
+
+    return possibleMoves;
+}
+
+function showMoves(possibleMoves) {
+    possibleMoves.forEach((move) => {
+        document.getElementById(move).classList.add("move");
+    })
+    setTimeout(() => { // wait 3 seconds then remove shown possible moves
+        possibleMoves.forEach((move) => {
+            document.getElementById(move).classList.remove("move");
+        })
+    }, 2500);
 }
