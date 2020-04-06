@@ -35,3 +35,44 @@ tr {
 .black {
     background-image: url(images/brownBoardColor.jpeg);
 }
+
+
+    /* boardPiece mappings from sprite */
+/* white pieces */
+#kingW {
+    background: url("images/pieceSprite.gif") 0 0;
+}
+#queenW {
+    background: url("images/pieceSprite.gif") -101px 0;
+}
+#bishopW {
+    background: url("images/pieceSprite.gif") -201px 0;
+}
+#knightW {
+    background: url("images/pieceSprite.gif") -301px 0;
+}
+#rookW {
+    background: url("images/pieceSprite.gif") -401px 0;
+}
+#pawnW {
+    background: url("images/pieceSprite.gif") -501px 0;
+}
+/* black pieces */
+#kingB {
+    background: url("images/pieceSprite.gif") 0 100px;
+}
+#queenB {
+    background: url("images/pieceSprite.gif") -101px 100px;
+}
+#bishopB {
+    background: url("images/pieceSprite.gif") -201px 100px;
+}
+#knightB {
+    background: url("images/pieceSprite.gif") -301px 100px;
+}
+#rookB {
+    background: url("images/pieceSprite.gif") -401px 100px;
+}
+#pawnB {
+    background: url("images/pieceSprite.gif") -501px 100px;
+}
