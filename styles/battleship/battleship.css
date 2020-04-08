@@ -1,0 +1,33 @@
+body {
+    background-color: lightblue; }
+
+h1 {
+    text-align: center;
+    font-size: 50px;
+    text-decoration: underline;
+    text-shadow: 2px 2px 5px red; }
+
+table {
+    margin-left:  50px;
+    border: 3px solid black;
+    border-collapse: collapse;
+    display: inline-block;
+    vertical-align: middle; }
+
+td {
+    width: 50px;
+    height: 50px;
+    border: 2px solid black; }
+
+#ships td {
+    width: 250px; }
+
+.full-width {
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    max-width: 100vw;
+    position: relative;
+    right: 50%;
+    width: 100vw;
+}
