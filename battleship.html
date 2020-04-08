@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title id="title">Battleship</title>
+	<link type="text/css" href="battleship.css" rel="stylesheet"/>
+</head>
+<body>
+	<h1>Battleship</h1>
+	<div style="text-align: center;">
+		<table id="board"></table>
+		<script type="text/javascript" src="generateBoard.js"></script>
+
+		<table id="ships">
+			<tr><th>Ships</th></tr>
+			<tr><td id="carrier">
+					<img id="imgCarrier" src="carrier.png">
+			</td></tr>
+			<tr><td id="battleship"><img src="carrier.png"></td></tr>
+			<tr><td id="destroyer"><img src="carrier.png"></td></tr>
+			<tr><td id="submarine"><img src="carrier.png"></td></tr>
+			<tr><td id="patrolBoat"><img src="carrier.png"></td></tr>
+		</table>
+	</div>
+
+	<script type="text/javascript" src="init.js"></script>
+	<script type="text/javascript" src="shipSelection.js"></script>
+</body>
+</html>
