@@ -9,6 +9,20 @@ function getRandomInt(min, max) {
 /*DISCLAIMER: This rng was copy and pasted from
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random*/
 
+document.getElementByID("c9").addEventListener("click", function(){alert("Success!");});
+
+function toggleMenuVisibility()//TODO: Fix visibility, this function does not work
+{
+  let x = document.getElementById("upgradeMenu");
+  if(x.style.display === "none")
+  {
+    x.style.display === "block";
+  }
+  else
+  {
+    x.style.display === "none";
+  }
+}
 
 function mob(coordinate, health)  //blueprint for
 {

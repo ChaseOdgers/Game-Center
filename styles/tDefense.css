@@ -5,7 +5,7 @@
   width:50px;
   background-color: #555;
 }
-div
+div.row
 {
   column-count: 9;
 }
