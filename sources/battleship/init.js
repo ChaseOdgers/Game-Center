@@ -14,7 +14,7 @@ function initGameState() {
             "submarine": {
                 "life": 3,
                 "locations": [] },
-            "patrolBoat": {
+            "patrolboat": {
                 "life": 2,
                 "locations": [] }
         }
