@@ -27,8 +27,8 @@ function randomInt(min, max) {
 };
 
 function generateLocations(shipLength) {
-    let row = randomInt(1,10);
-    let col = randomInt(1,10);
+    let row = randomInt(0,9);
+    let col = randomInt(0,9);
     let direction = randomInt(1,4);
     let locations = [];
 
@@ -49,7 +49,7 @@ function generateLocations(shipLength) {
                 col--;
                 break;
         }
-        if (1 <= row && row <= 10 && 1 <= col && col <= 10)
+        if (0 <= row && row <= 9 && 0 <= col && col <= 9)
             locations.push([row,col]);
         else {
             locations = generateLocations(shipLength);
@@ -87,3 +87,6 @@ function initStateCP() {
 function initStatePlayer() {
     return (initGameState());
 };
+
+let player = initStatePlayer();
+let cp = initStateCP();
