@@ -49,7 +49,7 @@ function shipSelect(clickEvent) {
         if (!validPlacement(boardClick.target))
             return;
 
-            boardClick.target.appendChild(image);
+        boardClick.target.appendChild(image);
         let cellBounds = boardClick.target.getBoundingClientRect();
         if (ships[selectedShip] == "horizontal")
             image.style.left = cellBounds.left + "px";
@@ -100,6 +100,7 @@ function shipSelect(clickEvent) {
 let ships = {"carrier": "horizontal", "battleship": "horizontal", 
     "destroyer": "horizontal", "submarine": "horizontal", "patrolboat": "horizontal"};
 let selectedShip = "";
+document.getElementById("boardCP").style.visibility = "collapse";
 
 for (ship in ships)
     document.getElementById(ship).addEventListener("click", shipSelect);

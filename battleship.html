@@ -8,6 +8,9 @@
 <body>
 	<h1>Battleship</h1>
 	<div style="text-align: center;">
+		<table id="boardCP"></table>
+	</div>
+	<div style="text-align: center;">
 		<table id="board"></table>
 		<script type="text/javascript" src="sources/battleship/generateBoard.js"></script>
 
@@ -23,7 +26,10 @@
 		</table>
 	</div>
 	<button id="btnStart">Start Game</button>
+	<p id="winner">You Win!</p>
+	<p id="loser">You Lose!</p>
 	<script type="text/javascript" src="sources/battleship/init.js"></script>
 	<script type="text/javascript" src="sources/battleship/shipSelection.js"></script>
+	<script type="text/javascript" src="sources/battleship/gameStart.js"></script>
 </body>
 </html>
