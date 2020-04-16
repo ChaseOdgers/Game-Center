@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let thePieces = document.getElementsByClassName("boardPiece");
     for (let i = 0; i < thePieces.length; i++) {
-        thePieces[i].addEventListener("click", () => showMoves(getPossibleMoves(thePieces[i])));
+        thePieces[i].addEventListener("click", makeMove, false);
     }
     
 });
@@ -64,9 +64,22 @@ function showMoves(possibleMoves) {
     possibleMoves.forEach((move) => {
         document.getElementById(move).classList.add("move");
     })
-    setTimeout(() => { // wait 3 seconds then remove shown possible moves
+    setTimeout(() => { // wait 2 seconds then remove shown possible moves
         possibleMoves.forEach((move) => {
             document.getElementById(move).classList.remove("move");
         })
     }, 2000);
+}
+
+function makeMove() {
+    let currentLocation = document.getElementById(this.parentNode.id);
+    let possibleMoves = getPossibleMoves(this);
+    showMoves(possibleMoves);
+    document.getElementById("mainBoard").onclick = handleClick;
+}
+
+function handleClick(theEvent) {
+    let theSelection = theEvent.target;
+    console.log(theSelection);
+
 }
