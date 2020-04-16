@@ -88,8 +88,17 @@ function makeMove() {
     
     function handleClick(theEvent) {
         let theSelection = theEvent.target;
-        if (possibleMoves.includes(theSelection.id)) {
-            movePiece(currentLocation.id, theSelection.id);
+        let theSelectionID;
+        // check whether theSelection is a boardPiece or boardSquare
+        if (theSelection.classList.contains("boardPiece")) {
+            theSelectionID = theSelection.parentNode.id;
+        }
+        else {
+            theSelectionID = theSelection.id;
+        }
+        // check whether theSelectionID is a valid move 
+        if (possibleMoves.includes(theSelectionID)) {
+            movePiece(currentLocation.id, theSelectionID);
         }
         else {
             console.log("invalid move");

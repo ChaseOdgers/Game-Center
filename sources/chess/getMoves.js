@@ -369,7 +369,6 @@ function getPossibleMoves(aBoardPiece) {
             }
         }
     }
-    console.log(possibleMoves);
 
     return possibleMoves;
 }
