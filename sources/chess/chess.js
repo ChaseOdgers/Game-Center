@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let thePieces = document.getElementsByClassName("boardPiece");
     for (let i = 0; i < thePieces.length; i++) {
-        thePieces[i].addEventListener("click", makeMove, false);
+        thePieces[i].addEventListener("click", makeMove, true);
     }
     
 });
@@ -75,11 +75,49 @@ function makeMove() {
     let currentLocation = document.getElementById(this.parentNode.id);
     let possibleMoves = getPossibleMoves(this);
     showMoves(possibleMoves);
-    document.getElementById("mainBoard").onclick = handleClick;
+
+    // "pause" the showMoves eventHandler
+    let thePieces = document.getElementsByClassName("boardPiece");
+    for (let i = 0; i < thePieces.length; i++) {
+        thePieces[i].removeEventListener("click", makeMove, true);
+    }
+    setTimeout(() => {
+        // "activate" the handleClick eventHandler
+        document.getElementById("mainBoard").addEventListener("click", handleClick, false);
+    });
+    
+    function handleClick(theEvent) {
+        let theSelection = theEvent.target;
+        if (possibleMoves.includes(theSelection.id)) {
+            movePiece(currentLocation.id, theSelection.id);
+        }
+        else {
+            console.log("invalid move");
+        }
+    
+        setTimeout(() => {
+            // "pause" the handleClick eventHandler
+            document.getElementById("mainBoard").removeEventListener("click", handleClick, false);
+            // "activate" the showMoves eventHandler
+            let thePieces = document.getElementsByClassName("boardPiece");
+            for (let i = 0; i < thePieces.length; i++) {
+                thePieces[i].addEventListener("click", makeMove, true);
+            }
+        });
+    }
 }
 
-function handleClick(theEvent) {
-    let theSelection = theEvent.target;
-    console.log(theSelection);
-
+function movePiece(currentLocation, newLocation) {
+    let newBoardSquare = document.getElementById(newLocation);
+    let currentBoardSquare = document.getElementById(currentLocation);
+    if (newBoardSquare.hasChildNodes()) { // attacking a piece
+        newBoardSquare.firstChild.id = currentBoardSquare.firstChild.id;
+    }
+    else { // moving to an empty boardSquare
+        let newPiece = document.createElement("div");
+        newPiece.id = currentBoardSquare.firstChild.id;
+        newPiece.classList.add("boardPiece");
+        newBoardSquare.appendChild(newPiece);
+    }
+    currentBoardSquare.removeChild(currentBoardSquare.firstElementChild);
 }
