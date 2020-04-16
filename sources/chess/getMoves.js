@@ -19,14 +19,14 @@ function getPossibleMoves(aBoardPiece) {
             let antiBoardSquare = document.getElementById(String.fromCharCode(currentColumn + 1) + (currentRow + 1));
             // if a black piece can be attacked on the anti diagonal
             if (antiBoardSquare != null && antiBoardSquare.hasChildNodes()) {
-                if (antiBoardSquare.firstChild.id.charAt(antiBoardSquare.id.length - 1) != pieceColor) {
+                if (antiBoardSquare.firstChild.id.charAt(antiBoardSquare.firstChild.id.length - 1) != pieceColor) {
                     possibleMoves.push(antiBoardSquare.id);
                 }
             }
             let mainBoardSquare = document.getElementById(String.fromCharCode(currentColumn - 1) + (currentRow + 1));
             // if a black piece can be attacked on the main diagonal
             if (mainBoardSquare != null && mainBoardSquare.hasChildNodes()) {
-                if (mainBoardSquare.firstChild.id.charAt(mainBoardSquare.length - 1) != pieceColor) {
+                if (mainBoardSquare.firstChild.id.charAt(mainBoardSquare.firstChild.id.length - 1) != pieceColor) {
                     possibleMoves.push(mainBoardSquare.id);
                 }
             }
