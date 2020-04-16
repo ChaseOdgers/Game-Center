@@ -29,54 +29,54 @@ tr {
 
     /* boardSquare colorings */
     
-    .white {
-        background-image: url(images/tanBoardColor.jpeg);
-    }
-    
-    .black {
-        background-image: url(images/brownBoardColor.jpeg);
-    }
-    
-    .move {
-        box-shadow: inset 0 0 0 1000px rgba(0, 130, 7, 0.5);
-    }
+.white {
+    background-image: url(../imgs/tanBoardColor.jpeg);
+}
+
+.black {
+    background-image: url(../imgs/brownBoardColor.jpeg);
+}
+
+.move {
+    box-shadow: inset 0 0 0 1000px rgba(0, 130, 7, 0.5);
+}
 
     /* boardPiece mappings from sprite */
 /* white pieces */
 #kingW {
-    background: url("images/pieceSprite.gif") 0 0;
+    background: url("../imgs/pieceSprite.gif") 0 0;
 }
 #queenW {
-    background: url("images/pieceSprite.gif") -101px 0;
+    background: url("../imgs/pieceSprite.gif") -101px 0;
 }
 #bishopW {
-    background: url("images/pieceSprite.gif") -201px 0;
+    background: url("../imgs/pieceSprite.gif") -201px 0;
 }
 #knightW {
-    background: url("images/pieceSprite.gif") -301px 0;
+    background: url("../imgs/pieceSprite.gif") -301px 0;
 }
 #rookW {
-    background: url("images/pieceSprite.gif") -401px 0;
+    background: url("../imgs/pieceSprite.gif") -401px 0;
 }
 #pawnW {
-    background: url("images/pieceSprite.gif") -501px 0;
+    background: url("../imgs/pieceSprite.gif") -501px 0;
 }
 /* black pieces */
 #kingB {
-    background: url("images/pieceSprite.gif") 0 100px;
+    background: url("../imgs/pieceSprite.gif") 0 100px;
 }
 #queenB {
-    background: url("images/pieceSprite.gif") -101px 100px;
+    background: url("../imgs/pieceSprite.gif") -101px 100px;
 }
 #bishopB {
-    background: url("images/pieceSprite.gif") -201px 100px;
+    background: url("../imgs/pieceSprite.gif") -201px 100px;
 }
 #knightB {
-    background: url("images/pieceSprite.gif") -301px 100px;
+    background: url("../imgs/pieceSprite.gif") -301px 100px;
 }
 #rookB {
-    background: url("images/pieceSprite.gif") -401px 100px;
+    background: url("../imgs/pieceSprite.gif") -401px 100px;
 }
 #pawnB {
-    background: url("images/pieceSprite.gif") -501px 100px;
+    background: url("../imgs/pieceSprite.gif") -501px 100px;
 }
