@@ -1,0 +1,11 @@
+.tile
+{
+  color : green;
+  height : 50px;
+  width:50px;
+  background-color: #555;
+}
+div.row
+{
+  column-count: 9;
+}
