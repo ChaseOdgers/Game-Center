@@ -66,7 +66,7 @@ function getPossibleMoves(aBoardPiece) {
     if (pieceType == "rook" || pieceType == "queen") { // I think it will fail to detect enemy in adjacent boardSquare
         let evaluatingRow = currentRow + 1;
         let posVerticalDirSquare = document.getElementById(String.fromCharCode(currentColumn) + evaluatingRow);
-        // while the next boardSquare is not off the board and does not contain a piece
+        // while the boardSquare is not off the board and does not contain a piece
         while (posVerticalDirSquare != null && !posVerticalDirSquare.hasChildNodes()) {
             possibleMoves.push(posVerticalDirSquare.id);
             posVerticalDirSquare = document.getElementById(String.fromCharCode(currentColumn) + ++evaluatingRow);
@@ -80,7 +80,7 @@ function getPossibleMoves(aBoardPiece) {
         }
         evaluatingRow = currentRow - 1;
         let negVerticalDirSquare = document.getElementById(String.fromCharCode(currentColumn) + evaluatingRow);
-        // while the next boardSquare is not off the board and does not contain a piece
+        // while the boardSquare is not off the board and does not contain a piece
         while (negVerticalDirSquare != null && !negVerticalDirSquare.hasChildNodes()) {
             possibleMoves.push(negVerticalDirSquare.id);
             negVerticalDirSquare = document.getElementById(String.fromCharCode(currentColumn) + --evaluatingRow);
@@ -94,7 +94,7 @@ function getPossibleMoves(aBoardPiece) {
         }
         let evaluatingColumn = currentColumn + 1;
         let posHorizontalDirSquare = document.getElementById(String.fromCharCode(evaluatingColumn) + currentRow);
-        // while the next boardSquare is not off the board and does not contain a piece
+        // while the boardSquare is not off the board and does not contain a piece
         while (posHorizontalDirSquare != null && !posHorizontalDirSquare.hasChildNodes()) {
             possibleMoves.push(posHorizontalDirSquare.id);
             posHorizontalDirSquare = document.getElementById(String.fromCharCode(++evaluatingColumn) + currentRow);
@@ -108,7 +108,7 @@ function getPossibleMoves(aBoardPiece) {
         }
         evaluatingColumn = currentColumn - 1;
         let negHorizontalDirSquare = document.getElementById(String.fromCharCode(evaluatingColumn) + currentRow);
-        // while the next boardSquare is not off the board and does not contain a piece
+        // while the boardSquare is not off the board and does not contain a piece
         while (negHorizontalDirSquare != null && !negHorizontalDirSquare.hasChildNodes()) {
             possibleMoves.push(negHorizontalDirSquare.id);
             negHorizontalDirSquare = document.getElementById(String.fromCharCode(--evaluatingColumn) + currentRow);
@@ -125,13 +125,13 @@ function getPossibleMoves(aBoardPiece) {
         let evaluatingRow = currentRow + 1;
         let evaluatingColumn = currentColumn + 1;
         let posAntiDirSquare = document.getElementById(String.fromCharCode(evaluatingColumn) + evaluatingRow);
-        // while the next boardSquare is not off the board and does not contain a piece
+        // while the boardSquare is not off the board and does not contain a piece
         while (posAntiDirSquare != null && !posAntiDirSquare.hasChildNodes()) {
             possibleMoves.push(posAntiDirSquare.id);
             posAntiDirSquare = document.getElementById(String.fromCharCode(++evaluatingColumn) + ++evaluatingRow);
             // if the next boardSquare is not off the board and contains a piece
             if (posAntiDirSquare != null && posAntiDirSquare.hasChildNodes()) {
-                // if the piece is not the same color as the moving rook
+                // if the piece is not the same color as the moving bishop
                 if (posAntiDirSquare.firstChild.id.charAt(posAntiDirSquare.firstChild.id.length - 1) != pieceColor) {
                     possibleMoves.push(posAntiDirSquare.id);
                 }
@@ -140,13 +140,13 @@ function getPossibleMoves(aBoardPiece) {
         evaluatingRow = currentRow - 1;
         evaluatingColumn = currentColumn - 1;
         let negAntiDirSquare = document.getElementById(String.fromCharCode(evaluatingColumn) + evaluatingRow);
-        // while the next boardSquare is not off the board and does not contain a piece
+        // while the boardSquare is not off the board and does not contain a piece
         while (negAntiDirSquare != null && !negAntiDirSquare.hasChildNodes()) {
             possibleMoves.push(negAntiDirSquare.id);
             negAntiDirSquare = document.getElementById(String.fromCharCode(--evaluatingColumn) + --evaluatingRow);
             // if the next boardSquare is not off the board and contains a piece
             if (negAntiDirSquare != null && negAntiDirSquare.hasChildNodes()) {
-                // if the piece is not the same color as the moving rook
+                // if the piece is not the same color as the moving bishop
                 if (negAntiDirSquare.firstChild.id.charAt(negAntiDirSquare.firstChild.id.length - 1) != pieceColor) {
                     possibleMoves.push(negAntiDirSquare.id);
                 }
@@ -155,13 +155,13 @@ function getPossibleMoves(aBoardPiece) {
         evaluatingRow = currentRow - 1;
         evaluatingColumn = currentColumn + 1;
         let posMainDirSquare = document.getElementById(String.fromCharCode(evaluatingColumn) + evaluatingRow);
-        // while the next boardSquare is not off the board and does not contain a piece
+        // while the boardSquare is not off the board and does not contain a piece
         while (posMainDirSquare != null && !posMainDirSquare.hasChildNodes()) {
             possibleMoves.push(posMainDirSquare.id);
             posMainDirSquare = document.getElementById(String.fromCharCode(++evaluatingColumn) + --evaluatingRow);
             // if the next boardSquare is not off the board and contains a piece
             if (posMainDirSquare != null && posMainDirSquare.hasChildNodes()) {
-                // if the piece is not the same color as the moving rook
+                // if the piece is not the same color as the moving bishop
                 if (posMainDirSquare.firstChild.id.charAt(posMainDirSquare.firstChild.id.length - 1) != pieceColor) {
                     possibleMoves.push(posMainDirSquare.id);
                 }
@@ -170,13 +170,13 @@ function getPossibleMoves(aBoardPiece) {
         evaluatingRow = currentRow + 1;
         evaluatingColumn = currentColumn - 1;
         let negMainDirSquare = document.getElementById(String.fromCharCode(evaluatingColumn) + evaluatingRow);
-        // while the next boardSquare is not off the board and does not contain a piece
+        // while the boardSquare is not off the board and does not contain a piece
         while (negMainDirSquare != null && !negMainDirSquare.hasChildNodes()) {
             possibleMoves.push(negMainDirSquare.id);
             negMainDirSquare = document.getElementById(String.fromCharCode(--evaluatingColumn) + ++evaluatingRow);
             // if the next boardSquare is not off the board and contains a piece
             if (negMainDirSquare != null && negMainDirSquare.hasChildNodes()) {
-                // if the piece is not the same color as the moving rook
+                // if the piece is not the same color as the moving bishop
                 if (negMainDirSquare.firstChild.id.charAt(negMainDirSquare.firstChild.id.length - 1) != pieceColor) {
                     possibleMoves.push(negMainDirSquare.id);
                 }
