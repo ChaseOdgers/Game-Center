@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title id="title">Battleship</title>
+	<link type="text/css" href="styles/battleship/battleship.css" rel="stylesheet"/>
+</head>
+<body>
+	<h1>Battleship</h1>
+	<div style="text-align: center;">
+		<table id="boardCP"></table>
+	</div>
+	<div style="text-align: center;">
+		<table id="board"></table>
+		<script type="text/javascript" src="sources/battleship/generateBoard.js"></script>
+
+		<table id="ships">
+			<tr><th>Ships</th></tr>
+			<tr><td>
+					<img id="carrier" src="imgs/battleship/carrier.png">
+					<img id="battleship" src="imgs/battleship/battleship.png">
+					<img id="destroyer" src="imgs/battleship/destroyer.png">
+					<img id="submarine" src="imgs/battleship/submarine.png">
+					<img id="patrolboat" src="imgs/battleship/patrolboat.png">
+			</td></tr>
+		</table>
+	</div>
+	<button id="btnStart">Start Game</button>
+	<p id="winner">You Win!</p>
+	<p id="loser">You Lose!</p>
+	<script type="text/javascript" src="sources/battleship/init.js"></script>
+	<script type="text/javascript" src="sources/battleship/shipSelection.js"></script>
+	<script type="text/javascript" src="sources/battleship/gameStart.js"></script>
+</body>
+</html>

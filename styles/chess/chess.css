@@ -1,0 +1,82 @@
+body {
+    margin: 0px;
+    padding-bottom: 0px;
+    background-color: black;
+}
+
+table {
+    width: 960px;
+    height: 960px;
+    border-spacing: 0px;
+    margin: auto;
+}
+
+tr {
+    width: 100%;
+    height: 12.5%;
+}
+
+.boardSquare {
+    width: 12.5%;
+}
+
+.boardPiece {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+
+    /* boardSquare colorings */
+    
+.white {
+    background-image: url(../../imgs/chess/tanBoardColor.jpeg);
+}
+
+.black {
+    background-image: url(../../imgs/chess/brownBoardColor.jpeg);
+}
+
+.move {
+    box-shadow: inset 0 0 0 1000px rgba(0, 130, 7, 0.5);
+}
+
+    /* boardPiece mappings from sprite */
+/* white pieces */
+#kingW {
+    background: url("../../imgs/chess/pieceSprite.gif") 0 0;
+}
+#queenW {
+    background: url("../../imgs/chess/pieceSprite.gif") -101px 0;
+}
+#bishopW {
+    background: url("../../imgs/chess/pieceSprite.gif") -201px 0;
+}
+#knightW {
+    background: url("../../imgs/chess/pieceSprite.gif") -301px 0;
+}
+#rookW {
+    background: url("../../imgs/chess/pieceSprite.gif") -401px 0;
+}
+#pawnW {
+    background: url("../../imgs/chess/pieceSprite.gif") -501px 0;
+}
+/* black pieces */
+#kingB {
+    background: url("../../imgs/chess/pieceSprite.gif") 0 100px;
+}
+#queenB {
+    background: url("../../imgs/chess/pieceSprite.gif") -101px 100px;
+}
+#bishopB {
+    background: url("../../imgs/chess/pieceSprite.gif") -201px 100px;
+}
+#knightB {
+    background: url("../../imgs/chess/pieceSprite.gif") -301px 100px;
+}
+#rookB {
+    background: url("../../imgs/chess/pieceSprite.gif") -401px 100px;
+}
+#pawnB {
+    background: url("../../imgs/chess/pieceSprite.gif") -501px 100px;
+}
