@@ -64,34 +64,41 @@ function getPossibleMoves(aBoardPiece) {
         }
     }
     if (pieceType == "rook" || pieceType == "queen") { // I think it will fail to detect enemy in adjacent boardSquare
-        let evaluatingRow = currentRow + 1;
-        let posVerticalDirSquare = document.getElementById(String.fromCharCode(currentColumn) + evaluatingRow);
-        // while the boardSquare is not off the board and does not contain a piece
-        while (posVerticalDirSquare != null && !posVerticalDirSquare.hasChildNodes()) {
-            possibleMoves.push(posVerticalDirSquare.id);
+        let evaluatingRow = currentRow;
+        let posVerticalDirSquare;
+        do {
+            // get the next boardSquare
             posVerticalDirSquare = document.getElementById(String.fromCharCode(currentColumn) + ++evaluatingRow);
-            // if the next boardSquare is not off the board and contains a piece
-            if (posVerticalDirSquare != null && posVerticalDirSquare.hasChildNodes()) {
-                // if the piece is not the same color as the moving rook
+            if (posVerticalDirSquare.hasChildNodes()) { // if the boardSquare is not empty and contains an attackable piece
                 if (posVerticalDirSquare.firstChild.id.charAt(posVerticalDirSquare.firstChild.id.length - 1) != pieceColor) {
                     possibleMoves.push(posVerticalDirSquare.id);
                 }
             }
-        }
-        evaluatingRow = currentRow - 1;
-        let negVerticalDirSquare = document.getElementById(String.fromCharCode(currentColumn) + evaluatingRow);
-        // while the boardSquare is not off the board and does not contain a piece
-        while (negVerticalDirSquare != null && !negVerticalDirSquare.hasChildNodes()) {
-            possibleMoves.push(negVerticalDirSquare.id);
+            else { // the boardSquare is empty
+                possibleMoves.push(posVerticalDirSquare.id);
+            }
+        } while(posVerticalDirSquare != null && !posVerticalDirSquare.hasChildNodes());
+
+        evaluatingRow = currentRow;
+        let negVerticalDirSquare;
+        do {
+            // get the next boardSquare
             negVerticalDirSquare = document.getElementById(String.fromCharCode(currentColumn) + --evaluatingRow);
-            // if the next boardSquare is not off the board and contains a piece
-            if (negVerticalDirSquare != null && negVerticalDirSquare.hasChildNodes()) {
-                // if the piece is not the same color as the moving rook
+            if (negVerticalDirSquare.hasChildNodes()) { // if the boardSquare is not empty and contains an attackable piece
                 if (negVerticalDirSquare.firstChild.id.charAt(negVerticalDirSquare.firstChild.id.length - 1) != pieceColor) {
                     possibleMoves.push(negVerticalDirSquare.id);
                 }
             }
-        }
+            else {
+                possibleMoves.push(negVerticalDirSquare.id);
+            }
+        } while(negVerticalDirSquare != null && !negVerticalDirSquare.hasChildNodes());
+
+
+
+
+
+
         let evaluatingColumn = currentColumn + 1;
         let posHorizontalDirSquare = document.getElementById(String.fromCharCode(evaluatingColumn) + currentRow);
         // while the boardSquare is not off the board and does not contain a piece
@@ -106,6 +113,14 @@ function getPossibleMoves(aBoardPiece) {
                 }
             }
         }
+
+
+
+
+
+
+
+
         evaluatingColumn = currentColumn - 1;
         let negHorizontalDirSquare = document.getElementById(String.fromCharCode(evaluatingColumn) + currentRow);
         // while the boardSquare is not off the board and does not contain a piece
