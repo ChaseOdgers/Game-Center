@@ -9,3 +9,18 @@ div.row
 {
   column-count: 9;
 }
+
+a.button{
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  text-decoration: none;
+  color: initial;
+}
+
+div.starter
+{
+  column-count: 4;
+  column-gap: 50px;
+}

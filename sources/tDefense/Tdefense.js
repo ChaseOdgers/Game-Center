@@ -14,13 +14,13 @@ document.getElementByID("c9").addEventListener("click", function(){alert("Succes
 function toggleMenuVisibility()//TODO: Fix visibility, this function does not work
 {
   let x = document.getElementById("upgradeMenu");
-  if(x.style.display === "none")
+  if(x.style.display === "hidden")
   {
     x.style.display === "block";
   }
   else
   {
-    x.style.display === "none";
+    x.style.display === "hidden";
   }
 }
 
@@ -63,4 +63,14 @@ while(playerHealth > 0)
     }
   }
   turn++;
+}
+
+function student(physicalHealth, studyTime, mentalHealth, sleep, social, typeOfStudent)
+{
+  this.physicalHealth = physicalHealth;
+  this.studyTime = studyTime;
+  this.mentalHealth = mentalHealth;
+  this.sleep = sleep;
+  this.social = social;
+  this.typeOfStudent = typeOfStudent;
 }
