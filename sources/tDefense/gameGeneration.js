@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded",() => {
 
     document.getElementById("startingMenu").remove();
     document.getElementById("mainHeading").innerHTML = "The Good Student";
+    document.getElementById("mainGame").style.visibility = "visible";
 
 
 
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded",() => {
 
     document.getElementById("startingMenu").remove();
     document.getElementById("mainHeading").innerHTML = "The Good Student";
+    document.getElementById("mainGame").style.visibility = "visible";
 
 
 
@@ -23,6 +25,7 @@ document.addEventListener("DOMContentLoaded",() => {
 
     document.getElementById("startingMenu").remove();
     document.getElementById("mainHeading").innerHTML = "The Good Student";
+    document.getElementById("mainGame").style.visibility = "visible";
 
 
 
@@ -33,7 +36,7 @@ document.addEventListener("DOMContentLoaded",() => {
 
     document.getElementById("startingMenu").remove();
     document.getElementById("mainHeading").innerHTML = "The Good Student";
-
+    document.getElementById("mainGame").style.visibility = "visible";
 
 
 

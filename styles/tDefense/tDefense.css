@@ -1,14 +1,27 @@
-.tile
+
+div.starter
 {
-  color : green;
-  height : 50px;
-  width:50px;
-  background-color: #555;
+  column-count: 4;
+  column-gap: 50px;
 }
-div.row
+
+div.playerStats
 {
-  column-count: 9;
+  column-width: 50px;
 }
+
+div.boardAndPlayer
+{
+  column-width: 100px;
+}
+
+div.mainGameStyle
+{
+  column-count: 2;
+  visibility: hidden;
+}
+
+
 
 a.button{
   -webkit-appearance: button;
@@ -17,10 +30,4 @@ a.button{
 
   text-decoration: none;
   color: initial;
-}
-
-div.starter
-{
-  column-count: 4;
-  column-gap: 50px;
 }

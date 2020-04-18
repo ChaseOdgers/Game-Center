@@ -1,117 +1,66 @@
-<head>
-  <title>The Good Student</title>
-  <link rel = "stylesheet" href = styles/tDefense/tDefense.css>
-  <script type = "text/javascript" src = "sources/tDefense/adversaries.js" defer></script>
-  <script type = "text/javascript" src = "sources/tDefense/displayManipulation.js" defer></script>
-  <script type = "text/javascript" src = "sources/tDefense/game.js" defer></script>
-  <script type = "text/javascript" src = "sources/tDefense/gameGeneration.js" defer></script>
-  <script type = "text/javascript" src = "sources/tDefense/lifeEvents.js" defer></script>
-  <script type = "text/javascript" src = "sources/tDefense/studentActions.js" defer></script>
-  <script type = "text/javascript" src = "sources/tDefense/studentCommitments.js" defer></script>
-<head>
+<html>
+  <head>
+    <title>The Good Student</title>
+    <link rel = "stylesheet" href = styles/tDefense/tDefense.css>
+    <script type = "text/javascript" src = "sources/tDefense/adversaries.js" defer></script>
+    <script type = "text/javascript" src = "sources/tDefense/displayManipulation.js" defer></script>
+    <script type = "text/javascript" src = "sources/tDefense/game.js" defer></script>
+    <script type = "text/javascript" src = "sources/tDefense/gameGeneration.js" defer></script>
+    <script type = "text/javascript" src = "sources/tDefense/lifeEvents.js" defer></script>
+    <script type = "text/javascript" src = "sources/tDefense/studentActions.js" defer></script>
+    <script type = "text/javascript" src = "sources/tDefense/studentCommitments.js" defer></script>
+  <head>
 
+  <body>
 
-  <h1 id = "mainHeading" style = "font-size:60; text-align:center">Choose your fighter</h1><br>
+    <h1 id = "mainHeading" style = "font-size:60; text-align:center">Choose your fighter</h1><br>
 
-  <div id = "startingMenu" class = "starter">
+    <!--STARTING MENU-->
+    <div id = "startingMenu" class = "starter">
+      <div>
+        <br>
+        <img src = imgs/tDefense/aStudent.jpg style = "width:300px;height:340"><br>
+        The A+ Perfectionist<br>
+        Easy<br>
+        <button id = "aStudent">Easy Peasy Lemon Squeezy</button>
+      </div>
 
-    <div>
+      <div>
+        <br>
+        <img src = imgs/tDefense/seasonedCStudent.png style = "width:300px;height:340"><br>
+        The Veteran C Student<br>
+        Medium<br>
+        <button id = "cStudent">I'll do it tomorrow</button>
+      </div>
+
+      <div>
+        <br>
+        <img src = imgs/tDefense/partyAnimal.jpg style = "width:300px;height:340"><br>
+        Party Animal<br>
+        Hard<br>
+        <button id = "partyAnimal">Yo bro can I copy your homework?</button>
+      </div>
+
+      <div>
       <br>
-      <img src = imgs/tDefense/aStudent.jpg style = "width:300px;height:340"><br>
-      The A+ Perfectionist<br>
-      Easy<br>
-      <button id = "aStudent">Easy Peasy Lemon Squeezy</button>
+      <img src = imgs/tDefense/engineeringStudent.png style = "width:300px;height:340"><br>
+      Engineering Student<br>
+      Engineering Student<br>
+      <button id = "engineeringStudent">*Crying intensifies*</button>
+      </div>
     </div>
 
 
-    <div>
-      <br>
-      <img src = imgs/tDefense/seasonedCStudent.png style = "width:300px;height:340"><br>
-      The Veteran C Student<br>
-      Medium<br>
-      <button id = "cStudent">I'll do it tomorrow</button>
-    </div>
+    <!--Game Display-->
+    <div class = "mainGameStyle" id = "mainGame">
+      <div class = "boardandPlayer">
+        <table id = "mainTable"></table>
+        Test Again
+      </div>
 
-    <div>
-      <br>
-      <img src = imgs/tDefense/partyAnimal.jpg style = "width:300px;height:340"><br>
-      Party Animal<br>
-      Hard<br>
-      <button id = "partyAnimal">Yo bro can I copy your homework?</button>
-    </div>
+      <div class = "playerStats">
+        Not agian
+      </div>
 
-    <div>
-    <br>
-    <img src = imgs/tDefense/engineeringStudent.png style = "width:300px;height:340"><br>
-    Engineering Student<br>
-    Engineering Student<br>
-    <button id = "engineeringStudent">*Crying intensifies*</button>
-    </div>
-  </div>
-
-<div class = "row" id = "r1">
-  <p class = tile id = "c1"></p><br>
-  <p class = tile id = "c2"></p><br>
-  <p class = tile id = "c3"></p><br>
-  <p class = tile id = "c4"></p><br>
-  <p class = tile id = "c5"></p><br>
-  <p class = tile id = "c6"></p><br>
-  <p class = tile id = "c7"></p><br>
-  <p class = tile id = "c8"></p><br>
-  <p class = tile id = "c9"></p><br>
-</div>
-
-<div class = "row" id = "r2">
-  <p class = tile id = "c1"></p><br>
-  <p class = tile id = "c2"></p><br>
-  <p class = tile id = "c3"></p><br>
-  <p class = tile id = "c4"></p><br>
-  <p class = tile id = "c5"></p><br>
-  <p class = tile id = "c6"></p><br>
-  <p class = tile id = "c7"></p><br>
-  <p class = tile id = "c8"></p><br>
-  <p class = tile id = "c9"></p><br>
-</div>
-
-<div class = "row" id = "r3">
-  <p class = tile id = "c1"></p><br>
-  <p class = tile id = "c2"></p><br>
-  <p class = tile id = "c3"></p><br>
-  <p class = tile id = "c4"></p><br>
-  <p class = tile id = "c5"></p><br>
-  <p class = tile id = "c6"></p><br>
-  <p class = tile id = "c7"></p><br>
-  <p class = tile id = "c8"></p><br>
-  <p class = tile id = "c9"></p><br>
-</div>
-
-<div class = "row" id = "r4">
-  <p class = tile id = "c1"></p><br>
-  <p class = tile id = "c2"></p><br>
-  <p class = tile id = "c3"></p><br>
-  <p class = tile id = "c4"></p><br>
-  <p class = tile id = "c5"></p><br>
-  <p class = tile id = "c6"></p><br>
-  <p class = tile id = "c7"></p><br>
-  <p class = tile id = "c8"></p><br>
-  <p class = tile id = "c9"></p><br>
-</div>
-
-<div class = "row" id = "r5">
-  <button class = tile id = "c1"></button><br>
-  <button class = tile id = "c2"></button><br>
-  <button class = tile id = "c3"></button><br>
-  <button class = tile id = "c4"></button><br>
-  <button class = tile id = "c5"></button><br>
-  <button class = tile id = "c6"></button><br>
-  <button class = tile id = "c7"></button><br>
-  <button class = tile id = "c8"></button><br>
-  <button class = tile id = "c9"></button><br>
-</div>
-
-<button onclick="toggleMenuVisibility()">Testing</button>
-
-<div id = "upgradeMenu" opacity = 0>
-  This is just a tests
-  Yes a very complex tests
-</div>
+  </body>
+</html>
