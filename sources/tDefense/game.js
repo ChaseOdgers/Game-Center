@@ -3,8 +3,42 @@ function gameStart(student){
   let commitments = [];
   let lifeEvets = [];
 
-  document.getElementById("smallCommitMH").addEventListener("click" () =>
+
+
+/*---------------------Player Controlled Button Listeners--------------------*/
+  document.getElementById("smallCommitMH").addEventListener("click", () =>
   {makeCommitment(small, MH, commitments);});
+  document.getElementById("smallCommitPH").addEventListener("click", () =>
+  {makeCommitment(small, PH, commitments);});
+  document.getElementById("smallCommitSleep").addEventListener("click", () =>
+  {makeCommitment(small, MH, commitments);});
+  document.getElementById("smallCommitSocial").addEventListener("click", () =>
+  {makeCommitment(small, MH, commitments);});
+  document.getElementById("smallCommitStudy").addEventListener("click", () =>
+  {makeCommitment(small, MH, commitments);});
+
+  document.getElementById("mediumCommitMH").addEventListener("click", () =>
+  {makeCommitment(medium, MH, commitments);});
+  document.getElementById("mediumCommitPH").addEventListener("click", () =>
+  {makeCommitment(medium, MH, commitments);});
+  document.getElementById("mediumCommitSleep").addEventListener("click", () =>
+  {makeCommitment(medium, MH, commitments);});
+  document.getElementById("mediumCommitSocial").addEventListener("click", () =>
+  {makeCommitment(medium, MH, commitments);});
+  document.getElementById("mediumCommitStudy").addEventListener("click", () =>
+  {makeCommitment(medium, MH, commitments);});
+
+  document.getElementById("bigCommitMH").addEventListener("click", () =>
+  {makeCommitment(big, MH, commitments);});
+  document.getElementById("bigCommitPH").addEventListener("click", () =>
+  {makeCommitment(big, MH, commitments);});
+  document.getElementById("bigCommitSleep").addEventListener("click", () =>
+  {makeCommitment(big, MH, commitments);});
+  document.getElementById("bigCommitSocial").addEventListener("click", () =>
+  {makeCommitment(big, MH, commitments);});
+  document.getElementById("bigCommitStudy").addEventListener("click", () =>
+  {makeCommitment(big, MH, commitments);});
+/*----------------------------------------------------------------------------*/
 
 
   for(let i = 0; i<75; i++)
@@ -12,11 +46,11 @@ function gameStart(student){
 
     for(let j = 0; j<5; j++)
     {
-      setTimeout(frameEvent(), 1000);
+      setTimeout(frameEvent(adversaries, commitments, lifeEvets, student), 1000);
     }
     if(getRandomInt(100)==42)
     {
-      generateLifeEvent(lifeEvets[]);
+      generateLifeEvent(lifeEvets);
     }
   }
 
@@ -26,10 +60,17 @@ function gameStart(student){
 
 
 function getRandomInt(max){
-  reutn Math.floor(math.random() * Math.floor(max));
+  return Math.floor(math.random() * Math.floor(max));
 }
 
 
-function frameEvent(){
+function frameEvent(adversaries, commitments, lifeEvents, student){
+
+  moveAdversaries(adversaries, student);
+
+
+  adversaries[](student);
+  commitments[](stundet);
+  lifeEvents[](student);
 
 }

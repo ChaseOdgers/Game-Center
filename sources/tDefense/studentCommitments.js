@@ -1,4 +1,4 @@
-function commitment()
+function commitment(){}
 
 function makeCommitment(size, type, list){
   if(size == "small")
@@ -85,4 +85,7 @@ function generateCommitmentName(size)
 
   }
   else if(size == "big")
+  {
+    
+  }
 }
