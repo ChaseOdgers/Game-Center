@@ -7,21 +7,75 @@ div.starter
 
 div.playerStats
 {
-  column-width: 50px;
+  column-width: 20%;
 }
 
-div.boardAndPlayer
+div.board
 {
-  column-width: 100px;
+  display: table-row-group;
+  height:250px;
+  width: 450px;
+  column-width: 80%;
 }
 
-div.mainGameStyle
+.board{grid-area: board;}
+.currentGrade{grid-area: grade;}
+.currentMood{grid-area: mood;}
+.eventTab{grid-area: events;}
+.playerStats{grid-area: stats;}
+.playerControl{grid-area: controls;}
+
+
+.webGrid
 {
-  column-count: 2;
+  visibility: hidden;
+  display: grid;
+  grid-template-areas:
+    'board board board board grade'
+    'board board board board mood'
+    'board board board board events'
+    'board board board board stats'
+    'controls controls controls controls controls';
+
+  grid-gap: 10px;
+  padding: 10px
+}
+
+.webGrid > div
+{
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+table
+{
+  background-size: cover;
+  margin-left:  50px;
+  border: 3px solid black;
+  border-collapse: collapse;
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+}
+
+td
+{
+  padding: 0;
+  width: 200px;
+  height: 100px;
+  border: 2px;
+}
+
+.LetterGrades
+{
   visibility: hidden;
 }
 
-
+.moodPics
+{
+  visibility: hidden;
+}
 
 a.button{
   -webkit-appearance: button;
