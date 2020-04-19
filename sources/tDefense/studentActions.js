@@ -6,16 +6,41 @@ function student(type, currentGrade, MH, PH, sleep, social, study){
   this.sleep = sleep;
   this.social = social;
   this.study = study;
-
-  let willpower = 100;
+  this.willpower = 100;
 }
 
 
-student.prototype.modType = (val) => {this.type = val;}
-student.prototype.modGrade = (val) => {this.grade += val;}
-student.prototype.modMH = (val) => {this.mentalHealth += val;}
-student.prototype.modPH = (val) => {this.physicalHealth += val;}
-student.prototype.modSleep = (val) => {this.sleep += val;}
-student.prototype.modSocial = (val) => {this.sleep += val;}
-student.prototype.modStudy = (val) => {this.study += val;}
-student.prototype.modWillpower = (val) => {this.willpower += val;}
+student.prototype.modifyStudent = function(value, where){
+  if(where == "type")
+  {
+    this.type == value;
+  }
+  else if(where == "grade")
+  {
+    this.grade += value;
+  }
+  else if(where == "MH")
+  {
+    this.mentalHealth += value;
+  }
+  else if(where == "PH")
+  {
+    this.physicalHealth += value;
+  }
+  else if(where == "sleep")
+  {
+    this.sleep += value;
+  }
+  else if(where == "social")
+  {
+    this.social += value;
+  }
+  else if(where == "study")
+  {
+    this.study += value;
+  }
+  else if(where == "willpower")
+  {
+    this.willpower += value;
+  }
+}
