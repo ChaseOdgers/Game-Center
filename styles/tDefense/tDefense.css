@@ -21,7 +21,11 @@ div.board
 .board{grid-area: board;}
 .currentGrade{grid-area: grade;}
 .currentMood{grid-area: mood;}
-.eventTab{grid-area: events;}
+.eventTab
+{
+  grid-area: events;
+  display:list-item;
+}
 .playerStats{grid-area: stats;}
 .playerControl{grid-area: controls;}
 
