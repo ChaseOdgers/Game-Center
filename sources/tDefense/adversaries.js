@@ -1,15 +1,9 @@
-function moveAdversaries(adversaries, student){
 
-  for(let i = 0; i<adversaries.length; i++)
-  {
-    applyDamage(adversaries[0], student)
-  }
-}
 
 function adversaries(student){
   this.student = student;
   this.name = getRandomAdversaryName();
-  this.deterioration = Math.floor(Math.random() * 15) + 5)
+  this.deterioration = Math.floor(Math.random() * 15) + 5
   this.type = getRandomAdversaryType();
   this.location = 5;//The location will start at the end of the row
 }
@@ -18,7 +12,7 @@ adversaries.prototype.modifyStudent = function(){
   this.student.modifyStudent(this.deterioration, this.type);
 }
 
-adversaries.prototype.moveNextBlock(){
+adversaries.prototype.moveNextBlock = function(){
   if(this.location >= 0)
   {
     this.location -= 1;

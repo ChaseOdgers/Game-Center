@@ -1,4 +1,4 @@
-function commitment(){}
+
 
 function makeCommitment(size, type, list){
   if(size == "small")
@@ -86,6 +86,21 @@ function generateCommitmentName(size)
   }
   else if(size == "big")
   {
-    
+
+  }
+}
+
+function commitment(scope, type, student){
+  this.student = student;
+  this.scope = scope;
+  this.type = type;
+
+  if(scope == "small")
+  {
+    this.length = 5;
+  }
+  else if(scope == "medium")
+  {
+    this.length = 30;
   }
 }
