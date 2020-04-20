@@ -35,11 +35,11 @@ div.board
   visibility: hidden;
   display: grid;
   grid-template-areas:
-    'board board board board grade'
-    'board board board board mood'
-    'board board board board events'
-    'board board board board stats'
-    'controls controls controls controls controls';
+    'board board board board board board board grade'
+    'board board board board board board board mood'
+    'board board board board board board board events'
+    'board board board board board board board stats'
+    'controls controls controls controls controls controls controls controls';
 
   grid-gap: 10px;
   padding: 10px

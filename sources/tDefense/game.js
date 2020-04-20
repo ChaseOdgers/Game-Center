@@ -10,37 +10,37 @@ function gameStart(student){
 
 /*---------------------Player Controlled Button Listeners--------------------*/
   document.getElementById("smallCommitMH").addEventListener("click", () =>
-  {studentModifications.push(new makeCommitment("small", "MH", "commitments");});
+  {studentModifications.push(new commitment("small", "MH", "student");});
   document.getElementById("smallCommitPH").addEventListener("click", () =>
-  {makeCommitment("small", "PH", "commitments");});
+  {studentModifications.push(new commitment("small", "PH", "student");});
   document.getElementById("smallCommitSleep").addEventListener("click", () =>
-  {makeCommitment("small", "MH", "commitments");});
+  {studentModifications.push(new commitment("small", "MH", "student");});
   document.getElementById("smallCommitSocial").addEventListener("click", () =>
-  {makeCommitment("small", "MH", "commitments");});
+  {studentModifications.push(new commitment("small", "MH", "student");});
   document.getElementById("smallCommitStudy").addEventListener("click", () =>
-  {makeCommitment("small", "MH", "commitments");});
+  {studentModifications.push(new commitment("small", "MH", "student");});
 
   document.getElementById("mediumCommitMH").addEventListener("click", () =>
-  {makeCommitment("medium", "MH", "commitments");});
+  {studentModifications.push(new commitment("medium", "MH", "student");});
   document.getElementById("mediumCommitPH").addEventListener("click", () =>
-  {makeCommitment("medium", "MH", "commitments");});
+  {studentModifications.push(new commitment("medium", "MH", "student");});
   document.getElementById("mediumCommitSleep").addEventListener("click", () =>
-  {makeCommitment("medium", "MH", "commitments");});
+  {studentModifications.push(new commitment("medium", "MH", "student");});
   document.getElementById("mediumCommitSocial").addEventListener("click", () =>
-  {makeCommitment("medium", "MH", "commitments");});
+  {studentModifications.push(new commitment("medium", "MH", "student");});
   document.getElementById("mediumCommitStudy").addEventListener("click", () =>
-  {makeCommitment("medium", "MH", "commitments");});
+  {studentModifications.push(new commitment("medium", "MH", "student");});
 
   document.getElementById("bigCommitMH").addEventListener("click", () =>
-  {makeCommitment("big", "MH", "commitments");});
+  {studentModifications.push(new commitment("big", "MH", "commitments");});
   document.getElementById("bigCommitPH").addEventListener("click", () =>
-  {makeCommitment("big", "MH", "commitments");});
+  {studentModifications.push(new commitment("big", "MH", "commitments");});
   document.getElementById("bigCommitSleep").addEventListener("click", () =>
-  {makeCommitment("big", "MH", "commitments");});
+  {studentModifications.push(new commitment("big", "MH", "commitments");});
   document.getElementById("bigCommitSocial").addEventListener("click", () =>
-  {makeCommitment("big", "MH", "commitments");});
+  {studentModifications.push(new commitment("big", "MH", "commitments");});
   document.getElementById("bigCommitStudy").addEventListener("click", () =>
-  {makeCommitment("big", "MH", "commitments");});
+  {studentModifications.push(new commitment("big", "MH", "commitments");});
 /*----------------------------------------------------------------------------*/
 
 
