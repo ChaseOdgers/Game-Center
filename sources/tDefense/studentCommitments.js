@@ -103,4 +103,33 @@ function commitment(scope, type, student){
   {
     this.length = 30;
   }
+  else if(scope == "big")
+  {
+    this.length = 150;
+  }
+}
+
+commitment.prototype.fulfill = function(student){
+  if(this.type == "MH")
+  {
+
+  }
+  else if(this.type == "PH")
+  {
+
+  }
+  else if(this.type == "sleep")
+  {
+
+  }
+  else if(this.type == "social")
+  {
+
+  }
+  else if(this.type == "study")
+  {
+
+  }
+
+  this.length -= 1;
 }

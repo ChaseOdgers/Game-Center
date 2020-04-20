@@ -1,3 +1,8 @@
+/*The student is the core of keeping track of data. All the functions are centered
+on the student object. Which basically boils down to that all function must have
+a function that only takes in the student as a parameter and modify it using
+student.prototype.modifyStudent */
+
 function student(type, currentGrade, MH, PH, sleep, social, study){
   this.type = type;
   this.grade = currentGrade;

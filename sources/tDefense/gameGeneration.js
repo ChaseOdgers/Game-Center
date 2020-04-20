@@ -1,3 +1,5 @@
+//The game is generated here as soon as the player chooses which type of student they are
+
 document.addEventListener("DOMContentLoaded",() => {
 
   document.getElementById("aStudent").addEventListener("click", function(){

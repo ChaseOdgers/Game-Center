@@ -1,3 +1,7 @@
+/*This is where the center of the game where all the game actions happen.
+This is sequentially what happens after the gameGeneration.js
+In this file, the frame by frame is controlled and student object is kept track of.*/
+
 function gameStart(student){
 
   let studentModifications = [];
@@ -6,7 +10,7 @@ function gameStart(student){
 
 /*---------------------Player Controlled Button Listeners--------------------*/
   document.getElementById("smallCommitMH").addEventListener("click", () =>
-  {makeCommitment("small", "MH", "commitments");});
+  {studentModifications.push(new makeCommitment("small", "MH", "commitments");});
   document.getElementById("smallCommitPH").addEventListener("click", () =>
   {makeCommitment("small", "PH", "commitments");});
   document.getElementById("smallCommitSleep").addEventListener("click", () =>
@@ -62,7 +66,11 @@ function getRandomInt(max){
   return Math.floor(math.random() * Math.floor(max));
 }
 
-
+/*
+Pre: The student object in the game will be pased to get its stats updated.
+Post: All the functions in studentModifications[] get executed and adjusted.
+Param: Student object
+*/
 function frameEvent(adversaries, commitments, lifeEvents, student){
 
   moveAdversaries(adversaries, student);
@@ -75,7 +83,11 @@ function frameEvent(adversaries, commitments, lifeEvents, student){
     }
     else if(studentModifications[i] == adversaries)
     {
-
+      if(studentModifications[i].location == 1)
+      {
+        studentModifications[i].modifyStudent(student);
+        studentModifications.splice(i,1);
+      }
     }
     else if(studentModifications[i] == lifeEvents)
     {
@@ -85,4 +97,8 @@ function frameEvent(adversaries, commitments, lifeEvents, student){
 
 
 
+}
+
+function announceGrade(student){
+  alert("Congratulations! You ended the semester with a " + student.grade);
 }

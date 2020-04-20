@@ -1,15 +1,34 @@
-
+//This file deals with all the adveries which will act as mobs in the tower defense
 
 function adversaries(student){
   this.student = student;
-  this.name = getRandomAdversaryName();
   this.deterioration = Math.floor(Math.random() * 15) + 5
   this.type = getRandomAdversaryType();
-  this.location = 5;//The location will start at the end of the row
+  if(this.type == "MH")
+  {
+    this.name = getRandomMHAdversary();
+  }
+  else if(this.type == "PH")
+  {
+    this.name = getRandomPHAdversary();
+  }
+  else if(this.type == "sleep")
+  {
+    this.name = getRandomSleepAdversary();
+  }
+  else if(this.type == "social")
+  {
+    this.name = getRandomSocialAdversary();
+  }
+  else if(this.type == "study")
+  {
+    this.name = getRandomStudyAdversary();
+  }
+  this.location = 4;//The location will start at the end of the row
 }
 
-adversaries.prototype.modifyStudent = function(){
-  this.student.modifyStudent(this.deterioration, this.type);
+adversaries.prototype.modifyStudent = function(student){
+  student.modifyStudent(this.deterioration, this.type);
 }
 
 adversaries.prototype.moveNextBlock = function(){
@@ -19,10 +38,62 @@ adversaries.prototype.moveNextBlock = function(){
   }
 }
 
-function getRandomAdversaryName(){
+function getRandomMHAdversary(){
+  let arr = [
+    "Burn out",
+    "Insecurity",
+    "Loneliness",
+    "Imposter syndrome",
+    "Laziness",
+    "Stress"
+  ];
+  let i = getRandomInt(arr.length);
+  return arr[i];
+}
+
+function getRandomPHAdversary(){
+  let arr = [
+    "Sore Muscle",
+    "Food poisining",
+    "Hangover",
+    "Flu",
+    "Common cold"
+  ];
+  let i = getRandomInt(arr.length);
+  return arr[i];
+}
+
+function getRandomSleepAdversary(){
   let arr = [
     "Phone distraction",
-    "Party",
+    "Roommate threw a party",
+    "Stress",
+    "1 am already?!",
+    "Insomnia",
+    "Caffeine",
+    "All nighter"
+  ];
+  let i = getRandomInt(arr.length);
+  return arr[i];
+}
+
+function getRandomSocialAdversary(){
+  let arr = [
+    "Social anxiety",
+    "Rejected by your crush",
+    "Rejected by your friends",
+    "Teacher is mean",
+    "Insecurity",
+    "No friends"
+  ];
+  let i = getRandomInt(arr.length);
+  return arr[i];
+}
+
+function getRandomStudyAdversary(){
+  let arr = [
+    "Phone distraction",
+    "Catching up",
     "Difficult subject",
     "Distracting classmates",
     "Laziness"
@@ -30,6 +101,8 @@ function getRandomAdversaryName(){
   let i = getRandomInt(arr.length);
   return arr[i];
 }
+
+
 
 function getRandomAdversaryType(){
   let arr = ["MH", "PH", "sleep", "social", "study"];
