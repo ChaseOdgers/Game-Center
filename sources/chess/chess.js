@@ -17,10 +17,10 @@ function createBoard() {
             let aColumn = document.createElement("td");
             aColumn.id = String.fromCharCode(j) + "" + i;
             if ((i + j) % 2 == 1) {
-                aColumn.className = "boardSquare white";
+                aColumn.className = "boardSquare whiteSquare";
             }
             else {
-                aColumn.className = "boardSquare black";
+                aColumn.className = "boardSquare blackSquare";
             }
             aRow.appendChild(aColumn);
         }
@@ -36,26 +36,26 @@ function setupBoard() {
         let aSquare = document.getElementById(String.fromCharCode(i) + 8);
         let aBlackPiece = document.createElement("div");
         aBlackPiece.id = pieceList[i-97] + "B";
-        aBlackPiece.className = "boardPiece";
+        aBlackPiece.className = "boardPiece blackPiece";
         aSquare.appendChild(aBlackPiece);
 
         aSquare = document.getElementById(String.fromCharCode(i) + 7);
         let aBlackPawn = document.createElement("div");
         aBlackPawn.id = "pawnB";
-        aBlackPawn.className = "boardPiece";
+        aBlackPawn.className = "boardPiece blackPiece";
         aSquare.appendChild(aBlackPawn);
 
         // White Player's Pieces
         aSquare = document.getElementById(String.fromCharCode(i) + 1);
         let aWhitePiece = document.createElement("div");
         aWhitePiece.id = pieceList[i-97] + "W";
-        aWhitePiece.className = "boardPiece";
+        aWhitePiece.className = "boardPiece whitePiece";
         aSquare.appendChild(aWhitePiece);
 
         aSquare = document.getElementById(String.fromCharCode(i) + 2);
         let aWhitePawn = document.createElement("div");
         aWhitePawn.id = "pawnW";
-        aWhitePawn.className = "boardPiece";
+        aWhitePawn.className = "boardPiece whitePiece";
         aSquare.appendChild(aWhitePawn);
     }
 }
@@ -127,34 +127,23 @@ function movePiece(currentLocation, newLocation) {
     let newBoardSquare = document.getElementById(newLocation);
     let currentBoardSquare = document.getElementById(currentLocation);
     if (newBoardSquare.hasChildNodes()) { // attacking a piece
-        newBoardSquare.firstChild.id = currentBoardSquare.firstChild.id;
+        newBoardSquare.removeChild(newBoardSquare.firstElementChild);
+        newBoardSquare.appendChild(currentBoardSquare.firstChild);
     }
     else { // moving to an empty boardSquare
-        let newPiece = document.createElement("div");
-        newPiece.id = currentBoardSquare.firstChild.id;
-        newPiece.classList.add("boardPiece");
-        newBoardSquare.appendChild(newPiece);
+        newBoardSquare.appendChild(currentBoardSquare.firstChild);
     }
-    currentBoardSquare.removeChild(currentBoardSquare.firstElementChild);
 }
 
 function updateCurrentPlayer(currentPlayerColor) {
-    if (currentPlayerColor == "W") {
-        document.getElementById("W").classList.remove("currentPlayer");
-        document.getElementById("B").classList.add("currentPlayer");
-    }
-    else {
-        document.getElementById("B").classList.remove("currentPlayer");
-        document.getElementById("W").classList.add("currentPlayer");
-    }
+    document.getElementById("W").classList.toggle("currentPlayer");
+    document.getElementById("B").classList.toggle("currentPlayer");
 }
 
 function updateStatus(newStatusMessage) {
     let theStatus = document.getElementById("playerStatus").firstElementChild;
-    let oldStatusMessage = theStatus.innerText;
-
     theStatus.innerText = newStatusMessage;
     setTimeout(() => {
-        theStatus.innerText = oldStatusMessage;
+        theStatus.innerText = "Current Player";
     }, 2000);
 }
