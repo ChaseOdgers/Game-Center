@@ -91,6 +91,7 @@ function makeMove() {
         function handleClick(theEvent) {
             let theSelection = theEvent.target;
             let theSelectionID;
+            let isGameOver = false;
             // check whether theSelection is a boardPiece or boardSquare
             if (theSelection.classList.contains("boardPiece")) {
                 theSelectionID = theSelection.parentNode.id;
@@ -102,6 +103,7 @@ function makeMove() {
             if (possibleMoves.includes(theSelectionID)) {
                 movePiece(currentLocation.id, theSelectionID);
                 updateCurrentPlayer(pieceColor);
+                isGameOver = isCheckmate(theSelectionID);
             }
             else {
                 updateStatus("Invalid move");
@@ -110,10 +112,15 @@ function makeMove() {
             setTimeout(() => {
                 // "pause" the handleClick eventHandler
                 document.getElementById("mainBoard").removeEventListener("click", handleClick, false);
-                // "activate" the showMoves eventHandler
-                let thePieces = document.getElementsByClassName("boardPiece");
-                for (let i = 0; i < thePieces.length; i++) {
-                    thePieces[i].addEventListener("click", makeMove, true);
+                if (!isGameOver) {
+                    // "activate" the showMoves eventHandler
+                    let thePieces = document.getElementsByClassName("boardPiece");
+                    for (let i = 0; i < thePieces.length; i++) {
+                        thePieces[i].addEventListener("click", makeMove, true);
+                    }
+                }
+                else {
+                    document.getElementById("playerStatus").firstElementChild.innerText = "Checkmate!";
                 }
             });
         }
@@ -146,4 +153,45 @@ function updateStatus(newStatusMessage) {
     setTimeout(() => {
         theStatus.innerText = "Current Player";
     }, 2000);
+}
+
+function isCheckmate(newestMovedPieceLocation) {
+    let possibleCheckingPiece = document.getElementById(newestMovedPieceLocation);
+    let theKing;
+    // if the current piece is a white, find the black king
+    if (possibleCheckingPiece.firstElementChild.classList.contains("whitePiece")) {
+        theKing = document.getElementById("kingB");
+    }
+    else { // find the white king
+        theKing = document.getElementById("kingW");
+    }
+    let possibleMoves = getPossibleMoves(possibleCheckingPiece.firstElementChild);
+
+    // if the king is in check, is it also in checkmate?
+    if (possibleMoves.includes(theKing.parentElement.id)) {
+        let kingsMoves = getPossibleMoves(theKing);
+        let allOpponentPieces;
+        // if the king is white, find all black pieces
+        if (theKing.classList.contains("whitePiece")) {
+            allOpponentPieces = document.getElementsByClassName("blackPiece");
+        }
+        else { // find all white pieces
+            allOpponentPieces = document.getElementsByClassName("whitePiece");
+        }
+
+        let allOpponentMoves = [];
+        for (let i = 0; i < allOpponentPieces.length; i++) {
+            allOpponentMoves = allOpponentMoves.concat(getPossibleMoves(allOpponentPieces.item(i)));
+        }
+
+        // if all possible moves for the king is attackable: checkmate
+        if (kingsMoves.every(move => allOpponentMoves.includes(move))) {
+            return true;
+        }
+        else { // the king is just in check
+            updateStatus("Check!");
+        }
+    }
+
+    return false;
 }
