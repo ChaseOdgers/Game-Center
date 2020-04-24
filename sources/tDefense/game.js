@@ -49,7 +49,7 @@ function gameStart(student){
 
     for(let j = 0; j<5; j++)
     {
-      setTimeout(frameEvent(adversaries, commitments, lifeEvets, student), 1000);
+      setTimeout(frameEvent(studentModifications, student), 1000);
     }
     if(getRandomInt(100)==42)
     {
@@ -71,7 +71,7 @@ Pre: The student object in the game will be pased to get its stats updated.
 Post: All the functions in studentModifications[] get executed and adjusted.
 Param: Student object
 */
-function frameEvent(adversaries, commitments, lifeEvents, student){
+function frameEvent(studentModifications, student){
 
   moveAdversaries(adversaries, student);
 
@@ -85,8 +85,17 @@ function frameEvent(adversaries, commitments, lifeEvents, student){
     {
       if(studentModifications[i].location == 1)
       {
-        studentModifications[i].modifyStudent(student);
+        studentModifications[i].modifyStudent();
         studentModifications.splice(i,1);
+      }
+      else if(studentModifications[i].deterioration <= 0)
+      {
+        studentModifications.splice(i, 1);
+      }
+      else
+      {
+        studentModifications[i].moveNextBlock();
+        studentModifications[i].updateLocation();
       }
     }
     else if(studentModifications[i] == lifeEvents)
