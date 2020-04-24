@@ -3,10 +3,52 @@ body {
     padding-bottom: 0px;
     background-color: black;
 }
+h1 {
+    text-align: center;
+    color: white;
+}
+
+#playerStatus {
+    float: right;
+    width: 12%;
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+}
+
+#playerStatus h4 {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    border: 1px dashed black;
+}
+
+#playerStatus div {
+    display: block;
+    float: left;
+    margin: 0px;
+    width: 50%;
+    height: 110px;
+    border-radius: 100%;
+}
+
+#W {
+    background: url("../../imgs/chess/pieceSprite.gif") -510px 0;
+    transform: scale(0.5);
+}
+
+#B {
+    background: url("../../imgs/chess/pieceSprite.gif") -510px 100px;
+    transform: scale(0.5);
+}
+
+.currentPlayer {
+    background-color: orange !important;
+}
 
 table {
-    width: 960px;
-    height: 960px;
+    width: 900px;
+    height: 900px;
     border-spacing: 0px;
     margin: auto;
 }
@@ -27,8 +69,8 @@ tr {
 }
 
 
+
     /* boardSquare colorings */
-    
 .white {
     background-image: url(../../imgs/chess/tanBoardColor.jpeg);
 }

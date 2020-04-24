@@ -73,46 +73,53 @@ function showMoves(possibleMoves) {
 
 function makeMove() {
     let currentLocation = document.getElementById(this.parentNode.id);
-    let possibleMoves = getPossibleMoves(this);
-    showMoves(possibleMoves);
+    let pieceColor = this.id.charAt(this.id.length - 1);
+    if (pieceColor == document.getElementsByClassName("currentPlayer").item(0).id) {
+        let possibleMoves = getPossibleMoves(this);
+        showMoves(possibleMoves);
 
-    // "pause" the showMoves eventHandler
-    let thePieces = document.getElementsByClassName("boardPiece");
-    for (let i = 0; i < thePieces.length; i++) {
-        thePieces[i].removeEventListener("click", makeMove, true);
-    }
-    setTimeout(() => {
-        // "activate" the handleClick eventHandler
-        document.getElementById("mainBoard").addEventListener("click", handleClick, false);
-    });
-    
-    function handleClick(theEvent) {
-        let theSelection = theEvent.target;
-        let theSelectionID;
-        // check whether theSelection is a boardPiece or boardSquare
-        if (theSelection.classList.contains("boardPiece")) {
-            theSelectionID = theSelection.parentNode.id;
+        // "pause" the showMoves eventHandler
+        let thePieces = document.getElementsByClassName("boardPiece");
+        for (let i = 0; i < thePieces.length; i++) {
+            thePieces[i].removeEventListener("click", makeMove, true);
         }
-        else {
-            theSelectionID = theSelection.id;
-        }
-        // check whether theSelectionID is a valid move 
-        if (possibleMoves.includes(theSelectionID)) {
-            movePiece(currentLocation.id, theSelectionID);
-        }
-        else {
-            console.log("invalid move");
-        }
-    
         setTimeout(() => {
-            // "pause" the handleClick eventHandler
-            document.getElementById("mainBoard").removeEventListener("click", handleClick, false);
-            // "activate" the showMoves eventHandler
-            let thePieces = document.getElementsByClassName("boardPiece");
-            for (let i = 0; i < thePieces.length; i++) {
-                thePieces[i].addEventListener("click", makeMove, true);
-            }
+            // "activate" the handleClick eventHandler
+            document.getElementById("mainBoard").addEventListener("click", handleClick, false);
         });
+        
+        function handleClick(theEvent) {
+            let theSelection = theEvent.target;
+            let theSelectionID;
+            // check whether theSelection is a boardPiece or boardSquare
+            if (theSelection.classList.contains("boardPiece")) {
+                theSelectionID = theSelection.parentNode.id;
+            }
+            else {
+                theSelectionID = theSelection.id;
+            }
+            // check whether theSelectionID is a valid move 
+            if (possibleMoves.includes(theSelectionID)) {
+                movePiece(currentLocation.id, theSelectionID);
+                updateCurrentPlayer(pieceColor);
+            }
+            else {
+                updateStatus("Invalid move");
+            }
+        
+            setTimeout(() => {
+                // "pause" the handleClick eventHandler
+                document.getElementById("mainBoard").removeEventListener("click", handleClick, false);
+                // "activate" the showMoves eventHandler
+                let thePieces = document.getElementsByClassName("boardPiece");
+                for (let i = 0; i < thePieces.length; i++) {
+                    thePieces[i].addEventListener("click", makeMove, true);
+                }
+            });
+        }
+    }
+    else {
+        updateStatus("You can't move that color of piece");
     }
 }
 
@@ -129,4 +136,25 @@ function movePiece(currentLocation, newLocation) {
         newBoardSquare.appendChild(newPiece);
     }
     currentBoardSquare.removeChild(currentBoardSquare.firstElementChild);
+}
+
+function updateCurrentPlayer(currentPlayerColor) {
+    if (currentPlayerColor == "W") {
+        document.getElementById("W").classList.remove("currentPlayer");
+        document.getElementById("B").classList.add("currentPlayer");
+    }
+    else {
+        document.getElementById("B").classList.remove("currentPlayer");
+        document.getElementById("W").classList.add("currentPlayer");
+    }
+}
+
+function updateStatus(newStatusMessage) {
+    let theStatus = document.getElementById("playerStatus").firstElementChild;
+    let oldStatusMessage = theStatus.innerText;
+
+    theStatus.innerText = newStatusMessage;
+    setTimeout(() => {
+        theStatus.innerText = oldStatusMessage;
+    }, 2000);
 }
