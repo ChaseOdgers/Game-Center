@@ -6,41 +6,39 @@ function gameStart(student){
 
   let studentModifications = [];
 
-
-
 /*---------------------Player Controlled Button Listeners--------------------*/
   document.getElementById("smallCommitMH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("small", "MH", "student");});
+  {studentModifications.push(new commitment("small", "MH", "student"))});
   document.getElementById("smallCommitPH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("small", "PH", "student");});
+  {studentModifications.push(new commitment("small", "PH", "student"))});
   document.getElementById("smallCommitSleep").addEventListener("click", () =>
-  {studentModifications.push(new commitment("small", "MH", "student");});
+  {studentModifications.push(new commitment("small", "sleep", "student"))});
   document.getElementById("smallCommitSocial").addEventListener("click", () =>
-  {studentModifications.push(new commitment("small", "MH", "student");});
+  {studentModifications.push(new commitment("small", "social", "student"))});
   document.getElementById("smallCommitStudy").addEventListener("click", () =>
-  {studentModifications.push(new commitment("small", "MH", "student");});
+  {studentModifications.push(new commitment("small", "study", "student"))});
 
   document.getElementById("mediumCommitMH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("medium", "MH", "student");});
+  {studentModifications.push(new commitment("medium", "MH", "student"));});
   document.getElementById("mediumCommitPH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("medium", "MH", "student");});
+  {studentModifications.push(new commitment("medium", "PH", "student"));});
   document.getElementById("mediumCommitSleep").addEventListener("click", () =>
-  {studentModifications.push(new commitment("medium", "MH", "student");});
+  {studentModifications.push(new commitment("medium", "sleep", "student"));});
   document.getElementById("mediumCommitSocial").addEventListener("click", () =>
-  {studentModifications.push(new commitment("medium", "MH", "student");});
+  {studentModifications.push(new commitment("medium", "social", "student"));});
   document.getElementById("mediumCommitStudy").addEventListener("click", () =>
-  {studentModifications.push(new commitment("medium", "MH", "student");});
+  {studentModifications.push(new commitment("medium", "study", "student"));});
 
   document.getElementById("bigCommitMH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("big", "MH", "commitments");});
+  {studentModifications.push(new commitment("big", "MH", "commitments"));});
   document.getElementById("bigCommitPH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("big", "MH", "commitments");});
+  {studentModifications.push(new commitment("big", "MH", "commitments"));});
   document.getElementById("bigCommitSleep").addEventListener("click", () =>
-  {studentModifications.push(new commitment("big", "MH", "commitments");});
+  {studentModifications.push(new commitment("big", "MH", "commitments"));});
   document.getElementById("bigCommitSocial").addEventListener("click", () =>
-  {studentModifications.push(new commitment("big", "MH", "commitments");});
+  {studentModifications.push(new commitment("big", "MH", "commitments"));});
   document.getElementById("bigCommitStudy").addEventListener("click", () =>
-  {studentModifications.push(new commitment("big", "MH", "commitments");});
+  {studentModifications.push(new commitment("big", "MH", "commitments"));});
 /*----------------------------------------------------------------------------*/
 
 
@@ -53,7 +51,7 @@ function gameStart(student){
     }
     if(getRandomInt(100)==42)
     {
-      generateLifeEvent(lifeEvets);
+      studentModifications.push(new lifeEvent(student);)
     }
   }
 
@@ -63,7 +61,7 @@ function gameStart(student){
 
 
 function getRandomInt(max){
-  return Math.floor(math.random() * Math.floor(max));
+  return Math.floor(Math.random() * Math.floor(max));
 }
 
 /*
@@ -72,8 +70,6 @@ Post: All the functions in studentModifications[] get executed and adjusted.
 Param: Student object
 */
 function frameEvent(studentModifications, student){
-
-  moveAdversaries(adversaries, student);
 
   for(let i = 0; i<studentModifications.length; i++)
   {
