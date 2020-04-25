@@ -96,7 +96,7 @@ function frameEvent(studentModifications, student){
     }
     else if(studentModifications[i] == lifeEvents)
     {
-
+      studentModifications[i].modifyStudent();
     }
   }
 
