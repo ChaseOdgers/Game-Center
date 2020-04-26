@@ -37,7 +37,7 @@ function commitment(scope, type, student){
   }
 }
 
-commitment.prototype.fulfill = function(student){
+commitment.prototype.fulfill = function(){
   if(this.scope == "small")
   {
     this.student.modifyStudent(-1, willpower)

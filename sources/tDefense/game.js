@@ -8,37 +8,37 @@ function gameStart(student){
 
 /*---------------------Player Controlled Button Listeners--------------------*/
   document.getElementById("smallCommitMH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("small", "MH", "student"))});
+  {studentModifications.push(new commitment("small", "MH", student))});
   document.getElementById("smallCommitPH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("small", "PH", "student"))});
+  {studentModifications.push(new commitment("small", "PH", student))});
   document.getElementById("smallCommitSleep").addEventListener("click", () =>
-  {studentModifications.push(new commitment("small", "sleep", "student"))});
+  {studentModifications.push(new commitment("small", "sleep", student))});
   document.getElementById("smallCommitSocial").addEventListener("click", () =>
-  {studentModifications.push(new commitment("small", "social", "student"))});
+  {studentModifications.push(new commitment("small", "social", student))});
   document.getElementById("smallCommitStudy").addEventListener("click", () =>
-  {studentModifications.push(new commitment("small", "study", "student"))});
+  {studentModifications.push(new commitment("small", "study", student))});
 
   document.getElementById("mediumCommitMH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("medium", "MH", "student"));});
+  {studentModifications.push(new commitment("medium", "MH", student));});
   document.getElementById("mediumCommitPH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("medium", "PH", "student"));});
+  {studentModifications.push(new commitment("medium", "PH", student));});
   document.getElementById("mediumCommitSleep").addEventListener("click", () =>
-  {studentModifications.push(new commitment("medium", "sleep", "student"));});
+  {studentModifications.push(new commitment("medium", "sleep", student));});
   document.getElementById("mediumCommitSocial").addEventListener("click", () =>
-  {studentModifications.push(new commitment("medium", "social", "student"));});
+  {studentModifications.push(new commitment("medium", "social", student));});
   document.getElementById("mediumCommitStudy").addEventListener("click", () =>
-  {studentModifications.push(new commitment("medium", "study", "student"));});
+  {studentModifications.push(new commitment("medium", "study", student));});
 
   document.getElementById("bigCommitMH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("big", "MH", "commitments"));});
+  {studentModifications.push(new commitment("big", "MH", student));});
   document.getElementById("bigCommitPH").addEventListener("click", () =>
-  {studentModifications.push(new commitment("big", "MH", "commitments"));});
+  {studentModifications.push(new commitment("big", "MH", student));});
   document.getElementById("bigCommitSleep").addEventListener("click", () =>
-  {studentModifications.push(new commitment("big", "MH", "commitments"));});
+  {studentModifications.push(new commitment("big", "MH", student));});
   document.getElementById("bigCommitSocial").addEventListener("click", () =>
-  {studentModifications.push(new commitment("big", "MH", "commitments"));});
+  {studentModifications.push(new commitment("big", "MH", student));});
   document.getElementById("bigCommitStudy").addEventListener("click", () =>
-  {studentModifications.push(new commitment("big", "MH", "commitments"));});
+  {studentModifications.push(new commitment("big", "MH", student));});
 /*----------------------------------------------------------------------------*/
 
 
@@ -75,7 +75,14 @@ function frameEvent(studentModifications, student){
   {
     if(studentModifications[i] == commitment)
     {
-
+      if(studentModifications[i].length == 0)
+      {
+        studentModifications.splice(i,1);
+      }
+      else
+      {
+        studentModifications[i].fulfill();
+      }
     }
     else if(studentModifications[i] == adversaries)
     {
@@ -91,13 +98,34 @@ function frameEvent(studentModifications, student){
       else
       {
         studentModifications[i].moveNextBlock();
-        studentModifications[i].updateLocation();
+        updateAdvesaryPosition(studentModifications[i]);
       }
     }
     else if(studentModifications[i] == lifeEvents)
     {
-      studentModifications[i].modifyStudent();
+      if(studentModifications[i].length == 0)
+      {
+        studentModifications.splice(i,1);
+        student.modifyStudent(10, "willpower");
+      }
+      else
+      {
+        studentModifications[i].modifyStudent();
+      }
     }
+
+    if(student.type == "Engineering Student")
+    {
+      studentModifications.push(new adversaries(student));
+    }
+    else
+    {
+      if(getRandomInt(4)==1)
+      {
+        studentModifications.push(new adversaries(student));
+      }
+    }
+
   }
 
 
