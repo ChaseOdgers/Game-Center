@@ -1,5 +1,30 @@
-function updateAdvesaryPosition(adversaries){
-  document.getElementById(this.type + (this.location+1).innerHTML = "";
-  document.getElementById(this.type + this.location).innerHTML = this.name;
+document.addEventListener("DOMContentLoaded", () =>{
 
-}
+  function updateAdvesaryPosition(adversaries){
+    if(adveries.length < 4)
+    {
+      console.log(adversaries.type + (adversaries.location+1));
+      document.getElementById(adversaries.type + (adversaries.location+1)).innerHTML = "";
+    }
+
+      document.getElementById(adversaries.type + adversaries.location).innerHTML = this.name;
+
+  }
+
+  function updateGrade(student){
+
+  }
+
+  function updateProfilePic(student){
+
+  }
+
+  function removeFromEventTab(Event){
+
+  }
+
+  function addToEventTab(Event){
+
+  }
+
+});

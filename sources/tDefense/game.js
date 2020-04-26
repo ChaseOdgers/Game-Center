@@ -51,7 +51,7 @@ function gameStart(student){
     }
     if(getRandomInt(100)==42)
     {
-      studentModifications.push(new lifeEvent(student);)
+      studentModifications.push(new lifeEvent(student));
     }
   }
 
@@ -73,6 +73,8 @@ function frameEvent(studentModifications, student){
 
   for(let i = 0; i<studentModifications.length; i++)
   {
+    console.log(studentModifications[i]);
+
     if(studentModifications[i] == commitment)
     {
       if(studentModifications[i].length == 0)
@@ -101,7 +103,7 @@ function frameEvent(studentModifications, student){
         updateAdvesaryPosition(studentModifications[i]);
       }
     }
-    else if(studentModifications[i] == lifeEvents)
+    else if(studentModifications[i] == lifeEvent)
     {
       if(studentModifications[i].length == 0)
       {
