@@ -27,8 +27,8 @@ function adversaries(student){
   this.location = 4;//The location will start at the end of the row
 }
 
-adversaries.prototype.modifyStudent = function(student){
-  student.modifyStudent(this.deterioration, this.type);
+adversaries.prototype.modifyStudent = function(){
+  this.student.modifyStudent(this.deterioration, this.type);
 }
 
 adversaries.prototype.moveNextBlock = function(){
@@ -36,6 +36,29 @@ adversaries.prototype.moveNextBlock = function(){
   {
     this.location -= 1;
   }
+
+
+  if(this.type == "MH")
+  {
+    this.deterioration -= this.student.mentalHealth;
+  }
+  else if(this.type == "PH")
+  {
+    this.deterioration -= this.student.physicalHealth;
+  }
+  else if(this.type == "sleep")
+  {
+    this.deterioration -= this.student.sleep;
+  }
+  else if(this.type == "social")
+  {
+    this.deterioration -= this.student.social;
+  }
+  else if(this.type == "study")
+  {
+    this.deterioration -= this.student.study;
+  }
+
 }
 
 function getRandomMHAdversary(){

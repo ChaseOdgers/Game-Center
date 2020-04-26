@@ -1,77 +1,5 @@
 
 
-function makeCommitment(size, type, list){
-  if(size == "small")
-  {
-    if(type == "MH")
-    {
-
-    }
-    else if(type == "PH")
-    {
-
-    }
-    else if(type == "sleep")
-    {
-
-    }
-    else if(type == "social")
-    {
-
-    }
-    else if(type == "study")
-    {
-
-    }
-  }
-  else if(size == "medium")
-  {
-    if(type == "MH")
-    {
-
-    }
-    else if(type == "PH")
-    {
-
-    }
-    else if(type == "sleep")
-    {
-
-    }
-    else if(type == "social")
-    {
-
-    }
-    else if(type == "study")
-    {
-
-    }
-  }
-  else if(size == "big")
-  {
-    if(type == "MH")
-    {
-
-    }
-    else if(type == "PH")
-    {
-
-    }
-    else if(type == "sleep")
-    {
-
-    }
-    else if(type == "social")
-    {
-
-    }
-    else if(type == "study")
-    {
-
-    }
-  }
-}
-
 function generateCommitmentName(size)
 {
   if(size == "small")
@@ -109,7 +37,20 @@ function commitment(scope, type, student){
   }
 }
 
-commitment.prototype.fulfill = function(student){
+commitment.prototype.fulfill = function(){
+  if(this.scope == "small")
+  {
+    this.student.modifyStudent(-1, willpower)
+  }
+  else if(this.scope == "medium")
+  {
+    this.student.modifyStudent(-0.5, willpower)
+  }
+  else if(this.scope == "big")
+  {
+    this.student.modifyStudent(-0.1, willpower)
+  }
+
   if(this.type == "MH")
   {
 
