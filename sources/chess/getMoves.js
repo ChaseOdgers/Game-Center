@@ -403,6 +403,25 @@ function getPossibleMoves(aBoardPiece) {
                 possibleMoves.push(bottomLeftSquare.id);
             }
         }
+        // possible castling
+        if (currentLocation == "e1" || currentLocation == "e8") {
+            let rightTwoSquares = document.getElementById(String.fromCharCode(currentColumn + 2) + (currentRow));
+            let rightRookLocation = document.getElementById(String.fromCharCode(currentColumn + 3) + (currentRow));
+            let leftTwoSquares = document.getElementById(String.fromCharCode(currentColumn - 2) + (currentRow));
+            let leftThreeSquares = document.getElementById(String.fromCharCode(currentColumn - 3) + (currentRow)) 
+            let leftRookLocation = document.getElementById(String.fromCharCode(currentColumn - 4) + (currentRow));
+
+            if (!rightSquare.hasChildNodes() && !rightTwoSquares.hasChildNodes() &&
+                rightRookLocation.firstElementChild.id.substring(0, rightRookLocation.firstElementChild.id.length - 1) == "rook")
+            {
+                possibleMoves.push(rightRookLocation.id);
+            }
+            if (!leftSquare.hasChildNodes() && !leftTwoSquares.hasChildNodes() && !leftThreeSquares.hasChildNodes() &&
+                leftRookLocation.firstElementChild.id.substring(0, leftRookLocation.firstElementChild.id.length - 1) == "rook")
+            {
+                possibleMoves.push(leftRookLocation.id);
+            }
+        }
     }
 
     return possibleMoves;
