@@ -23,13 +23,14 @@ var pCount = 0;
 var dCount = 0;
 var pACount = 0;
 var dACount = 0;
-var aceCheck = false;
+//var aceCheck = false;
 var split1A = false;
 var split2A = false;
 var split = false;
 var split1 = 0;
 var split2 = 0;
 var cutCount = 0;
+var aceInplay  = 0;
 document.getElementById('hit').disabled = true;
 document.getElementById("stand").disabled = true;
 document.getElementById("double").disabled = true;
@@ -527,6 +528,7 @@ function cards(card, n)
       switch (n)
       {
         case 0:
+          aceInplay++;
           return 11;
           break;
         case 1:
@@ -538,6 +540,7 @@ function cards(card, n)
       switch (n)
       {
         case 0:
+          aceInplay++;
           return 11;
           break;
         case 1:
@@ -549,6 +552,7 @@ function cards(card, n)
       switch (n)
       {
         case 0:
+          aceInplay++;
           return 11;
           break;
         case 1:
@@ -560,6 +564,7 @@ function cards(card, n)
       switch (n)
       {
         case 0:
+          aceInplay++;
           return 11;
           break;
         case 1:
@@ -587,6 +592,20 @@ function shuffleDeck(deck)
   return deck;
 }
 
+
+function aCheck(n)
+{
+  if (aceInplay > 0)
+  {
+    if (n > 21)
+    {
+      n = n - 10;
+      aceInplay--;
+    }
+  }
+  return n;
+}
+
 function play(state)
 {
   switch(state)
@@ -595,17 +614,18 @@ function play(state)
       if (split1A == true)
       {
         split1 = split1 + cards(deck[posInDeck],0);
+        pCount = aCheck(split1);
         if (hitCount == 0)
         {
-          document.getElementById("pCard2Img").src = "Player: " + cards(deck[posInDeck],1);
+          document.getElementById("pCard2Img").src =cards(deck[posInDeck],1);
 
         }
         else {
-          document.getElementById("pHit" + hitCount + "Img").src = "Player: " + cards(deck[posInDeck],1);
+          document.getElementById("pHit" + hitCount + "Img").src =cards(deck[posInDeck],1);
         }
         posInDeck++;
         hitCount++;
-        document.getElementById("player").innerHTML = split1;
+        document.getElementById("player").innerHTML ="Player:" + split1;
         if (split1 < 22)
         {
           //hit or stand
@@ -625,10 +645,11 @@ function play(state)
       else if (split2A == true)
       {
         split2 = split2 + cards(deck[posInDeck],0);
-        document.getElementById("pHitS" + hitSCount + "Img").src = "Player: " + cards(deck[posInDeck],1);
+        pCount = aCheck(split2);
+        document.getElementById("pHitS" + hitSCount + "Img").src =cards(deck[posInDeck],1);
         posInDeck++;
         hitSCount++;
-        document.getElementById("player").innerHTML = split2;
+        document.getElementById("player").innerHTML = "Player: " + split2;
         if (split2 < 22)
         {
           //hit or stand
@@ -639,11 +660,16 @@ function play(state)
           //bust
           split2A = false;
           //ends the game
+          aceInplay = 0;
+          dCount = cards(dCard1,0) + cards(dCard2,0);
+
+          hitCount = 1;
           dealerPlay();
         }
       }
       else {
         pCount = pCount + cards(deck[posInDeck],0);
+        pCount = aCheck(pCount);
         document.getElementById("pHit" + hitCount + "Img").src = cards(deck[posInDeck],1);
         posInDeck++;
         hitCount++;
@@ -651,6 +677,10 @@ function play(state)
         if (pCount == 21)
         {
           document.getElementById("log").innerHTML = "You got 21, dealers turn to play";
+          aceInplay = 0;
+          dCount = cards(dCard1,0) + cards(dCard2,0);
+
+          hitCount = 1;
           dealerPlay();
         }
         else if (pCount < 21)
@@ -677,6 +707,10 @@ function play(state)
 
       }
       else {
+        aceInplay = 0;
+        dCount = cards(dCard1,0) + cards(dCard2,0);
+
+        hitCount = 1;
         dealerPlay();
       }
 
@@ -696,10 +730,15 @@ function play(state)
     case "double":
       //document.getElementById("log").innerHTML = "You have chose to double down."
       pCount = pCount + cards(deck[posInDeck],0);
+      pCount = aCheck(pCount);
       posInDeck++;
       document.getElementById("player").innerHTML = "Player: " + pCount;
       if (pCount < 22)
       {
+        aceInplay = 0;
+        dCount = cards(dCard1,0) + cards(dCard2,0);
+
+        hitCount = 1;
         dealerPlay();
       }
       else
@@ -721,10 +760,10 @@ function play(state)
 
       posInDeck++;
       cutCount++;
-      pCard1 = deck[0];
-      dCard1 = deck[1];
-      pCard2 = deck[2];
-      dCard2 = deck[3];
+      // pCard1 = deck[0];
+      // dCard1 = deck[1];
+      // pCard2 = deck[2];
+      // dCard2 = deck[3];
       pCard1 = deck[posInDeck];
       posInDeck++;
       pCard2 = deck[posInDeck];
@@ -733,11 +772,23 @@ function play(state)
       posInDeck++;
       dCard2 = deck[posInDeck];
       posInDeck++;
+      dCard1 = 'aC';
+      dCard2 = 'aH';
+      // pCard1 = 'aC';
+      // pCard2 = 'aH';
 
-
+      // if (aceInplay > 0)
+      // {
+      //   if (pCount > 21)
+      //   {
+      //     pCount = pCount - 10;
+      //     aceInplay--;
+      //   }
+      // }
 
       pCount = cards(pCard1,0) + cards(pCard2,0);
-      dCount = cards(dCard1,0) + cards(dCard2,0);
+      pCount = aCheck(pCount);
+      //dCount = cards(dCard1,0) + cards(dCard2,0);
       document.getElementById("player").innerHTML = "Player: " + pCount;
       document.getElementById("dealer").innerHTML = "Dealer: " + cards(dCard1,0);
       document.getElementById("pCard1Img").src = cards(pCard1,1);
@@ -747,8 +798,12 @@ function play(state)
       if (pCount == 21)
       {
         document.getElementById("log").innerHTML = "Blackjack you have won!"
+        document.getElementById('hit').disabled = true;
+        document.getElementById("stand").disabled = true;
+        document.getElementById("double").disabled = true;
+        document.getElementById("play").disabled = false;
       }
-      else if (cards(pCard1,0) == cards(pCard2,0)) {
+      else if (pCard1.charAt(0) == pCard2.charAt(0)) {
         document.getElementById("split").disabled = false;
         document.getElementById("log").innerHTML = "Hit, Stand, Double Down, Split";
       }
@@ -771,16 +826,18 @@ function dealerPlay()
   //     // go to end
   //   }
   // }
-  hitCount = 1;
   document.getElementById("dCard2Img").src = cards(dCard2,1);
+  dCount = aCheck(dCount);
   document.getElementById("dealer").innerHTML = "Dealer: " + dCount;
   if (dCount < 17)
   {
     dCount = dCount + cards(deck[posInDeck],0);
+    //dCount = aCheck(dCount);
     document.getElementById("dHit" + hitCount + "Img").src = cards(deck[posInDeck],1);
     posInDeck++;
     hitCount++;
     dealerPlay();
+
   }
   else {
     if (split == true)
@@ -888,7 +945,7 @@ function reset()
   pCount = 0;
   dCount = 0;
   hitCount = 1;
-  if (cutCount == 6)
+  if (cutCount == 10)
   {
     posInDeck = 0;
     shuffleDeck(deck);
