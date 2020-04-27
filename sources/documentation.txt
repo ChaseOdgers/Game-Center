@@ -1,0 +1,5 @@
+checkers
+2d array holding a value of either 0= empty, 1=player1, 2=player2
+use the 2d array to then print pieces location on screen
+click on a pieces
+  
