@@ -772,8 +772,8 @@ function play(state)
       posInDeck++;
       dCard2 = deck[posInDeck];
       posInDeck++;
-      dCard1 = 'aC';
-      dCard2 = 'aH';
+      // dCard1 = 'aC';
+      // dCard2 = 'aH';
       // pCard1 = 'aC';
       // pCard2 = 'aH';
 
@@ -790,6 +790,8 @@ function play(state)
       pCount = aCheck(pCount);
       //dCount = cards(dCard1,0) + cards(dCard2,0);
       document.getElementById("player").innerHTML = "Player: " + pCount;
+      //find way to show without counting the ace for the dealer
+      //add another switch to ace with 2 bool vars to see who has the ace???
       document.getElementById("dealer").innerHTML = "Dealer: " + cards(dCard1,0);
       document.getElementById("pCard1Img").src = cards(pCard1,1);
       document.getElementById("pCard2Img").src = cards(pCard2,1);
@@ -812,8 +814,8 @@ function play(state)
         document.getElementById("log").innerHTML = "Hit, Stand, Double Down";
       }
       break;
-    case "insurance":
-      break;
+    // case "insurance":
+    //   break;
   }
 }
 
@@ -919,9 +921,9 @@ document.addEventListener("DOMContentLoaded", () =>
       reset();
       play("play");
   })
-  document.getElementById('insurance').addEventListener('click', function(){
-      play("insurance");
-  })
+  // document.getElementById('insurance').addEventListener('click', function(){
+  //     play("insurance");
+  // })
 
 function reset()
 {
