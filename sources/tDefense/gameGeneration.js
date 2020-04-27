@@ -8,8 +8,6 @@ document.addEventListener("DOMContentLoaded",() => {
     document.getElementById("mainHeading").innerHTML = "The Good Student";
     document.getElementById("mainGame").style.visibility = "visible";
 
-    debugger;
-
     let aStudent = new student("A Student", 90, 90, 90, 90, 90, 90);
     gameStart(aStudent);
 

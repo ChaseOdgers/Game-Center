@@ -44,7 +44,6 @@ function gameStart(student){
 
   for(let i = 0; i<75; i++)
   {
-
     for(let j = 0; j<5; j++)
     {
       setTimeout(frameEvent(studentModifications, student), 1000);
@@ -53,6 +52,7 @@ function gameStart(student){
     {
       studentModifications.push(new lifeEvent(student));
     }
+    console.log(studentModifications.length + " " + i);
   }
 
 
@@ -73,13 +73,13 @@ function frameEvent(studentModifications, student){
 
   for(let i = 0; i<studentModifications.length; i++)
   {
-    console.log(studentModifications[i]);
-
     if(studentModifications[i] == commitment)
     {
       if(studentModifications[i].length == 0)
       {
         studentModifications.splice(i,1);
+        console.log(studentModifications);
+        //TODO: Find a replacement for splice
       }
       else
       {
@@ -92,6 +92,8 @@ function frameEvent(studentModifications, student){
       {
         studentModifications[i].modifyStudent();
         studentModifications.splice(i,1);
+        console.log(studentModifications);
+
       }
       else if(studentModifications[i].deterioration <= 0)
       {
@@ -108,6 +110,8 @@ function frameEvent(studentModifications, student){
       if(studentModifications[i].length == 0)
       {
         studentModifications.splice(i,1);
+        console.log(studentModifications);
+
         student.modifyStudent(10, "willpower");
       }
       else
