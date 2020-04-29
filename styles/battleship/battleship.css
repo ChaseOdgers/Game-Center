@@ -8,12 +8,14 @@ h1 {
     text-shadow: 2px 2px 5px blue; }
 
 table {
-    margin-left:  50px;
     border: 3px solid black;
     border-collapse: collapse;
     display: inline-block;
     vertical-align: middle;
     user-select: none; }
+
+table#board {
+    margin-right:  50px; }
 
 td {
     padding: 0;
@@ -45,7 +47,7 @@ button {
     cursor: pointer;
     visibility: collapse; }
 
-p {
+p#winner, p#loser {
     text-align: center;
     visibility: collapse;
     position: absolute;
@@ -55,5 +57,10 @@ p {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -150%);
-    z-index: 999;
-}
+    z-index: 999; }
+
+p#instructions {
+    display: inline-block;
+    text-align: left;
+    font-size: 17px;
+    font-weight: bolder; }
