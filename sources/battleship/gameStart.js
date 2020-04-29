@@ -15,6 +15,8 @@ window.addEventListener("resize", refreshShipLocations);
 document.getElementById("btnStart").addEventListener("click", function() {
     this.remove();
     document.getElementById("ships").remove();
+    document.getElementById("instructions").remove();
+    document.getElementById("board").style.marginRight = "0px";
     createTable("boardCP");
     document.getElementById("boardCP").style.visibility = "visible";
     document.getElementById("boardCP").style.marginBottom = "20px";
