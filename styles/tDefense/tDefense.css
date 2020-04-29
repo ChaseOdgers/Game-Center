@@ -12,7 +12,7 @@ div.playerStats
 
 div.board
 {
-  display: table-row-group;
+  display: inline-block;
   height:250px;
   width: 450px;
   column-width: 80%;
@@ -48,7 +48,7 @@ div.board
 .webGrid > div
 {
   text-align: center;
-  padding: 20px 0;
+  padding: 20px;
   font-size: 30px;
 }
 
