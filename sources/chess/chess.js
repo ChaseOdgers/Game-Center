@@ -1,12 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     createBoard();
     setupBoard();
-
-    let thePieces = document.getElementsByClassName("boardPiece");
-    for (let i = 0; i < thePieces.length; i++) {
-        thePieces[i].addEventListener("click", makeMove, true);
-    }
-    
+    playGame();
 });
 
 function createBoard() {
@@ -17,10 +12,10 @@ function createBoard() {
             let aColumn = document.createElement("td");
             aColumn.id = String.fromCharCode(j) + "" + i;
             if ((i + j) % 2 == 1) {
-                aColumn.className = "boardSquare white";
+                aColumn.className = "boardSquare whiteSquare";
             }
             else {
-                aColumn.className = "boardSquare black";
+                aColumn.className = "boardSquare blackSquare";
             }
             aRow.appendChild(aColumn);
         }
@@ -36,26 +31,26 @@ function setupBoard() {
         let aSquare = document.getElementById(String.fromCharCode(i) + 8);
         let aBlackPiece = document.createElement("div");
         aBlackPiece.id = pieceList[i-97] + "B";
-        aBlackPiece.className = "boardPiece";
+        aBlackPiece.className = "boardPiece blackPiece";
         aSquare.appendChild(aBlackPiece);
 
         aSquare = document.getElementById(String.fromCharCode(i) + 7);
         let aBlackPawn = document.createElement("div");
         aBlackPawn.id = "pawnB";
-        aBlackPawn.className = "boardPiece";
+        aBlackPawn.className = "boardPiece blackPiece";
         aSquare.appendChild(aBlackPawn);
 
         // White Player's Pieces
         aSquare = document.getElementById(String.fromCharCode(i) + 1);
         let aWhitePiece = document.createElement("div");
         aWhitePiece.id = pieceList[i-97] + "W";
-        aWhitePiece.className = "boardPiece";
+        aWhitePiece.className = "boardPiece whitePiece";
         aSquare.appendChild(aWhitePiece);
 
         aSquare = document.getElementById(String.fromCharCode(i) + 2);
         let aWhitePawn = document.createElement("div");
         aWhitePawn.id = "pawnW";
-        aWhitePawn.className = "boardPiece";
+        aWhitePawn.className = "boardPiece whitePiece";
         aSquare.appendChild(aWhitePawn);
     }
 }
@@ -91,6 +86,7 @@ function makeMove() {
         function handleClick(theEvent) {
             let theSelection = theEvent.target;
             let theSelectionID;
+            let isGameOver = false;
             // check whether theSelection is a boardPiece or boardSquare
             if (theSelection.classList.contains("boardPiece")) {
                 theSelectionID = theSelection.parentNode.id;
@@ -102,59 +98,191 @@ function makeMove() {
             if (possibleMoves.includes(theSelectionID)) {
                 movePiece(currentLocation.id, theSelectionID);
                 updateCurrentPlayer(pieceColor);
+                if (isCheck(theSelectionID)) {
+                    isGameOver = isCheckmate();
+                }
             }
             else {
-                updateStatus("Invalid move");
+                updateStatus("Invalid move", false);
             }
         
             setTimeout(() => {
                 // "pause" the handleClick eventHandler
                 document.getElementById("mainBoard").removeEventListener("click", handleClick, false);
-                // "activate" the showMoves eventHandler
-                let thePieces = document.getElementsByClassName("boardPiece");
-                for (let i = 0; i < thePieces.length; i++) {
-                    thePieces[i].addEventListener("click", makeMove, true);
+                if (!isGameOver) {
+                    // "activate" the showMoves eventHandler
+                    let thePieces = document.getElementsByClassName("boardPiece");
+                    for (let i = 0; i < thePieces.length; i++) {
+                        thePieces[i].addEventListener("click", makeMove, true);
+                    }
+                }
+                else {
+                    document.getElementById("playerStatus").firstElementChild.innerText = "Checkmate!";
                 }
             });
         }
     }
     else {
-        updateStatus("You can't move that color of piece");
+        updateStatus("You can't move that color of piece", false);
     }
 }
 
 function movePiece(currentLocation, newLocation) {
     let newBoardSquare = document.getElementById(newLocation);
     let currentBoardSquare = document.getElementById(currentLocation);
-    if (newBoardSquare.hasChildNodes()) { // attacking a piece
-        newBoardSquare.firstChild.id = currentBoardSquare.firstChild.id;
+    // castle to the right
+    let currentColumn = currentLocation.charCodeAt(0);
+    let currentRow = currentLocation.charAt(1);
+    if ((currentLocation == "e1" && newLocation == "h1") ||
+        (currentLocation == "e8" && newLocation == "h8"))
+    {
+        let newKingSquare = document.getElementById(String.fromCharCode(currentColumn + 2) + currentRow);
+        let newRookSquare = document.getElementById(String.fromCharCode(currentColumn + 1) + currentRow);
+
+        newKingSquare.appendChild(currentBoardSquare.firstElementChild);
+        newRookSquare.appendChild(newBoardSquare.firstElementChild);
     }
-    else { // moving to an empty boardSquare
-        let newPiece = document.createElement("div");
-        newPiece.id = currentBoardSquare.firstChild.id;
-        newPiece.classList.add("boardPiece");
-        newBoardSquare.appendChild(newPiece);
+    // castle to the left
+    else if ((currentLocation == "e1" && newLocation == "a1") ||
+             (currentLocation == "e8" && newLocation == "a8"))
+    {
+        let newKingSquare = document.getElementById(String.fromCharCode(currentColumn - 2) + currentRow);
+        let newRookSquare = document.getElementById(String.fromCharCode(currentColumn - 1) + currentRow);
+
+        newKingSquare.appendChild(currentBoardSquare.firstElementChild);
+        newRookSquare.appendChild(newBoardSquare.firstElementChild);
     }
-    currentBoardSquare.removeChild(currentBoardSquare.firstElementChild);
+    // attacking a piece
+    else if (newBoardSquare.hasChildNodes()) {
+        newBoardSquare.removeChild(newBoardSquare.firstElementChild);
+        newBoardSquare.appendChild(currentBoardSquare.firstChild);
+    }
+    // moving to an empty boardSquare
+    else {
+        newBoardSquare.appendChild(currentBoardSquare.firstChild);
+    }
 }
 
 function updateCurrentPlayer(currentPlayerColor) {
-    if (currentPlayerColor == "W") {
-        document.getElementById("W").classList.remove("currentPlayer");
-        document.getElementById("B").classList.add("currentPlayer");
-    }
-    else {
-        document.getElementById("B").classList.remove("currentPlayer");
-        document.getElementById("W").classList.add("currentPlayer");
+    document.getElementById("W").classList.toggle("currentPlayer");
+    document.getElementById("B").classList.toggle("currentPlayer");
+}
+
+function updateStatus(newStatusMessage, isPermanent) {
+    let theStatus = document.getElementById("playerStatus").firstElementChild;
+    theStatus.innerText = newStatusMessage;
+    if (!isPermanent) {
+        setTimeout(() => {
+            theStatus.innerText = "Current Player";
+        }, 2000);
     }
 }
 
-function updateStatus(newStatusMessage) {
-    let theStatus = document.getElementById("playerStatus").firstElementChild;
-    let oldStatusMessage = theStatus.innerText;
+function playGame() {
+    let thePieces = document.getElementsByClassName("boardPiece");
+    for (let i = 0; i < thePieces.length; i++) {
+        thePieces[i].addEventListener("click", makeMove, true);
+    } 
+}
 
-    theStatus.innerText = newStatusMessage;
-    setTimeout(() => {
-        theStatus.innerText = oldStatusMessage;
-    }, 2000);
+function isCheck(newestMovedPieceLocation) {
+    let possibleCheckingPiece = document.getElementById(newestMovedPieceLocation);
+    if (possibleCheckingPiece.firstElementChild != null) {
+        let theKing = document.getElementById("kingW");
+        // if the current piece is a white, find the black king
+        if (possibleCheckingPiece.firstElementChild.classList.contains("whitePiece")) {
+            theKing = document.getElementById("kingB");
+        }
+
+        let possibleMoves = getPossibleMoves(possibleCheckingPiece.firstElementChild);
+
+        if (possibleMoves.includes(theKing.parentElement.id)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function isCheckmate() {
+    let theKing = document.getElementById("kingW");
+    let allFriendlyPieces = document.getElementsByClassName("whitePiece");
+    let allOpposingPieces = document.getElementsByClassName("blackPiece");
+    // if wrong assumption, get the black king and white pieces
+    if (document.getElementsByClassName("currentPlayer").item(0).id == "B") {
+        theKing = document.getElementById("kingB");
+        allFriendlyPieces = document.getElementsByClassName("blackPiece");
+        allOpposingPieces = document.getElementsByClassName("whitePiece");
+    }
+
+    let allOpposingMoves = [];
+    for (let i = 0; i < allOpposingPieces.length; i++) {
+        allOpposingMoves = allOpposingMoves.concat(getPossibleMoves(allOpposingPieces.item(i)));
+    }
+
+    let kingsMoves = getPossibleMoves(theKing);
+    // if every possible move of the king is attackable
+    if (kingsMoves.every(kingMove => allOpposingMoves.includes(kingMove))) {
+        if (kingsMoves.length != 1) {
+            updateStatus("Checkmate!", true);
+            return true;
+        }
+        else {
+            let allFriendlyMoves = [];
+            for (let i = 0; i < allFriendlyPieces.length; i++) {
+                if (allFriendlyPieces.item(i).id != theKing.id) {
+                    allFriendlyMoves = allFriendlyMoves.concat(getPossibleMoves(allFriendlyPieces.item(i)));
+                }
+            }
+
+            let checkingPiece;
+            let checkingPieceMoves;
+            // find the checking piece
+            for (let i = 0; i < allOpposingPieces.length; i++) {
+                if (getPossibleMoves(allOpposingPieces.item(i)).includes(kingsMoves[0])) {
+                    checkingPiece = allOpposingPieces.item(i);
+                    checkingPieceMoves = getPossibleMoves(checkingPiece);
+                    checkingPieceMoves.push(checkingPiece.parentElement.id);
+                }
+            }
+            
+            // simulate all possible blocking moves with unshown filler pieces
+            let movesToFill = checkingPieceMoves.filter(move => allFriendlyMoves.includes(move));
+            console.log(movesToFill);
+            movesToFill.forEach(move => {
+                let boardSquare = document.getElementById(move);
+                let fillerPiece = document.createElement("div");
+                fillerPiece.classList.add("filler");
+                fillerPiece.style.visibility = "hidden";
+                boardSquare.appendChild(fillerPiece);
+            });
+
+            let checkmate = false;
+            // if the checking piece can't be captured
+            if (!movesToFill.includes(checkingPiece.parentElement.id)) {
+                // see if the king is still in check
+                checkmate = isCheck(checkingPiece.parentElement.id);
+            }
+            
+            // is the king still in check after all possible blocking moves are made?
+            if (checkmate) {
+                updateStatus("Checkmate!", true);
+                return true;
+            }
+
+            // remove filler pieces
+            movesToFill.forEach(move => {
+                let boardSquare = document.getElementById(move);
+                let fillerPiece = boardSquare.children;
+                for (let i = 0; i < fillerPiece.length; i++) {
+                    if (fillerPiece.item(i).classList.contains("filler")) {
+                        fillerPiece.item(i).parentElement.removeChild(fillerPiece.item(i));
+                    }
+                }
+            });
+        }
+    }
+
+    updateStatus("Check!", false);
+    return false;
 }

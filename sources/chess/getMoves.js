@@ -4,13 +4,14 @@ function getPossibleMoves(aBoardPiece) {
     let currentRow = parseInt(currentLocation.charAt(1));
 
     let pieceType = aBoardPiece.id.substring(0, aBoardPiece.id.length - 1);
-    let pieceColor = aBoardPiece.id.charAt(aBoardPiece.id.length - 1);
+    
+    let pieceColor = aBoardPiece.classList.item(1);
 
     let possibleMoves = [];
 
     if (pieceType == "pawn") {
 
-        if (pieceColor == "W") { // a white pawn
+        if (pieceColor == "whitePiece") { // a white pawn
             let facingBoardSquare = document.getElementById(String.fromCharCode(currentColumn) + (currentRow + 1));
             // if the boardSquare in front of the pawn does not contain a piece
             if (!facingBoardSquare.hasChildNodes()) {
@@ -19,14 +20,14 @@ function getPossibleMoves(aBoardPiece) {
             let antiBoardSquare = document.getElementById(String.fromCharCode(currentColumn + 1) + (currentRow + 1));
             // if a black piece can be attacked on the anti diagonal
             if (antiBoardSquare != null && antiBoardSquare.hasChildNodes()) {
-                if (antiBoardSquare.firstChild.id.charAt(antiBoardSquare.firstChild.id.length - 1) != pieceColor) {
+                if (antiBoardSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(antiBoardSquare.id);
                 }
             }
             let mainBoardSquare = document.getElementById(String.fromCharCode(currentColumn - 1) + (currentRow + 1));
             // if a black piece can be attacked on the main diagonal
             if (mainBoardSquare != null && mainBoardSquare.hasChildNodes()) {
-                if (mainBoardSquare.firstChild.id.charAt(mainBoardSquare.firstChild.id.length - 1) != pieceColor) {
+                if (mainBoardSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(mainBoardSquare.id);
                 }
             }
@@ -45,14 +46,14 @@ function getPossibleMoves(aBoardPiece) {
             let antiBoardSquare = document.getElementById(String.fromCharCode(currentColumn - 1) + (currentRow - 1));
             // if a white piece can be attacked on the anti diagonal
             if (antiBoardSquare != null && antiBoardSquare.hasChildNodes()) {
-                if (antiBoardSquare.firstChild.id.charAt(antiBoardSquare.firstChild.id.length - 1) != pieceColor) {
+                if (antiBoardSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(antiBoardSquare.id);
                 }
             }
             let mainBoardSquare = document.getElementById(String.fromCharCode(currentColumn + 1) + (currentRow - 1));
             // if a white piece can be attacked on the main diagonal
             if (mainBoardSquare != null && mainBoardSquare.hasChildNodes()) {
-                if (mainBoardSquare.firstChild.id.charAt(mainBoardSquare.firstChild.id.length - 1) != pieceColor) {
+                if (mainBoardSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(mainBoardSquare.id);
                 }
             }
@@ -73,7 +74,7 @@ function getPossibleMoves(aBoardPiece) {
             // if the boardSquare is not empty and contains an attackable piece
             if (posVerticalDirSquare != null) {
                 if (posVerticalDirSquare.hasChildNodes()) {
-                    if (posVerticalDirSquare.firstChild.id.charAt(posVerticalDirSquare.firstChild.id.length - 1) != pieceColor) {
+                    if (posVerticalDirSquare.firstChild.classList.item(1) != pieceColor) {
                         possibleMoves.push(posVerticalDirSquare.id);
                     }
                 }
@@ -91,7 +92,7 @@ function getPossibleMoves(aBoardPiece) {
             // if the boardSquare is not empty and contains an attackable piece
             if (negVerticalDirSquare != null) {
                 if (negVerticalDirSquare.hasChildNodes()) {
-                    if (negVerticalDirSquare.firstChild.id.charAt(negVerticalDirSquare.firstChild.id.length - 1) != pieceColor) {
+                    if (negVerticalDirSquare.firstChild.classList.item(1) != pieceColor) {
                         possibleMoves.push(negVerticalDirSquare.id);
                     }
                 }
@@ -109,7 +110,7 @@ function getPossibleMoves(aBoardPiece) {
             // if the boardSquare is not empty and contains an attackable piece
             if (posHorizontalDirSquare != null) {
                 if (posHorizontalDirSquare.hasChildNodes()) {
-                    if (posHorizontalDirSquare.firstChild.id.charAt(posHorizontalDirSquare.firstChild.id.length - 1) != pieceColor) {
+                    if (posHorizontalDirSquare.firstChild.classList.item(1) != pieceColor) {
                         possibleMoves.push(posHorizontalDirSquare.id);
                     }
                 }
@@ -127,7 +128,7 @@ function getPossibleMoves(aBoardPiece) {
             // if the boardSquare is not empty and contains an attackable piece
             if (negHorizontalDirSquare != null) {
                 if (negHorizontalDirSquare.hasChildNodes()) { 
-                    if (negHorizontalDirSquare.firstChild.id.charAt(negHorizontalDirSquare.firstChild.id.length - 1) != pieceColor) {
+                    if (negHorizontalDirSquare.firstChild.classList.item(1) != pieceColor) {
                         possibleMoves.push(negHorizontalDirSquare.id);
                     }
                 }
@@ -148,7 +149,7 @@ function getPossibleMoves(aBoardPiece) {
             // if the boardSquare is not empty and contains an attackable piece
             if (posAntiDirSquare != null) {
                 if (posAntiDirSquare.hasChildNodes()) {
-                    if (posAntiDirSquare.firstChild.id.charAt(posAntiDirSquare.firstChild.id.length - 1) != pieceColor) {
+                    if (posAntiDirSquare.firstChild.classList.item(1) != pieceColor) {
                         possibleMoves.push(posAntiDirSquare.id);
                     }
                 }
@@ -167,7 +168,7 @@ function getPossibleMoves(aBoardPiece) {
             // if the boardSquare is not empty and contains an attackable piece
             if (negAntiDirSquare != null) {
                 if (negAntiDirSquare.hasChildNodes()) {
-                    if (negAntiDirSquare.firstChild.id.charAt(negAntiDirSquare.firstChild.id.length - 1) != pieceColor) {
+                    if (negAntiDirSquare.firstChild.classList.item(1) != pieceColor) {
                         possibleMoves.push(negAntiDirSquare.id);
                     }
                 }
@@ -186,7 +187,7 @@ function getPossibleMoves(aBoardPiece) {
             // if the boardSquare is not empty and contains an attackable piece
             if (posMainDirSquare != null) {
                 if (posMainDirSquare.hasChildNodes()) {
-                    if (posMainDirSquare.firstChild.id.charAt(posMainDirSquare.firstChild.id.length - 1) != pieceColor) {
+                    if (posMainDirSquare.firstChild.classList.item(1) != pieceColor) {
                         possibleMoves.push(posMainDirSquare.id);
                     }
                 }
@@ -205,7 +206,7 @@ function getPossibleMoves(aBoardPiece) {
             // if the boardSquare is not empty and contains an attackable piece
             if (negMainDirSquare != null) {
                 if (negMainDirSquare.hasChildNodes()) {
-                    if (negMainDirSquare.firstChild.id.charAt(negMainDirSquare.firstChild.id.length - 1) != pieceColor) {
+                    if (negMainDirSquare.firstChild.classList.item(1) != pieceColor) {
                         possibleMoves.push(negMainDirSquare.id);
                     }
                 }
@@ -221,7 +222,7 @@ function getPossibleMoves(aBoardPiece) {
         let posVerticalDirSquareR = document.getElementById(String.fromCharCode(currentColumn + 1) + evaluatingRow);
         if (posVerticalDirSquareR != null) {
             if (posVerticalDirSquareR.hasChildNodes()) {
-                if (posVerticalDirSquareR.firstChild.id.charAt(posVerticalDirSquareR.firstChild.id.length - 1) != pieceColor) {
+                if (posVerticalDirSquareR.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(posVerticalDirSquareR.id);
                 }
             }
@@ -232,7 +233,7 @@ function getPossibleMoves(aBoardPiece) {
         let posVerticalDirSquareL = document.getElementById(String.fromCharCode(currentColumn - 1) + evaluatingRow);
         if (posVerticalDirSquareL != null) {
             if (posVerticalDirSquareL.hasChildNodes()) {
-                if (posVerticalDirSquareL.firstChild.id.charAt(posVerticalDirSquareL.firstChild.id.length - 1) != pieceColor) {
+                if (posVerticalDirSquareL.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(posVerticalDirSquareL.id);
                 }
             }
@@ -244,7 +245,7 @@ function getPossibleMoves(aBoardPiece) {
         let negVerticalDirSquareR = document.getElementById(String.fromCharCode(currentColumn + 1) + evaluatingRow);
         if (negVerticalDirSquareR != null) {
             if (negVerticalDirSquareR.hasChildNodes()) {
-                if (negVerticalDirSquareR.firstChild.id.charAt(negVerticalDirSquareR.firstChild.id.length - 1) != pieceColor) {
+                if (negVerticalDirSquareR.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(negVerticalDirSquareR.id);
                 }
             }
@@ -255,7 +256,7 @@ function getPossibleMoves(aBoardPiece) {
         let negVerticalDirSquareL = document.getElementById(String.fromCharCode(currentColumn - 1) + evaluatingRow);
         if (negVerticalDirSquareL != null) {
             if (negVerticalDirSquareL.hasChildNodes()) {
-                if (negVerticalDirSquareL.firstChild.id.charAt(negVerticalDirSquareL.firstChild.id.length - 1) != pieceColor) {
+                if (negVerticalDirSquareL.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(negVerticalDirSquareL.id);
                 }
             }
@@ -269,7 +270,7 @@ function getPossibleMoves(aBoardPiece) {
         let posHorizontalDirSquareT = document.getElementById(String.fromCharCode(evaluatingColumn) + (currentRow + 1));
         if (posHorizontalDirSquareT != null) {
             if (posHorizontalDirSquareT.hasChildNodes()) {
-                if (posHorizontalDirSquareT.firstChild.id.charAt(posHorizontalDirSquareT.firstChild.id.length - 1) != pieceColor) {
+                if (posHorizontalDirSquareT.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(posHorizontalDirSquareT.id);
                 }
             }
@@ -280,7 +281,7 @@ function getPossibleMoves(aBoardPiece) {
         let posHorizontalDirSquareB = document.getElementById(String.fromCharCode(evaluatingColumn) + (currentRow - 1));
         if (posHorizontalDirSquareB != null) {
             if (posHorizontalDirSquareB.hasChildNodes()) {
-                if (posHorizontalDirSquareB.firstChild.id.charAt(posHorizontalDirSquareB.firstChild.id.length - 1) != pieceColor) {
+                if (posHorizontalDirSquareB.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(posHorizontalDirSquareB.id);
                 }
             }
@@ -292,7 +293,7 @@ function getPossibleMoves(aBoardPiece) {
         let negHorizontalDirSquareT = document.getElementById(String.fromCharCode(evaluatingColumn) + (currentRow + 1));
         if (negHorizontalDirSquareT != null) {
             if (negHorizontalDirSquareT.hasChildNodes()) {
-                if (negHorizontalDirSquareT.firstChild.id.charAt(negHorizontalDirSquareT.firstChild.id.length - 1) != pieceColor) {
+                if (negHorizontalDirSquareT.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(negHorizontalDirSquareT.id);
                 }
             }
@@ -303,7 +304,7 @@ function getPossibleMoves(aBoardPiece) {
         let negHorizontalDirSquareB = document.getElementById(String.fromCharCode(evaluatingColumn) + (currentRow - 1));
         if (negHorizontalDirSquareB != null) {
             if (negHorizontalDirSquareB.hasChildNodes()) {
-                if (negHorizontalDirSquareB.firstChild.id.charAt(negHorizontalDirSquareB.firstChild.id.length - 1) != pieceColor) {
+                if (negHorizontalDirSquareB.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(negHorizontalDirSquareB.id);
                 }
             }
@@ -317,7 +318,7 @@ function getPossibleMoves(aBoardPiece) {
         let topSquare = document.getElementById(String.fromCharCode(currentColumn) + (currentRow + 1));
         if (topSquare != null) {
             if (topSquare.hasChildNodes()) {
-                if (topSquare.firstChild.id.charAt(topSquare.firstChild.id.length - 1) != pieceColor) {
+                if (topSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(topSquare.id);
                 }
             }
@@ -328,7 +329,7 @@ function getPossibleMoves(aBoardPiece) {
         let topRightSquare = document.getElementById(String.fromCharCode(currentColumn + 1) + (currentRow + 1));
         if (topRightSquare != null) {
             if (topRightSquare.hasChildNodes()) {
-                if (topRightSquare.firstChild.id.charAt(topRightSquare.firstChild.id.length - 1) != pieceColor) {
+                if (topRightSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(topRightSquare.id);
                 }
             }
@@ -339,7 +340,7 @@ function getPossibleMoves(aBoardPiece) {
         let topLeftSquare = document.getElementById(String.fromCharCode(currentColumn - 1) + (currentRow + 1));
         if (topLeftSquare != null) {
             if (topLeftSquare.hasChildNodes()) {
-                if (topLeftSquare.firstChild.id.charAt(topLeftSquare.firstChild.id.length - 1) != pieceColor) {
+                if (topLeftSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(topLeftSquare.id);
                 }
             }
@@ -350,7 +351,7 @@ function getPossibleMoves(aBoardPiece) {
         let leftSquare = document.getElementById(String.fromCharCode(currentColumn - 1) + (currentRow));
         if (leftSquare != null) {
             if (leftSquare.hasChildNodes()) {
-                if (leftSquare.firstChild.id.charAt(leftSquare.firstChild.id.length - 1) != pieceColor) {
+                if (leftSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(leftSquare.id);
                 }
             }
@@ -361,7 +362,7 @@ function getPossibleMoves(aBoardPiece) {
         let rightSquare = document.getElementById(String.fromCharCode(currentColumn + 1) + (currentRow));
         if (rightSquare != null) {
             if (rightSquare.hasChildNodes()) {
-                if (rightSquare.firstChild.id.charAt(rightSquare.firstChild.id.length - 1) != pieceColor) {
+                if (rightSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(rightSquare.id);
                 }
             }
@@ -372,7 +373,7 @@ function getPossibleMoves(aBoardPiece) {
         let bottomSquare = document.getElementById(String.fromCharCode(currentColumn) + (currentRow - 1));
         if (bottomSquare != null) {
             if (bottomSquare.hasChildNodes()) {
-                if (bottomSquare.firstChild.id.charAt(bottomSquare.firstChild.id.length - 1) != pieceColor) {
+                if (bottomSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(bottomSquare.id);
                 }
             }
@@ -383,7 +384,7 @@ function getPossibleMoves(aBoardPiece) {
         let bottomRightSquare = document.getElementById(String.fromCharCode(currentColumn + 1) + (currentRow - 1));
         if (bottomRightSquare != null) {
             if (bottomRightSquare.hasChildNodes()) {
-                if (bottomRightSquare.firstChild.id.charAt(bottomRightSquare.firstChild.id.length - 1) != pieceColor) {
+                if (bottomRightSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(bottomRightSquare.id);
                 }
             }
@@ -394,12 +395,31 @@ function getPossibleMoves(aBoardPiece) {
         let bottomLeftSquare = document.getElementById(String.fromCharCode(currentColumn - 1) + (currentRow - 1));
         if (bottomLeftSquare != null) {
             if (bottomLeftSquare.hasChildNodes()) {
-                if (bottomLeftSquare.firstChild.id.charAt(bottomLeftSquare.firstChild.id.length - 1) != pieceColor) {
+                if (bottomLeftSquare.firstChild.classList.item(1) != pieceColor) {
                     possibleMoves.push(bottomLeftSquare.id);
                 }
             }
             else { // boardSquare does not contain a piece
                 possibleMoves.push(bottomLeftSquare.id);
+            }
+        }
+        // possible castling
+        if (currentLocation == "e1" || currentLocation == "e8") {
+            let rightTwoSquares = document.getElementById(String.fromCharCode(currentColumn + 2) + (currentRow));
+            let rightRookLocation = document.getElementById(String.fromCharCode(currentColumn + 3) + (currentRow));
+            let leftTwoSquares = document.getElementById(String.fromCharCode(currentColumn - 2) + (currentRow));
+            let leftThreeSquares = document.getElementById(String.fromCharCode(currentColumn - 3) + (currentRow)) 
+            let leftRookLocation = document.getElementById(String.fromCharCode(currentColumn - 4) + (currentRow));
+
+            if (!rightSquare.hasChildNodes() && !rightTwoSquares.hasChildNodes() &&
+                rightRookLocation.firstElementChild.id.substring(0, rightRookLocation.firstElementChild.id.length - 1) == "rook")
+            {
+                possibleMoves.push(rightRookLocation.id);
+            }
+            if (!leftSquare.hasChildNodes() && !leftTwoSquares.hasChildNodes() && !leftThreeSquares.hasChildNodes() &&
+                leftRookLocation.firstElementChild.id.substring(0, leftRookLocation.firstElementChild.id.length - 1) == "rook")
+            {
+                possibleMoves.push(leftRookLocation.id);
             }
         }
     }

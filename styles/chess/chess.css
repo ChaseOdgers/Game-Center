@@ -33,12 +33,12 @@ h1 {
 }
 
 #W {
-    background: url("../../imgs/chess/pieceSprite.gif") -510px 0;
+    background: url("../../imgs/chess/pieceSprite.gif") -490px 0;
     transform: scale(0.5);
 }
 
 #B {
-    background: url("../../imgs/chess/pieceSprite.gif") -510px 100px;
+    background: url("../../imgs/chess/pieceSprite.gif") -490px 100px;
     transform: scale(0.5);
 }
 
@@ -71,11 +71,11 @@ tr {
 
 
     /* boardSquare colorings */
-.white {
+.whiteSquare {
     background-image: url(../../imgs/chess/tanBoardColor.jpeg);
 }
 
-.black {
+.blackSquare {
     background-image: url(../../imgs/chess/brownBoardColor.jpeg);
 }
 
