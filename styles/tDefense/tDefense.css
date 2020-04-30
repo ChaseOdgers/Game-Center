@@ -13,8 +13,8 @@ div.playerStats
 div.board
 {
   display: inline-block;
-  height:250px;
-  width: 450px;
+  height:50px;
+  width: 50px;
   column-width: 80%;
 }
 
@@ -34,12 +34,12 @@ div.board
 {
   visibility: hidden;
   display: grid;
-  grid-template-areas:
-    'board board board board board grade'
-    'board board board board board mood'
-    'board board board board board events'
-    'board board board board board stats'
-    'controls controls controls controls controls controls';
+  grid-template-columns: 4fr 1fr;
+  justify-items:stretch;
+  align-items: stretch;
+
+
+  grid-auto-rows: minmax(100px, auto);
 
   grid-gap: 10px;
   padding: 10px
@@ -48,8 +48,13 @@ div.board
 .webGrid > div
 {
   text-align: center;
-  padding: 20px;
+  padding: 1px;
   font-size: 30px;
+  background: #eee;
+}
+.webGrid > div:nth-child(odd)
+{
+  background: #ddd
 }
 
 table
