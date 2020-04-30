@@ -48,6 +48,14 @@ button {
     cursor: pointer;
     visibility: collapse; }
 
+button#btnBack {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    height: 80px;
+    margin-top: 0px; 
+    visibility: visible; }
+
 p#winner, p#loser {
     text-align: center;
     visibility: collapse;

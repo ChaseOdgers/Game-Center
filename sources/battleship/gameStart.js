@@ -163,3 +163,7 @@ function gameLoop(clickEvent) {
         missPlayer(rowGuess, colGuess)
 }
 document.getElementById("boardCP").addEventListener("click", gameLoop);
+
+document.getElementById("btnBack").addEventListener("click", function() {
+    window.location.href = "index.html";
+});
