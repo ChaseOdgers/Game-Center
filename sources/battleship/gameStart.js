@@ -44,10 +44,38 @@ function isHitPlayer(row, col) {
 function hitCP(row, col) {
     for (let ship of Object.keys(cp.ships))
         for (let location of cp.ships[ship].locations)
-            if (location[0] == row && location[1] == col)
+            if (location[0] == row && location[1] == col) {
                 cp.ships[ship].life--;
+                if (cp.ships[ship].life == 0) {
+                    let newImg = document.createElement("img");
+                    newImg.src = "imgs/battleship/" + ship + ".png";
+                    newImg.style.position = "absolute";
+                    let orientation = "horizontal"
+                    if (cp.ships[ship].locations[0][1] == cp.ships[ship].locations[1][1])
+                        orientation = "vertical"
+                    if (orientation == "vertical") {
+                        console.log("vertical")
+                        newImg.style.transform = "rotate(90deg)";
+                    }
+                    let origin = cp.ships[ship].locations[0];
+                    for (let location of cp.ships[ship].locations) {
+                        if (orientation == "horizontal" && location[1] < origin[1])
+                            origin = location;
+                        else if (orientation == "vertical" && location[0] < origin[0])
+                            origin = location;
+                    }
+                    let originCell = document.getElementById("boardCP").rows[origin[0]].cells[origin[1]];
+                    originCell.appendChild(newImg);
+                    let cellBounds = originCell.getBoundingClientRect();
+                    if (orientation == "vertical")
+                        newImg.style.left = cellBounds.left + 50 + "px";
+                    newImg.style.top = cellBounds.top + "px";
+                }
+            }
     let newImg = document.createElement("img");
     newImg.src = "imgs/battleship/hit.png";
+    newImg.style.position = "relative";
+    newImg.style.zIndex = "1";
     document.getElementById("boardCP").rows[row].cells[col].appendChild(newImg);
 };
 
@@ -66,6 +94,8 @@ function hitPlayer(row, col) {
 function missCP(row, col) {
     let newImg = document.createElement("img");
     newImg.src = "imgs/battleship/miss.png";
+    newImg.style.position = "relative";
+    newImg.style.zIndex = "1";
     document.getElementById("boardCP").rows[row].cells[col].appendChild(newImg);
 };
 
@@ -109,6 +139,7 @@ function gameLoop(clickEvent) {
     let row = cell.parentNode.rowIndex;
     let col = cell.cellIndex;
 
+    cell.style.pointerEvents = "none";
     if (isHitCP(row, col)) {
         hitCP(row, col);
         if (checkWin()) {

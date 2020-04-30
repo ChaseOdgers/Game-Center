@@ -45,7 +45,6 @@ function shipSelect(clickEvent) {
     function shipToBoard(boardClick) {
         if (boardClick.target.tagName == "IMG")
             return;
-        //check if anything other than TD and if so get proper TD ?
         if (!validPlacement(boardClick.target))
             return;
 
