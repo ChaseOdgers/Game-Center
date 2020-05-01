@@ -21,9 +21,6 @@ var deck = ["2C","2D","2H","2S","3C","3D","3H","3S","4C","4D","4H","4S","5C",
 
 var pCount = 0;
 var dCount = 0;
-var pACount = 0;
-var dACount = 0;
-//var aceCheck = false;
 var split1A = false;
 var split2A = false;
 var split = false;
@@ -31,17 +28,43 @@ var split1 = 0;
 var split2 = 0;
 var cutCount = 0;
 var aceInplay  = 0;
+
+var dCard1, dCard2, pCard1, pCard2, posInDeck, hitCount;
+
+/*
+pCount = current players count
+dCount = current dealers count
+split = checks if a split is active
+split1A = checks if in first card set of a split
+split2A = checks if in second card set of a split
+split1 = current count of the first hand in a split
+split2 = current count of the second hand in a split
+cutCount = a count to see how long until the next shuffle
+aceInplay = number of aces in current play
+dCard1 = dealers first card code
+dCard2 = dealers second card code
+pCard1 = players first card code
+pCard2 = players second card code
+posInDeck = the current position in the shuffled list
+hitCount  = counter for displaying the image of the card
+*/
+
 document.getElementById('hit').disabled = true;
 document.getElementById("stand").disabled = true;
 document.getElementById("double").disabled = true;
 document.getElementById("split").disabled = true;
 document.getElementById("play").disabled = false;
 
+
+//pre: card = the card code, n = the action of what needs to be returned
+//this takes in a card and if its a
+//0 then it will return the number of that card
+//1 then it will return the string of the image file
+//post: returns number of the card or the string of the image file
 function cards(card, n)
 {
   switch(card)
   {
-    //aceCheck = false;
     case "2C":
       switch (n)
       {
@@ -536,7 +559,6 @@ function cards(card, n)
           break;
       }
     case "aD":
-      // aceCheck = true;
       switch (n)
       {
         case 0:
@@ -548,7 +570,6 @@ function cards(card, n)
           break;
       }
     case "aH":
-      // aceCheck = true;
       switch (n)
       {
         case 0:
@@ -560,7 +581,6 @@ function cards(card, n)
           break;
       }
     case "aS":
-      // aceCheck = true;
       switch (n)
       {
         case 0:
@@ -574,7 +594,10 @@ function cards(card, n)
 
   }
 }
-var dCard1, dCard2, pCard1, pCard2, posInDeck, hitCount;
+
+//pre: deck = list of cards
+//shuffles the deck of cards
+//post: returns the list that is now shuffled
 
 function shuffleDeck(deck)
 {
@@ -592,7 +615,9 @@ function shuffleDeck(deck)
   return deck;
 }
 
-
+//pre: n = the current count
+//checks if ace is in play and if 11 should turn to 1
+//post: return the correct number of the current count
 function aCheck(n)
 {
   if (aceInplay > 0)
@@ -606,6 +631,9 @@ function aCheck(n)
   return n;
 }
 
+
+//pre: state of the game
+//post: compute the action of the current state then waits for next state
 function play(state)
 {
   switch(state)
@@ -728,11 +756,12 @@ function play(state)
       hitCount = 0;
       break;
     case "double":
-      //document.getElementById("log").innerHTML = "You have chose to double down."
       pCount = pCount + cards(deck[posInDeck],0);
+      document.getElementById("pHit1Img").src = cards(deck[posInDeck],1);
       pCount = aCheck(pCount);
       posInDeck++;
       document.getElementById("player").innerHTML = "Player: " + pCount;
+
       if (pCount < 22)
       {
         aceInplay = 0;
@@ -760,10 +789,7 @@ function play(state)
 
       posInDeck++;
       cutCount++;
-      // pCard1 = deck[0];
-      // dCard1 = deck[1];
-      // pCard2 = deck[2];
-      // dCard2 = deck[3];
+
       pCard1 = deck[posInDeck];
       posInDeck++;
       pCard2 = deck[posInDeck];
@@ -772,27 +798,13 @@ function play(state)
       posInDeck++;
       dCard2 = deck[posInDeck];
       posInDeck++;
-      // dCard1 = 'aC';
-      // dCard2 = 'aH';
-      // pCard1 = 'aC';
-      // pCard2 = 'aH';
 
-      // if (aceInplay > 0)
-      // {
-      //   if (pCount > 21)
-      //   {
-      //     pCount = pCount - 10;
-      //     aceInplay--;
-      //   }
-      // }
 
       pCount = cards(pCard1,0) + cards(pCard2,0);
       pCount = aCheck(pCount);
-      //dCount = cards(dCard1,0) + cards(dCard2,0);
       document.getElementById("player").innerHTML = "Player: " + pCount;
-      //find way to show without counting the ace for the dealer
-      //add another switch to ace with 2 bool vars to see who has the ace???
-      document.getElementById("dealer").innerHTML = "Dealer: " + cards(dCard1,0);
+
+      document.getElementById("dealer").innerHTML = "Dealer";
       document.getElementById("pCard1Img").src = cards(pCard1,1);
       document.getElementById("pCard2Img").src = cards(pCard2,1);
       document.getElementById("dCard1Img").src = cards(dCard1,1);
@@ -814,27 +826,24 @@ function play(state)
         document.getElementById("log").innerHTML = "Hit, Stand, Double Down";
       }
       break;
-    // case "insurance":
-    //   break;
+
   }
 }
 
+
+//Pre:None
+//plays blackjack for the dealer based on the dealer rules
+//Post:calls the endGame function
 function dealerPlay()
 {
-  // if (dCard1 == "aC" || dCard1 == "aH" || dCard1 == "aD" || dCard1 == "aS")
-  // {
-  //   if (dCount > 16 && dCount < 22)
-  //   {
-  //     // go to end
-  //   }
-  // }
+
   document.getElementById("dCard2Img").src = cards(dCard2,1);
   dCount = aCheck(dCount);
   document.getElementById("dealer").innerHTML = "Dealer: " + dCount;
   if (dCount < 17)
   {
     dCount = dCount + cards(deck[posInDeck],0);
-    //dCount = aCheck(dCount);
+
     document.getElementById("dHit" + hitCount + "Img").src = cards(deck[posInDeck],1);
     posInDeck++;
     hitCount++;
@@ -854,6 +863,10 @@ function dealerPlay()
   }
 }
 
+
+//pre: p = players count, d = dealers count
+//takes in the 2 players counts and determinds the winner.
+//post: returns the result of the game as a string
 function endGame(p, d)
 {
   document.getElementById('hit').disabled = true;
@@ -903,6 +916,8 @@ function endGame(p, d)
   }
 }
 
+
+//controlls the buttons
 document.addEventListener("DOMContentLoaded", () =>
 {
   document.getElementById('hit').addEventListener('click', function(){
@@ -921,10 +936,10 @@ document.addEventListener("DOMContentLoaded", () =>
       reset();
       play("play");
   })
-  // document.getElementById('insurance').addEventListener('click', function(){
-  //     play("insurance");
-  // })
 
+//pre: none
+//reset function to reset the game to that starting state
+//post: game is reset for next round
 function reset()
 {
   document.getElementById("dCard1Img").src = "imgs/blackjack/deck/white.jpg";
@@ -959,8 +974,4 @@ function reset()
     posInDeck = 0;
   }
 }
-//have one ace bool that tells if an ace is in player
-//have another ace bool to see if there is one that is current
-
-
 })
