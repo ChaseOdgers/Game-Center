@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>shipSelection.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="gameStart.html">
+                  gameStart.js
+                </a>
+              
+                
+                <a class="source" href="generateBoard.html">
+                  generateBoard.js
+                </a>
+              
+                
+                <a class="source" href="init.html">
+                  init.js
+                </a>
+              
+                
+                <a class="source" href="shipSelection.html">
+                  shipSelection.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>shipSelection.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/** Runs every time a ship is clicked before the game is started.
+ *  - Removes the ship from its selected position.
+ *  - Adds a mousemove event listener so that the ship always follows the
+ *    location of the mouse.
+ *  - Adds a keydown event listener to rotate the selected ship.
+ *  - Adds a click event listener to the board to place the ship at the
+ *    clicked location on the board, if the location doesn't intersect anything.
+ *  - Makes the start button visible if a placed ship is the final one.
+    <span class="hljs-doctag">@param  </span>clickEvent the event object created by clicking.
+    <span class="hljs-doctag">@post   </span>Selected ship follows cursor and event listeners are ready to rotate
+            and place ship. */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">shipSelect</span>(<span class="hljs-params">clickEvent</span>) </span>{
+    <span class="hljs-keyword">if</span> (selectedShip)
+        <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">let</span> mousePosX = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">let</span> mousePosY = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">let</span> image = clickEvent.target;
+
+    selectedShip = image.id;
+    player.ships[selectedShip].locations = [];
+    <span class="hljs-built_in">document</span>.body.appendChild(image);
+    image.style.pointerEvents = <span class="hljs-string">"none"</span>;
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"btnStart"</span>).style.visibility = <span class="hljs-string">"hidden"</span>;
+
+    shipToCursor(clickEvent);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>EVENT LISTENERS</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">"mousemove"</span>, shipToCursor);
+    <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">"keydown"</span>, rotateShip);
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"board"</span>).addEventListener(<span class="hljs-string">"click"</span>, shipToBoard);
+
+    <span class="hljs-comment">/** Moves the ship's first location to be centered at the mouseEvent's 
+     *  location.
+        @pre    mouseEvent is a click event or mousemove event.
+        @param  mouseEvent The event object created by clicking or moving mouse.
+        @post   Ship's first location matches the mouseEvent's location. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">shipToCursor</span>(<span class="hljs-params">mouseEvent</span>) </span>{
+        mousePosX = mouseEvent.clientX;
+        mousePosY = mouseEvent.clientY;
+        image.style.position = <span class="hljs-string">"absolute"</span>;
+        <span class="hljs-keyword">if</span> (ships[selectedShip] == <span class="hljs-string">"horizontal"</span>)
+            image.style.left = mouseEvent.clientX - <span class="hljs-number">25</span> + <span class="hljs-string">"px"</span>;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ships[selectedShip] == <span class="hljs-string">"vertical"</span>)
+            image.style.left = mouseEvent.clientX + <span class="hljs-number">25</span> + <span class="hljs-string">"px"</span>;
+        image.style.top = mouseEvent.clientY - <span class="hljs-number">25</span> + <span class="hljs-string">'px'</span>;
+    };
+
+    <span class="hljs-comment">/** Rotates the ship to either horizontal or vertical orientation.
+        @pre    keyEvent is a keydown event.
+        @param  keyEvent .keyCode 82 is 'R' key. Rotate when pressed.
+        @post   Ship rotated. Ship's orientation in ship object is updated. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rotateShip</span>(<span class="hljs-params">keyEvent</span>) </span>{
+        <span class="hljs-keyword">if</span> (keyEvent.keyCode === <span class="hljs-number">82</span>) {
+            <span class="hljs-keyword">if</span> (ships[selectedShip] == <span class="hljs-string">"horizontal"</span>) {
+                image.style.transform = <span class="hljs-string">"rotate(90deg)"</span>;
+                image.style.left = mousePosX + <span class="hljs-number">25</span> + <span class="hljs-string">"px"</span>;
+                ships[selectedShip] = <span class="hljs-string">"vertical"</span>;
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ships[selectedShip] == <span class="hljs-string">"vertical"</span>) {
+                image.style.transform = <span class="hljs-string">"rotate(0deg)"</span>;
+                image.style.left = mousePosX - <span class="hljs-number">25</span> + <span class="hljs-string">"px"</span>;
+                ships[selectedShip] = <span class="hljs-string">"horizontal"</span>;
+            }
+        }
+    }
+
+    <span class="hljs-comment">/** Places the ship at the clicked location on the board, if the location
+     *  doesn't intersect other ships and ship is within bounds.
+     *  - Removes shipToCursor and rotateShip event listeners if ship is placed.
+        <span class="hljs-doctag">@pre    </span>boardClick is a click event on the board element.
+        <span class="hljs-doctag">@param  </span>boardClick The event object created by clicking board element.
+        <span class="hljs-doctag">@post   </span>Ship placed at clicked board location. Event listeners updated.
+                Start game button made visible if final ship placed. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">shipToBoard</span>(<span class="hljs-params">boardClick</span>) </span>{
+        <span class="hljs-keyword">if</span> (boardClick.target.tagName == <span class="hljs-string">"IMG"</span>)
+            <span class="hljs-keyword">return</span>;
+        <span class="hljs-keyword">if</span> (!validPlacement(boardClick.target))
+            <span class="hljs-keyword">return</span>;
+
+        boardClick.target.appendChild(image);
+        <span class="hljs-keyword">let</span> cellBounds = boardClick.target.getBoundingClientRect();
+        <span class="hljs-keyword">if</span> (ships[selectedShip] == <span class="hljs-string">"horizontal"</span>)
+            image.style.left = cellBounds.left + <span class="hljs-string">"px"</span>;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ships[selectedShip] == <span class="hljs-string">"vertical"</span>)
+            image.style.left = cellBounds.left + <span class="hljs-number">50</span> + <span class="hljs-string">"px"</span>;
+        image.style.top = cellBounds.top + <span class="hljs-string">"px"</span>;
+        image.style.pointerEvents = <span class="hljs-string">"auto"</span>;
+
+        <span class="hljs-built_in">document</span>.removeEventListener(<span class="hljs-string">"mousemove"</span>, shipToCursor);
+        <span class="hljs-built_in">document</span>.removeEventListener(<span class="hljs-string">"keydown"</span>, rotateShip);
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"board"</span>).removeEventListener(<span class="hljs-string">"click"</span>, shipToBoard)
+        selectedShip = <span class="hljs-string">""</span>;
+        <span class="hljs-keyword">if</span> (readyToStart())
+            <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"btnStart"</span>).style.visibility = <span class="hljs-string">"visible"</span>;
+    }
+
+    <span class="hljs-comment">/** Checks whether the ship can be placed at the clicked cell on the board.
+        <span class="hljs-doctag">@pre    </span>cell is a valid TD object and a child of board element.
+        <span class="hljs-doctag">@param  </span>cell TD element object.
+        <span class="hljs-doctag">@return </span>true if valid placement. false otherwise. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">validPlacement</span>(<span class="hljs-params">cell</span>) </span>{
+        <span class="hljs-keyword">let</span> row = cell.parentNode.rowIndex;
+        <span class="hljs-keyword">let</span> col = cell.cellIndex;
+        <span class="hljs-keyword">let</span> locations = []
+
+        locations.push([row,col]);
+        <span class="hljs-keyword">let</span> remainingLocations = player.ships[selectedShip].life - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">while</span> (remainingLocations &gt; <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">if</span> (ships[selectedShip] == <span class="hljs-string">"horizontal"</span>)
+                col++;
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ships[selectedShip] == <span class="hljs-string">"vertical"</span>)
+                row++;
+            <span class="hljs-keyword">if</span> (!(<span class="hljs-number">0</span> &lt;= row &amp;&amp; row &lt;= <span class="hljs-number">9</span> &amp;&amp; <span class="hljs-number">0</span> &lt;= col &amp;&amp; col &lt;= <span class="hljs-number">9</span>))
+                <span class="hljs-keyword">return</span> (<span class="hljs-literal">false</span>);
+            locations.push([row,col]);
+            remainingLocations--;
+        }
+        <span class="hljs-keyword">if</span> (checkIntersect(locations, player.ships))
+            <span class="hljs-keyword">return</span> (<span class="hljs-literal">false</span>);
+        player.ships[selectedShip].locations = locations;
+        <span class="hljs-keyword">return</span> (<span class="hljs-literal">true</span>);
+    }
+
+    <span class="hljs-comment">/** Checks whether the game is ready to start, i.e. all ships are placed.
+        <span class="hljs-doctag">@return </span>true if all player's ships have a location. false otherwise. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">readyToStart</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">for</span> (ship <span class="hljs-keyword">in</span> ships)
+            <span class="hljs-keyword">if</span> (!player.ships[ship].locations[<span class="hljs-number">0</span>])
+                <span class="hljs-keyword">return</span> (<span class="hljs-literal">false</span>);
+        <span class="hljs-keyword">return</span> (<span class="hljs-literal">true</span>);
+    }
+};
+
+<span class="hljs-keyword">let</span> ships = {<span class="hljs-string">"carrier"</span>: <span class="hljs-string">"horizontal"</span>, <span class="hljs-string">"battleship"</span>: <span class="hljs-string">"horizontal"</span>, 
+    <span class="hljs-string">"destroyer"</span>: <span class="hljs-string">"horizontal"</span>, <span class="hljs-string">"submarine"</span>: <span class="hljs-string">"horizontal"</span>, <span class="hljs-string">"patrolboat"</span>: <span class="hljs-string">"horizontal"</span>};
+<span class="hljs-keyword">let</span> selectedShip = <span class="hljs-string">""</span>;
+<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"boardCP"</span>).style.visibility = <span class="hljs-string">"collapse"</span>;
+
+<span class="hljs-keyword">for</span> (ship <span class="hljs-keyword">in</span> ships)
+    <span class="hljs-built_in">document</span>.getElementById(ship).addEventListener(<span class="hljs-string">"click"</span>, shipSelect);</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
