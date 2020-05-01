@@ -46,16 +46,22 @@ function gameStart(student){
   {
     for(let j = 0; j<5; j++)
     {
-      wait(1000);
+      //wait(1000);
       frameEvent(studentModifications, student);
     }
     if(getRandomInt(100)==42)
     {
       studentModifications.push(new lifeEvent(student));
     }
-    console.log(studentModifications.length + " " + i);
-    console.log(student);
+    if(student.GameOver())
+    {
+      break;
+    }
+
   }
+
+  announceGrade(student);
+
 
 
 
@@ -71,8 +77,16 @@ function wait(ms)
   while(d2-d < ms);
 }
 
+
+//these two functions came from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomInt(max){
   return Math.floor(Math.random() * Math.floor(max));
+}
+
+function getRandomInt2(min, max){
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
 /*
@@ -82,18 +96,14 @@ Param: Student object
 */
 function frameEvent(studentModifications, student){
 
-console.log(studentModifications);
 
   for(let i = 0; i<studentModifications.length; i++)
   {
     if(studentModifications[i] == "commitment")
     {
-      console.log('commit');
       if(studentModifications[i].length == 0)
       {
         studentModifications.splice(i,1);
-        console.log("success");
-        //TODO: Find a replacement for splice
       }
       else
       {
@@ -102,18 +112,14 @@ console.log(studentModifications);
     }
     else if(studentModifications[i].modType == "adversaries")
     {
-      //console.log('adver');
       if(studentModifications[i].location == 1)
       {
-        debugger;
-        studentModifications[i].modifyStudent;
+        studentModifications[i].modifyStudent();
         studentModifications.splice(i,1);
-        console.log("success");
 
       }
       else if(studentModifications[i].deterioration <= 0)
       {
-        debugger;
         studentModifications.splice(i, 1);
       }
       else
@@ -124,11 +130,9 @@ console.log(studentModifications);
     }
     else if(studentModifications[i].modType == "lifeEvent")
     {
-      console.log('life');
       if(studentModifications[i].length == 0)
       {
         studentModifications.splice(i,1);
-        console.log("success");
 
         student.modifyStudent(10, "willpower");
       }
@@ -152,6 +156,7 @@ console.log(studentModifications);
     }
   }
 
+  updateGameDisplay(studentModifications, student);
 
 
 }

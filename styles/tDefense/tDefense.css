@@ -127,3 +127,8 @@ a.button{
     height: 100%;
     border: solid black 1px;
 }
+
+.gridPics{
+  width:10px;
+  height:10px;
+}
