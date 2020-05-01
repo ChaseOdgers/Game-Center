@@ -1,3 +1,14 @@
+/** Runs every time a ship is clicked before the game is started.
+ *  - Removes the ship from its selected position.
+ *  - Adds a mousemove event listener so that the ship always follows the
+ *    location of the mouse.
+ *  - Adds a keydown event listener to rotate the selected ship.
+ *  - Adds a click event listener to the board to place the ship at the
+ *    clicked location on the board, if the location doesn't intersect anything.
+ *  - Makes the start button visible if a placed ship is the final one.
+    @param  clickEvent the event object created by clicking.
+    @post   Selected ship follows cursor and event listeners are ready to rotate
+            and place ship. */
 function shipSelect(clickEvent) {
     if (selectedShip)
         return;
@@ -12,10 +23,16 @@ function shipSelect(clickEvent) {
     document.getElementById("btnStart").style.visibility = "hidden";
 
     shipToCursor(clickEvent);
+    //EVENT LISTENERS
     document.addEventListener("mousemove", shipToCursor);
     document.addEventListener("keydown", rotateShip);
     document.getElementById("board").addEventListener("click", shipToBoard);
 
+    /** Moves the ship's first location to be centered at the mouseEvent's 
+     *  location.
+        @pre    mouseEvent is a click event or mousemove event.
+        @param  mouseEvent The event object created by clicking or moving mouse.
+        @post   Ship's first location matches the mouseEvent's location. */
     function shipToCursor(mouseEvent) {
         mousePosX = mouseEvent.clientX;
         mousePosY = mouseEvent.clientY;
@@ -27,6 +44,10 @@ function shipSelect(clickEvent) {
         image.style.top = mouseEvent.clientY - 25 + 'px';
     };
 
+    /** Rotates the ship to either horizontal or vertical orientation.
+        @pre    keyEvent is a keydown event.
+        @param  keyEvent .keyCode 82 is 'R' key. Rotate when pressed.
+        @post   Ship rotated. Ship's orientation in ship object is updated. */
     function rotateShip(keyEvent) {
         if (keyEvent.keyCode === 82) {
             if (ships[selectedShip] == "horizontal") {
@@ -42,6 +63,13 @@ function shipSelect(clickEvent) {
         }
     }
 
+    /** Places the ship at the clicked location on the board, if the location
+     *  doesn't intersect other ships and ship is within bounds.
+     *  - Removes shipToCursor and rotateShip event listeners if ship is placed.
+        @pre    boardClick is a click event on the board element.
+        @param  boardClick The event object created by clicking board element.
+        @post   Ship placed at clicked board location. Event listeners updated.
+                Start game button made visible if final ship placed. */
     function shipToBoard(boardClick) {
         if (boardClick.target.tagName == "IMG")
             return;
@@ -65,6 +93,10 @@ function shipSelect(clickEvent) {
             document.getElementById("btnStart").style.visibility = "visible";
     }
 
+    /** Checks whether the ship can be placed at the clicked cell on the board.
+        @pre    cell is a valid TD object and a child of board element.
+        @param  cell TD element object.
+        @return true if valid placement. false otherwise. */
     function validPlacement(cell) {
         let row = cell.parentNode.rowIndex;
         let col = cell.cellIndex;
@@ -88,6 +120,8 @@ function shipSelect(clickEvent) {
         return (true);
     }
 
+    /** Checks whether the game is ready to start, i.e. all ships are placed.
+        @return true if all player's ships have a location. false otherwise. */
     function readyToStart() {
         for (ship in ships)
             if (!player.ships[ship].locations[0])
