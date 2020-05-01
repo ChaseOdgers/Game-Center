@@ -29,7 +29,6 @@ function adversaries(student){
 }
 
 adversaries.prototype.modifyStudent = function(){
-  console.log(this.deterioration);
   this.student.modifyStudent(-this.deterioration, this.type);
 }
 
