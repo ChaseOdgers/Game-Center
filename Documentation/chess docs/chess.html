@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>chess.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="chess.html">
+                  chess.js
+                </a>
+              
+                
+                <a class="source" href="getMoves.html">
+                  getMoves.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>chess.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">"DOMContentLoaded"</span>, () =&gt; {
+    createBoard();
+    setupBoard();
+    playGame();
+});
+
+<span class="hljs-comment">/*
+@pre: createBoard() as not been previously called
+@post: an 8x8 board is generated with an alternating color scheme 
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createBoard</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> theBoard = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"mainBoard"</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">8</span>; i &gt;= <span class="hljs-number">1</span>; i--) {
+        <span class="hljs-keyword">let</span> aRow = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"tr"</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">97</span>; j &lt;= <span class="hljs-number">104</span>; j++) { <span class="hljs-comment">// 97 = 'a', 104 = 'h'</span>
+            <span class="hljs-keyword">let</span> aColumn = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"td"</span>);
+            aColumn.id = <span class="hljs-built_in">String</span>.fromCharCode(j) + <span class="hljs-string">""</span> + i;
+            <span class="hljs-keyword">if</span> ((i + j) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) {
+                aColumn.className = <span class="hljs-string">"boardSquare whiteSquare"</span>;
+            }
+            <span class="hljs-keyword">else</span> {
+                aColumn.className = <span class="hljs-string">"boardSquare blackSquare"</span>;
+            }
+            aRow.appendChild(aColumn);
+        }
+
+        theBoard.appendChild(aRow);
+    }
+}
+
+<span class="hljs-comment">/*
+@pre: createBoard() has been previously called
+@post: the previously created board has chess pieces added to it in their starting locations
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setupBoard</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> pieceList = [<span class="hljs-string">"rook"</span>, <span class="hljs-string">"knight"</span>, <span class="hljs-string">"bishop"</span>, <span class="hljs-string">"queen"</span>, <span class="hljs-string">"king"</span>, <span class="hljs-string">"bishop"</span>, <span class="hljs-string">"knight"</span>, <span class="hljs-string">"rook"</span>];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">97</span>; i &lt;= <span class="hljs-number">104</span>; i++) { <span class="hljs-comment">// 97 = 'a', 104 = 'h'</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Black Player’s Pieces</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">let</span> aSquare = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-built_in">String</span>.fromCharCode(i) + <span class="hljs-number">8</span>);
+        <span class="hljs-keyword">let</span> aBlackPiece = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"div"</span>);
+        aBlackPiece.id = pieceList[i<span class="hljs-number">-97</span>] + <span class="hljs-string">"B"</span>;
+        aBlackPiece.className = <span class="hljs-string">"boardPiece blackPiece"</span>;
+        aSquare.appendChild(aBlackPiece);
+
+        aSquare = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-built_in">String</span>.fromCharCode(i) + <span class="hljs-number">7</span>);
+        <span class="hljs-keyword">let</span> aBlackPawn = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"div"</span>);
+        aBlackPawn.id = <span class="hljs-string">"pawnB"</span>;
+        aBlackPawn.className = <span class="hljs-string">"boardPiece blackPiece"</span>;
+        aSquare.appendChild(aBlackPawn);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>White Player’s Pieces</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aSquare = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-built_in">String</span>.fromCharCode(i) + <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">let</span> aWhitePiece = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"div"</span>);
+        aWhitePiece.id = pieceList[i<span class="hljs-number">-97</span>] + <span class="hljs-string">"W"</span>;
+        aWhitePiece.className = <span class="hljs-string">"boardPiece whitePiece"</span>;
+        aSquare.appendChild(aWhitePiece);
+
+        aSquare = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-built_in">String</span>.fromCharCode(i) + <span class="hljs-number">2</span>);
+        <span class="hljs-keyword">let</span> aWhitePawn = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"div"</span>);
+        aWhitePawn.id = <span class="hljs-string">"pawnW"</span>;
+        aWhitePawn.className = <span class="hljs-string">"boardPiece whitePiece"</span>;
+        aSquare.appendChild(aWhitePawn);
+    }
+}
+
+<span class="hljs-comment">/*
+@param: possibleMoves -&gt; an array of board positions which the calling piece can move to
+@pre: possibleMoves has been generated using getPossibleMoves()
+@post: the boardSquares the piece can move to are highlighted in green for 1.5 seconds
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showMoves</span>(<span class="hljs-params">possibleMoves</span>) </span>{
+    possibleMoves.forEach(<span class="hljs-function">(<span class="hljs-params">move</span>) =&gt;</span> {
+        <span class="hljs-built_in">document</span>.getElementById(move).classList.add(<span class="hljs-string">"move"</span>);
+    })
+    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> { <span class="hljs-comment">// wait 2 seconds then remove shown possible moves</span>
+        possibleMoves.forEach(<span class="hljs-function">(<span class="hljs-params">move</span>) =&gt;</span> {
+            <span class="hljs-built_in">document</span>.getElementById(move).classList.remove(<span class="hljs-string">"move"</span>);
+        })
+    }, <span class="hljs-number">1500</span>);
+}
+
+<span class="hljs-comment">/*
+@pre: none -&gt; called as an event listener placed upon each piece in playGame()
+@post: the clicked piece is moved to the selected position or an error message is displayed if invalid
+@brief: handles "pausing" and "activating" event listeners to make sure the right event is being listened for
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">makeMove</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> currentLocation = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-keyword">this</span>.parentNode.id);
+    <span class="hljs-keyword">let</span> pieceColor = <span class="hljs-keyword">this</span>.id.charAt(<span class="hljs-keyword">this</span>.id.length - <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">if</span> (pieceColor == <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"currentPlayer"</span>).item(<span class="hljs-number">0</span>).id) {
+        <span class="hljs-keyword">let</span> possibleMoves = getPossibleMoves(<span class="hljs-keyword">this</span>);
+        showMoves(possibleMoves);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>“pause” the showMoves eventHandler</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">let</span> thePieces = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"boardPiece"</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; thePieces.length; i++) {
+            thePieces[i].removeEventListener(<span class="hljs-string">"click"</span>, makeMove, <span class="hljs-literal">true</span>);
+        }
+        setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>“activate” the handleClick eventHandler</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"mainBoard"</span>).addEventListener(<span class="hljs-string">"click"</span>, handleClick, <span class="hljs-literal">false</span>);
+        });
+        
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleClick</span>(<span class="hljs-params">theEvent</span>) </span>{
+            <span class="hljs-keyword">let</span> theSelection = theEvent.target;
+            <span class="hljs-keyword">let</span> theSelectionID;
+            <span class="hljs-keyword">let</span> isGameOver = <span class="hljs-literal">false</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>check whether theSelection is a boardPiece or boardSquare</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (theSelection.classList.contains(<span class="hljs-string">"boardPiece"</span>)) {
+                theSelectionID = theSelection.parentNode.id;
+            }
+            <span class="hljs-keyword">else</span> {
+                theSelectionID = theSelection.id;
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>check whether theSelectionID is a valid move </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (possibleMoves.includes(theSelectionID)) {
+                movePiece(currentLocation.id, theSelectionID);
+                updateCurrentPlayer();
+                <span class="hljs-keyword">if</span> (isCheck(theSelectionID)) {
+                    isGameOver = isCheckmate();
+                }
+            }
+            <span class="hljs-keyword">else</span> {
+                updateStatus(<span class="hljs-string">"Invalid move"</span>, <span class="hljs-literal">false</span>);
+            }
+        
+            setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>“pause” the handleClick eventHandler</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"mainBoard"</span>).removeEventListener(<span class="hljs-string">"click"</span>, handleClick, <span class="hljs-literal">false</span>);
+                <span class="hljs-keyword">if</span> (!isGameOver) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>“activate” the showMoves eventHandler</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    <span class="hljs-keyword">let</span> thePieces = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"boardPiece"</span>);
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; thePieces.length; i++) {
+                        thePieces[i].addEventListener(<span class="hljs-string">"click"</span>, makeMove, <span class="hljs-literal">true</span>);
+                    }
+                }
+                <span class="hljs-keyword">else</span> {
+                    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"playerStatus"</span>).firstElementChild.innerText = <span class="hljs-string">"Checkmate!"</span>;
+                }
+            });
+        }
+    }
+    <span class="hljs-keyword">else</span> {
+        updateStatus(<span class="hljs-string">"You can't move that color of piece"</span>, <span class="hljs-literal">false</span>);
+    }
+}
+
+<span class="hljs-comment">/*
+@param: currentLocation -&gt; the current boardSquare the selected piece is at
+        newLocation -&gt; the location of the boardSqaure to move the selected piece to
+@pre: newLocation has been validated as an acceptable location to move the selected piece
+@post: the piece located at currentLocation is moved to newLocation
+        ***Special Case: castling will move a king to a square that is not newLocation***
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">movePiece</span>(<span class="hljs-params">currentLocation, newLocation</span>) </span>{
+    <span class="hljs-keyword">let</span> newBoardSquare = <span class="hljs-built_in">document</span>.getElementById(newLocation);
+    <span class="hljs-keyword">let</span> currentBoardSquare = <span class="hljs-built_in">document</span>.getElementById(currentLocation);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>castle to the right</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">let</span> currentColumn = currentLocation.charCodeAt(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">let</span> currentRow = currentLocation.charAt(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">if</span> ((currentLocation == <span class="hljs-string">"e1"</span> &amp;&amp; newLocation == <span class="hljs-string">"h1"</span>) ||
+        (currentLocation == <span class="hljs-string">"e8"</span> &amp;&amp; newLocation == <span class="hljs-string">"h8"</span>))
+    {
+        <span class="hljs-keyword">let</span> newKingSquare = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-built_in">String</span>.fromCharCode(currentColumn + <span class="hljs-number">2</span>) + currentRow);
+        <span class="hljs-keyword">let</span> newRookSquare = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-built_in">String</span>.fromCharCode(currentColumn + <span class="hljs-number">1</span>) + currentRow);
+
+        newKingSquare.appendChild(currentBoardSquare.firstElementChild);
+        newRookSquare.appendChild(newBoardSquare.firstElementChild);
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>castle to the left</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((currentLocation == <span class="hljs-string">"e1"</span> &amp;&amp; newLocation == <span class="hljs-string">"a1"</span>) ||
+             (currentLocation == <span class="hljs-string">"e8"</span> &amp;&amp; newLocation == <span class="hljs-string">"a8"</span>))
+    {
+        <span class="hljs-keyword">let</span> newKingSquare = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-built_in">String</span>.fromCharCode(currentColumn - <span class="hljs-number">2</span>) + currentRow);
+        <span class="hljs-keyword">let</span> newRookSquare = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-built_in">String</span>.fromCharCode(currentColumn - <span class="hljs-number">1</span>) + currentRow);
+
+        newKingSquare.appendChild(currentBoardSquare.firstElementChild);
+        newRookSquare.appendChild(newBoardSquare.firstElementChild);
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>attacking a piece</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (newBoardSquare.hasChildNodes()) {
+        newBoardSquare.removeChild(newBoardSquare.firstElementChild);
+        newBoardSquare.appendChild(currentBoardSquare.firstChild);
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>moving to an empty boardSquare</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">else</span> {
+        newBoardSquare.appendChild(currentBoardSquare.firstChild);
+    }
+}
+
+<span class="hljs-comment">/*
+@post: the currentPlayer tracker is updated to reflect a move being made
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">updateCurrentPlayer</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"W"</span>).classList.toggle(<span class="hljs-string">"currentPlayer"</span>);
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"B"</span>).classList.toggle(<span class="hljs-string">"currentPlayer"</span>);
+}
+
+<span class="hljs-comment">/*
+@param: newStatusMessage -&gt; the message to be displayed to the users
+        isPermanent -&gt; a bool which specifies whether newStatusMessage is to remain permanently
+@post: newStatusMessage is displayed to the user within the playerStatus element and reset after 2 seconds,
+        if isPermanent is true, the message is never reset
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">updateStatus</span>(<span class="hljs-params">newStatusMessage, isPermanent</span>) </span>{
+    <span class="hljs-keyword">let</span> theStatus = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"playerStatus"</span>).firstElementChild;
+    theStatus.innerText = newStatusMessage;
+    <span class="hljs-keyword">if</span> (!isPermanent) {
+        setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+            theStatus.innerText = <span class="hljs-string">"Current Player"</span>;
+        }, <span class="hljs-number">2000</span>);
+    }
+}
+
+<span class="hljs-comment">/*
+@pre: createBoard() and setupBoard() have been previously called
+@post: makeMove() is assigned as an event listener callback for each piece on the board
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">playGame</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> thePieces = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"boardPiece"</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; thePieces.length; i++) {
+        thePieces[i].addEventListener(<span class="hljs-string">"click"</span>, makeMove, <span class="hljs-literal">true</span>);
+    } 
+}
+
+<span class="hljs-comment">/*
+@param: newestMovedPieceLocation -&gt; the boardSquare location of the most recently moved piece
+@pre: newestMovedPieceLocation contains a piece and hasChildElements() [is not null]
+@post: if the most recently moved piece has put the opposing king into check, returns true,
+        returns false otherwise
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isCheck</span>(<span class="hljs-params">newestMovedPieceLocation</span>) </span>{
+    <span class="hljs-keyword">let</span> possibleCheckingPiece = <span class="hljs-built_in">document</span>.getElementById(newestMovedPieceLocation);
+    <span class="hljs-comment">/* this null check is to account for a castling move since the newLocation from movePiece() will
+       not actually contain a piece */</span>
+    <span class="hljs-keyword">if</span> (possibleCheckingPiece.firstElementChild != <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">let</span> theKing = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"kingW"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>if the current piece is a white, find the black king</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span> (possibleCheckingPiece.firstElementChild.classList.contains(<span class="hljs-string">"whitePiece"</span>)) {
+            theKing = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"kingB"</span>);
+        }
+
+        <span class="hljs-keyword">let</span> possibleMoves = getPossibleMoves(possibleCheckingPiece.firstElementChild);
+
+        <span class="hljs-keyword">if</span> (possibleMoves.includes(theKing.parentElement.id)) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+<span class="hljs-comment">/*
+@pre: should only be called after isCheck() returns true
+@post: if the checking piece has also put the opposing king into checkmate, returns true,
+        returns false otherwise. [playerStatus message is updated to display check or checkmate]
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isCheckmate</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> theKing = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"kingW"</span>);
+    <span class="hljs-keyword">let</span> allFriendlyPieces = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"whitePiece"</span>);
+    <span class="hljs-keyword">let</span> allOpposingPieces = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"blackPiece"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>if wrong assumption, get the black king and white pieces</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"currentPlayer"</span>).item(<span class="hljs-number">0</span>).id == <span class="hljs-string">"B"</span>) {
+        theKing = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"kingB"</span>);
+        allFriendlyPieces = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"blackPiece"</span>);
+        allOpposingPieces = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"whitePiece"</span>);
+    }
+
+    <span class="hljs-keyword">let</span> allOpposingMoves = [];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; allOpposingPieces.length; i++) {
+        allOpposingMoves = allOpposingMoves.concat(getPossibleMoves(allOpposingPieces.item(i)));
+    }
+
+    <span class="hljs-keyword">let</span> kingsMoves = getPossibleMoves(theKing);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>if every possible move of the king is attackable</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (kingsMoves.every(<span class="hljs-function"><span class="hljs-params">kingMove</span> =&gt;</span> allOpposingMoves.includes(kingMove))) {
+        <span class="hljs-keyword">if</span> (kingsMoves.length != <span class="hljs-number">1</span>) {
+            updateStatus(<span class="hljs-string">"Checkmate!"</span>, <span class="hljs-literal">true</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">let</span> allFriendlyMoves = [];
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; allFriendlyPieces.length; i++) {
+                <span class="hljs-keyword">if</span> (allFriendlyPieces.item(i).id != theKing.id) {
+                    allFriendlyMoves = allFriendlyMoves.concat(getPossibleMoves(allFriendlyPieces.item(i)));
+                }
+            }
+
+            <span class="hljs-keyword">let</span> checkingPiece;
+            <span class="hljs-keyword">let</span> checkingPieceMoves;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>find the checking piece</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; allOpposingPieces.length; i++) {
+                <span class="hljs-keyword">if</span> (getPossibleMoves(allOpposingPieces.item(i)).includes(kingsMoves[<span class="hljs-number">0</span>])) {
+                    checkingPiece = allOpposingPieces.item(i);
+                    checkingPieceMoves = getPossibleMoves(checkingPiece);
+                    checkingPieceMoves.push(checkingPiece.parentElement.id);
+                }
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>simulate all possible blocking moves with unshown filler pieces</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">let</span> movesToFill = checkingPieceMoves.filter(<span class="hljs-function"><span class="hljs-params">move</span> =&gt;</span> allFriendlyMoves.includes(move));
+            <span class="hljs-built_in">console</span>.log(movesToFill);
+            movesToFill.forEach(<span class="hljs-function"><span class="hljs-params">move</span> =&gt;</span> {
+                <span class="hljs-keyword">let</span> boardSquare = <span class="hljs-built_in">document</span>.getElementById(move);
+                <span class="hljs-keyword">let</span> fillerPiece = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"div"</span>);
+                fillerPiece.classList.add(<span class="hljs-string">"filler"</span>);
+                fillerPiece.style.visibility = <span class="hljs-string">"hidden"</span>;
+                boardSquare.appendChild(fillerPiece);
+            });
+
+            <span class="hljs-keyword">let</span> checkmate = <span class="hljs-literal">false</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>if the checking piece can’t be captured</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (!movesToFill.includes(checkingPiece.parentElement.id)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>see if the king is still in check</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                checkmate = isCheck(checkingPiece.parentElement.id);
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>is the king still in check after all possible blocking moves are made?</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (checkmate) {
+                updateStatus(<span class="hljs-string">"Checkmate!"</span>, <span class="hljs-literal">true</span>);
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>remove filler pieces</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            movesToFill.forEach(<span class="hljs-function"><span class="hljs-params">move</span> =&gt;</span> {
+                <span class="hljs-keyword">let</span> boardSquare = <span class="hljs-built_in">document</span>.getElementById(move);
+                <span class="hljs-keyword">let</span> fillerPiece = boardSquare.children;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; fillerPiece.length; i++) {
+                    <span class="hljs-keyword">if</span> (fillerPiece.item(i).classList.contains(<span class="hljs-string">"filler"</span>)) {
+                        fillerPiece.item(i).parentElement.removeChild(fillerPiece.item(i));
+                    }
+                }
+            });
+        }
+    }
+
+    updateStatus(<span class="hljs-string">"Check!"</span>, <span class="hljs-literal">false</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
