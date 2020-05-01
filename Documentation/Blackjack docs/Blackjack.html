@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Blackjack.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>Blackjack.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> deck = [<span class="hljs-string">"2C"</span>,<span class="hljs-string">"2D"</span>,<span class="hljs-string">"2H"</span>,<span class="hljs-string">"2S"</span>,<span class="hljs-string">"3C"</span>,<span class="hljs-string">"3D"</span>,<span class="hljs-string">"3H"</span>,<span class="hljs-string">"3S"</span>,<span class="hljs-string">"4C"</span>,<span class="hljs-string">"4D"</span>,<span class="hljs-string">"4H"</span>,<span class="hljs-string">"4S"</span>,<span class="hljs-string">"5C"</span>,
+            <span class="hljs-string">"5D"</span>,<span class="hljs-string">"5H"</span>,<span class="hljs-string">"5S"</span>,<span class="hljs-string">"6C"</span>,<span class="hljs-string">"6D"</span>,<span class="hljs-string">"6H"</span>,<span class="hljs-string">"6S"</span>,<span class="hljs-string">"7C"</span>,<span class="hljs-string">"7D"</span>,<span class="hljs-string">"7H"</span>,<span class="hljs-string">"7S"</span>,<span class="hljs-string">"8C"</span>,<span class="hljs-string">"8D"</span>,
+            <span class="hljs-string">"8H"</span>,<span class="hljs-string">"8S"</span>,<span class="hljs-string">"9C"</span>,<span class="hljs-string">"9D"</span>,<span class="hljs-string">"9H"</span>,<span class="hljs-string">"9S"</span>,<span class="hljs-string">"10C"</span>,<span class="hljs-string">"10D"</span>,<span class="hljs-string">"10H"</span>,<span class="hljs-string">"10S"</span>,<span class="hljs-string">"jC"</span>,<span class="hljs-string">"jD"</span>,
+            <span class="hljs-string">"jH"</span>,<span class="hljs-string">"jS"</span>,<span class="hljs-string">"qC"</span>,<span class="hljs-string">"qD"</span>,<span class="hljs-string">"qH"</span>,<span class="hljs-string">"qS"</span>,<span class="hljs-string">"kC"</span>,<span class="hljs-string">"kD"</span>,<span class="hljs-string">"kH"</span>,<span class="hljs-string">"kS"</span>,<span class="hljs-string">"aC"</span>,<span class="hljs-string">"aD"</span>,<span class="hljs-string">"aH"</span>,<span class="hljs-string">"aS"</span>,
+
+            <span class="hljs-string">"2C"</span>,<span class="hljs-string">"2D"</span>,<span class="hljs-string">"2H"</span>,<span class="hljs-string">"2S"</span>,<span class="hljs-string">"3C"</span>,<span class="hljs-string">"3D"</span>,<span class="hljs-string">"3H"</span>,<span class="hljs-string">"3S"</span>,<span class="hljs-string">"4C"</span>,<span class="hljs-string">"4D"</span>,<span class="hljs-string">"4H"</span>,<span class="hljs-string">"4S"</span>,<span class="hljs-string">"5C"</span>,
+            <span class="hljs-string">"5D"</span>,<span class="hljs-string">"5H"</span>,<span class="hljs-string">"5S"</span>,<span class="hljs-string">"6C"</span>,<span class="hljs-string">"6D"</span>,<span class="hljs-string">"6H"</span>,<span class="hljs-string">"6S"</span>,<span class="hljs-string">"7C"</span>,<span class="hljs-string">"7D"</span>,<span class="hljs-string">"7H"</span>,<span class="hljs-string">"7S"</span>,<span class="hljs-string">"8C"</span>,<span class="hljs-string">"8D"</span>,
+            <span class="hljs-string">"8H"</span>,<span class="hljs-string">"8S"</span>,<span class="hljs-string">"9C"</span>,<span class="hljs-string">"9D"</span>,<span class="hljs-string">"9H"</span>,<span class="hljs-string">"9S"</span>,<span class="hljs-string">"10C"</span>,<span class="hljs-string">"10D"</span>,<span class="hljs-string">"10H"</span>,<span class="hljs-string">"10S"</span>,<span class="hljs-string">"jC"</span>,<span class="hljs-string">"jD"</span>,
+            <span class="hljs-string">"jH"</span>,<span class="hljs-string">"jS"</span>,<span class="hljs-string">"qC"</span>,<span class="hljs-string">"qD"</span>,<span class="hljs-string">"qH"</span>,<span class="hljs-string">"qS"</span>,<span class="hljs-string">"kC"</span>,<span class="hljs-string">"kD"</span>,<span class="hljs-string">"kH"</span>,<span class="hljs-string">"kS"</span>,<span class="hljs-string">"aC"</span>,<span class="hljs-string">"aD"</span>,<span class="hljs-string">"aH"</span>,<span class="hljs-string">"aS"</span>,
+
+            <span class="hljs-string">"2C"</span>,<span class="hljs-string">"2D"</span>,<span class="hljs-string">"2H"</span>,<span class="hljs-string">"2S"</span>,<span class="hljs-string">"3C"</span>,<span class="hljs-string">"3D"</span>,<span class="hljs-string">"3H"</span>,<span class="hljs-string">"3S"</span>,<span class="hljs-string">"4C"</span>,<span class="hljs-string">"4D"</span>,<span class="hljs-string">"4H"</span>,<span class="hljs-string">"4S"</span>,<span class="hljs-string">"5C"</span>,
+            <span class="hljs-string">"5D"</span>,<span class="hljs-string">"5H"</span>,<span class="hljs-string">"5S"</span>,<span class="hljs-string">"6C"</span>,<span class="hljs-string">"6D"</span>,<span class="hljs-string">"6H"</span>,<span class="hljs-string">"6S"</span>,<span class="hljs-string">"7C"</span>,<span class="hljs-string">"7D"</span>,<span class="hljs-string">"7H"</span>,<span class="hljs-string">"7S"</span>,<span class="hljs-string">"8C"</span>,<span class="hljs-string">"8D"</span>,
+            <span class="hljs-string">"8H"</span>,<span class="hljs-string">"8S"</span>,<span class="hljs-string">"9C"</span>,<span class="hljs-string">"9D"</span>,<span class="hljs-string">"9H"</span>,<span class="hljs-string">"9S"</span>,<span class="hljs-string">"10C"</span>,<span class="hljs-string">"10D"</span>,<span class="hljs-string">"10H"</span>,<span class="hljs-string">"10S"</span>,<span class="hljs-string">"jC"</span>,<span class="hljs-string">"jD"</span>,
+            <span class="hljs-string">"jH"</span>,<span class="hljs-string">"jS"</span>,<span class="hljs-string">"qC"</span>,<span class="hljs-string">"qD"</span>,<span class="hljs-string">"qH"</span>,<span class="hljs-string">"qS"</span>,<span class="hljs-string">"kC"</span>,<span class="hljs-string">"kD"</span>,<span class="hljs-string">"kH"</span>,<span class="hljs-string">"kS"</span>,<span class="hljs-string">"aC"</span>,<span class="hljs-string">"aD"</span>,<span class="hljs-string">"aH"</span>,<span class="hljs-string">"aS"</span>,
+
+            <span class="hljs-string">"2C"</span>,<span class="hljs-string">"2D"</span>,<span class="hljs-string">"2H"</span>,<span class="hljs-string">"2S"</span>,<span class="hljs-string">"3C"</span>,<span class="hljs-string">"3D"</span>,<span class="hljs-string">"3H"</span>,<span class="hljs-string">"3S"</span>,<span class="hljs-string">"4C"</span>,<span class="hljs-string">"4D"</span>,<span class="hljs-string">"4H"</span>,<span class="hljs-string">"4S"</span>,<span class="hljs-string">"5C"</span>,
+            <span class="hljs-string">"5D"</span>,<span class="hljs-string">"5H"</span>,<span class="hljs-string">"5S"</span>,<span class="hljs-string">"6C"</span>,<span class="hljs-string">"6D"</span>,<span class="hljs-string">"6H"</span>,<span class="hljs-string">"6S"</span>,<span class="hljs-string">"7C"</span>,<span class="hljs-string">"7D"</span>,<span class="hljs-string">"7H"</span>,<span class="hljs-string">"7S"</span>,<span class="hljs-string">"8C"</span>,<span class="hljs-string">"8D"</span>,
+            <span class="hljs-string">"8H"</span>,<span class="hljs-string">"8S"</span>,<span class="hljs-string">"9C"</span>,<span class="hljs-string">"9D"</span>,<span class="hljs-string">"9H"</span>,<span class="hljs-string">"9S"</span>,<span class="hljs-string">"10C"</span>,<span class="hljs-string">"10D"</span>,<span class="hljs-string">"10H"</span>,<span class="hljs-string">"10S"</span>,<span class="hljs-string">"jC"</span>,<span class="hljs-string">"jD"</span>,
+            <span class="hljs-string">"jH"</span>,<span class="hljs-string">"jS"</span>,<span class="hljs-string">"qC"</span>,<span class="hljs-string">"qD"</span>,<span class="hljs-string">"qH"</span>,<span class="hljs-string">"qS"</span>,<span class="hljs-string">"kC"</span>,<span class="hljs-string">"kD"</span>,<span class="hljs-string">"kH"</span>,<span class="hljs-string">"kS"</span>,<span class="hljs-string">"aC"</span>,<span class="hljs-string">"aD"</span>,<span class="hljs-string">"aH"</span>,<span class="hljs-string">"aS"</span>
+          ];
+
+<span class="hljs-keyword">var</span> pCount = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">var</span> dCount = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">var</span> split1A = <span class="hljs-literal">false</span>;
+<span class="hljs-keyword">var</span> split2A = <span class="hljs-literal">false</span>;
+<span class="hljs-keyword">var</span> split = <span class="hljs-literal">false</span>;
+<span class="hljs-keyword">var</span> split1 = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">var</span> split2 = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">var</span> cutCount = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">var</span> aceInplay  = <span class="hljs-number">0</span>;
+
+<span class="hljs-keyword">var</span> dCard1, dCard2, pCard1, pCard2, posInDeck, hitCount;
+
+<span class="hljs-comment">/*
+pCount = current players count
+dCount = current dealers count
+split = checks if a split is active
+split1A = checks if in first card set of a split
+split2A = checks if in second card set of a split
+split1 = current count of the first hand in a split
+split2 = current count of the second hand in a split
+cutCount = a count to see how long until the next shuffle
+aceInplay = number of aces in current play
+dCard1 = dealers first card code
+dCard2 = dealers second card code
+pCard1 = players first card code
+pCard2 = players second card code
+posInDeck = the current position in the shuffled list
+hitCount  = counter for displaying the image of the card
+*/</span>
+
+<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'hit'</span>).disabled = <span class="hljs-literal">true</span>;
+<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"stand"</span>).disabled = <span class="hljs-literal">true</span>;
+<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"double"</span>).disabled = <span class="hljs-literal">true</span>;
+<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"split"</span>).disabled = <span class="hljs-literal">true</span>;
+<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"play"</span>).disabled = <span class="hljs-literal">false</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>pre: card = the card code, n = the action of what needs to be returned
+this takes in a card and if its a
+0 then it will return the number of that card
+1 then it will return the string of the image file
+post: returns number of the card or the string of the image file</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cards</span>(<span class="hljs-params">card, n</span>)
+</span>{
+  <span class="hljs-keyword">switch</span>(card)
+  {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"2C"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/2C.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+      pCount = pCount + <span class="hljs-number">2</span>;
+      <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"2D"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/2D.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"2H"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/2H.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"2S"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/2S.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"3C"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/3C.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"3D"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/3D.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"3H"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/3H.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"3S"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/3S.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"4C"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/4C.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"4D"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/4D.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"4H"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/4H.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"4S"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/4S.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"5C"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/5C.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"5D"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/5D.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"5H"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/5H.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"5S"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/5S.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"6C"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">6</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/6C.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"6D"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">6</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/6D.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"6H"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">6</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/6H.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"6S"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">6</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/6S.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"7C"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">7</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/7C.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"7D"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">7</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/7D.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"7H"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">7</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/7H.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"7S"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">7</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/7S.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"8C"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">8</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/8C.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"8D"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">8</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/8D.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"8H"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">8</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/8H.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"8S"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">8</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/8S.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"9C"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">9</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/9C.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"9D"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">9</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/9D.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"9H"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">9</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/9H.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"9S"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">9</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/9S.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"10C"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/10C.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"10D"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/10D.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"10H"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/10H.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"10S"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/10S.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"jC"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/JC.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"jD"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/JD.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"jH"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/JH.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"jS"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/JS.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"qC"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/QC.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"qD"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/QD.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"qH"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/QH.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"qS"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/QS.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"kC"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/KC.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"kD"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/KD.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"kH"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/KH.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"kS"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/KS.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"aC"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          aceInplay++;
+          <span class="hljs-keyword">return</span> <span class="hljs-number">11</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/AC.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"aD"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          aceInplay++;
+          <span class="hljs-keyword">return</span> <span class="hljs-number">11</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/AD.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"aH"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          aceInplay++;
+          <span class="hljs-keyword">return</span> <span class="hljs-number">11</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/AH.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"aS"</span>:
+      <span class="hljs-keyword">switch</span> (n)
+      {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+          aceInplay++;
+          <span class="hljs-keyword">return</span> <span class="hljs-number">11</span>;
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-string">"imgs/blackjack/deck/AS.jpg"</span>;
+          <span class="hljs-keyword">break</span>;
+      }
+
+  }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>pre: deck = list of cards
+shuffles the deck of cards
+post: returns the list that is now shuffled</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">shuffleDeck</span>(<span class="hljs-params">deck</span>)
+</span>{
+  <span class="hljs-keyword">let</span> temp;
+  <span class="hljs-keyword">let</span> randomPosition;
+  <span class="hljs-keyword">let</span> position = deck.length;
+  <span class="hljs-keyword">while</span> (position != <span class="hljs-number">0</span>)
+  {
+    randomPosition = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * position);
+    position--;
+    temp = deck[position];
+    deck[position] = deck[randomPosition];
+    deck[randomPosition] = temp;
+  }
+  <span class="hljs-keyword">return</span> deck;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>pre: n = the current count
+checks if ace is in play and if 11 should turn to 1
+post: return the correct number of the current count</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">aCheck</span>(<span class="hljs-params">n</span>)
+</span>{
+  <span class="hljs-keyword">if</span> (aceInplay &gt; <span class="hljs-number">0</span>)
+  {
+    <span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">21</span>)
+    {
+      n = n - <span class="hljs-number">10</span>;
+      aceInplay--;
+    }
+  }
+  <span class="hljs-keyword">return</span> n;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>pre: state of the game
+post: compute the action of the current state then waits for next state</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">play</span>(<span class="hljs-params">state</span>)
+</span>{
+  <span class="hljs-keyword">switch</span>(state)
+  {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"hit"</span>:
+      <span class="hljs-keyword">if</span> (split1A == <span class="hljs-literal">true</span>)
+      {
+        split1 = split1 + cards(deck[posInDeck],<span class="hljs-number">0</span>);
+        pCount = aCheck(split1);
+        <span class="hljs-keyword">if</span> (hitCount == <span class="hljs-number">0</span>)
+        {
+          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pCard2Img"</span>).src =cards(deck[posInDeck],<span class="hljs-number">1</span>);
+
+        }
+        <span class="hljs-keyword">else</span> {
+          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pHit"</span> + hitCount + <span class="hljs-string">"Img"</span>).src =cards(deck[posInDeck],<span class="hljs-number">1</span>);
+        }
+        posInDeck++;
+        hitCount++;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"player"</span>).innerHTML =<span class="hljs-string">"Player:"</span> + split1;
+        <span class="hljs-keyword">if</span> (split1 &lt; <span class="hljs-number">22</span>)
+        {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>hit or stand</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"You can hit or stand"</span>;
+
+        }
+        <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>first hand bust</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>          split1A = <span class="hljs-literal">false</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>start second hand</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>          split2A = <span class="hljs-literal">true</span>;
+          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"Your first hand has bust starting second hand"</span>;
+        }
+
+      }
+      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (split2A == <span class="hljs-literal">true</span>)
+      {
+        split2 = split2 + cards(deck[posInDeck],<span class="hljs-number">0</span>);
+        pCount = aCheck(split2);
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pHitS"</span> + hitSCount + <span class="hljs-string">"Img"</span>).src =cards(deck[posInDeck],<span class="hljs-number">1</span>);
+        posInDeck++;
+        hitSCount++;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"player"</span>).innerHTML = <span class="hljs-string">"Player: "</span> + split2;
+        <span class="hljs-keyword">if</span> (split2 &lt; <span class="hljs-number">22</span>)
+        {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>hit or stand</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"You can hit or stand"</span>;
+
+        }
+        <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>bust</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>          split2A = <span class="hljs-literal">false</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>ends the game</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>          aceInplay = <span class="hljs-number">0</span>;
+          dCount = cards(dCard1,<span class="hljs-number">0</span>) + cards(dCard2,<span class="hljs-number">0</span>);
+
+          hitCount = <span class="hljs-number">1</span>;
+          dealerPlay();
+        }
+      }
+      <span class="hljs-keyword">else</span> {
+        pCount = pCount + cards(deck[posInDeck],<span class="hljs-number">0</span>);
+        pCount = aCheck(pCount);
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pHit"</span> + hitCount + <span class="hljs-string">"Img"</span>).src = cards(deck[posInDeck],<span class="hljs-number">1</span>);
+        posInDeck++;
+        hitCount++;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"player"</span>).innerHTML = <span class="hljs-string">"Player: "</span> + pCount;
+        <span class="hljs-keyword">if</span> (pCount == <span class="hljs-number">21</span>)
+        {
+          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"You got 21, dealers turn to play"</span>;
+          aceInplay = <span class="hljs-number">0</span>;
+          dCount = cards(dCard1,<span class="hljs-number">0</span>) + cards(dCard2,<span class="hljs-number">0</span>);
+
+          hitCount = <span class="hljs-number">1</span>;
+          dealerPlay();
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pCount &lt; <span class="hljs-number">21</span>)
+        {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>hit or stand</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"You can hit or stand "</span>
+        }
+        <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>lost</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"You have busted with "</span> + pCount;
+          endGame(pCount, dCount);
+        }
+
+      }
+      <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"stand"</span>:
+      <span class="hljs-keyword">if</span> (split1A == <span class="hljs-literal">true</span>)
+      {
+        split1A = <span class="hljs-literal">false</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>start second hand</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        split2A = <span class="hljs-literal">true</span>;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"Hit or stand on your second hand."</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>you are now working with other set</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+      }
+      <span class="hljs-keyword">else</span> {
+        aceInplay = <span class="hljs-number">0</span>;
+        dCount = cards(dCard1,<span class="hljs-number">0</span>) + cards(dCard2,<span class="hljs-number">0</span>);
+
+        hitCount = <span class="hljs-number">1</span>;
+        dealerPlay();
+      }
+
+      <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"split"</span>:
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"split"</span>).disabled = <span class="hljs-literal">true</span>;
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"You have chose to split. Hit or stand on your first hand."</span>;
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pHitS1Img"</span>).src = cards(pCard2, <span class="hljs-number">1</span>);
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pCard2Img"</span>).src = <span class="hljs-string">"imgs/blackjack/deck/white.jpg"</span>;
+      split1 = cards(pCard1,<span class="hljs-number">0</span>);
+      split2 = cards(pCard2,<span class="hljs-number">0</span>);
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"player"</span>).innerHTML = split1;
+      split = <span class="hljs-literal">true</span>;
+      split1A = <span class="hljs-literal">true</span>;
+      hitCount = <span class="hljs-number">0</span>;
+      <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"double"</span>:
+      pCount = pCount + cards(deck[posInDeck],<span class="hljs-number">0</span>);
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pHit1Img"</span>).src = cards(deck[posInDeck],<span class="hljs-number">1</span>);
+      pCount = aCheck(pCount);
+      posInDeck++;
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"player"</span>).innerHTML = <span class="hljs-string">"Player: "</span> + pCount;
+
+      <span class="hljs-keyword">if</span> (pCount &lt; <span class="hljs-number">22</span>)
+      {
+        aceInplay = <span class="hljs-number">0</span>;
+        dCount = cards(dCard1,<span class="hljs-number">0</span>) + cards(dCard2,<span class="hljs-number">0</span>);
+
+        hitCount = <span class="hljs-number">1</span>;
+        dealerPlay();
+      }
+      <span class="hljs-keyword">else</span>
+      {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>bust</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"You have bust with "</span> + pCount;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"hit"</span>).disabled = <span class="hljs-literal">true</span>;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"stand"</span>).disabled = <span class="hljs-literal">true</span>;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"double"</span>).disabled = <span class="hljs-literal">true</span>;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"play"</span>).disabled = <span class="hljs-literal">false</span>;
+      }
+      <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"play"</span>:
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"hit"</span>).disabled = <span class="hljs-literal">false</span>;
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"stand"</span>).disabled = <span class="hljs-literal">false</span>;
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"double"</span>).disabled = <span class="hljs-literal">false</span>;
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"play"</span>).disabled = <span class="hljs-literal">true</span>;
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"split"</span>).disabled = <span class="hljs-literal">true</span>;
+
+      posInDeck++;
+      cutCount++;
+
+      pCard1 = deck[posInDeck];
+      posInDeck++;
+      pCard2 = deck[posInDeck];
+      posInDeck++;
+      dCard1 = deck[posInDeck];
+      posInDeck++;
+      dCard2 = deck[posInDeck];
+      posInDeck++;
+
+
+      pCount = cards(pCard1,<span class="hljs-number">0</span>) + cards(pCard2,<span class="hljs-number">0</span>);
+      pCount = aCheck(pCount);
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"player"</span>).innerHTML = <span class="hljs-string">"Player: "</span> + pCount;
+
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"dealer"</span>).innerHTML = <span class="hljs-string">"Dealer"</span>;
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pCard1Img"</span>).src = cards(pCard1,<span class="hljs-number">1</span>);
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pCard2Img"</span>).src = cards(pCard2,<span class="hljs-number">1</span>);
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"dCard1Img"</span>).src = cards(dCard1,<span class="hljs-number">1</span>);
+
+      <span class="hljs-keyword">if</span> (pCount == <span class="hljs-number">21</span>)
+      {
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"Blackjack you have won!"</span>
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'hit'</span>).disabled = <span class="hljs-literal">true</span>;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"stand"</span>).disabled = <span class="hljs-literal">true</span>;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"double"</span>).disabled = <span class="hljs-literal">true</span>;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"play"</span>).disabled = <span class="hljs-literal">false</span>;
+      }
+      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pCard1.charAt(<span class="hljs-number">0</span>) == pCard2.charAt(<span class="hljs-number">0</span>)) {
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"split"</span>).disabled = <span class="hljs-literal">false</span>;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"Hit, Stand, Double Down, Split"</span>;
+      }
+      <span class="hljs-keyword">else</span>
+      {
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = <span class="hljs-string">"Hit, Stand, Double Down"</span>;
+      }
+      <span class="hljs-keyword">break</span>;
+
+  }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Pre:None
+plays blackjack for the dealer based on the dealer rules
+Post:calls the endGame function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dealerPlay</span>(<span class="hljs-params"></span>)
+</span>{
+
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"dCard2Img"</span>).src = cards(dCard2,<span class="hljs-number">1</span>);
+  dCount = aCheck(dCount);
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"dealer"</span>).innerHTML = <span class="hljs-string">"Dealer: "</span> + dCount;
+  <span class="hljs-keyword">if</span> (dCount &lt; <span class="hljs-number">17</span>)
+  {
+    dCount = dCount + cards(deck[posInDeck],<span class="hljs-number">0</span>);
+
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"dHit"</span> + hitCount + <span class="hljs-string">"Img"</span>).src = cards(deck[posInDeck],<span class="hljs-number">1</span>);
+    posInDeck++;
+    hitCount++;
+    dealerPlay();
+
+  }
+  <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">if</span> (split == <span class="hljs-literal">true</span>)
+    {
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML =<span class="hljs-string">"First hand ---- "</span> + endGame(split1, dCount);
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log2"</span>).innerHTML =<span class="hljs-string">"Second hand ---- "</span> + endGame(split2, dCount);
+
+    }
+    <span class="hljs-keyword">else</span> {
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"log"</span>).innerHTML = endGame(pCount, dCount);
+    }
+  }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>pre: p = players count, d = dealers count
+takes in the 2 players counts and determinds the winner.
+post: returns the result of the game as a string</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">endGame</span>(<span class="hljs-params">p, d</span>)
+</span>{
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'hit'</span>).disabled = <span class="hljs-literal">true</span>;
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"stand"</span>).disabled = <span class="hljs-literal">true</span>;
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"double"</span>).disabled = <span class="hljs-literal">true</span>;
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"play"</span>).disabled = <span class="hljs-literal">false</span>;
+
+  <span class="hljs-keyword">if</span> (p &gt; <span class="hljs-number">21</span>)
+  {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>lost</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span>  <span class="hljs-string">"You have bust with "</span> + p
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (d &gt; <span class="hljs-number">21</span>)
+  {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>win</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span>  <span class="hljs-string">"You have won"</span>
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p == d)
+  {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>push</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span>  <span class="hljs-string">"You have pushed with "</span> + p
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p == <span class="hljs-number">21</span>)
+  {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>win</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span>  <span class="hljs-string">"You have won"</span>
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (d == <span class="hljs-number">21</span>)
+  {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>lost</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span>  <span class="hljs-string">"You have lost"</span>
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p &gt; d)
+  {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>win</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span>  <span class="hljs-string">"You have won"</span>
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (d &gt; p)
+  {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>lost</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-string">"You have lost"</span>
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p == d)
+  {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>push</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-string">" You have pushed with "</span> + p
+  }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>controlls the buttons</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">"DOMContentLoaded"</span>, () =&gt;
+{
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'hit'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+      play(<span class="hljs-string">"hit"</span>);
+    })
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'stand'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+      play(<span class="hljs-string">"stand"</span>);
+  })
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'split'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+      play(<span class="hljs-string">"split"</span>);
+  })
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'double'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+      play(<span class="hljs-string">"double"</span>);
+  })
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'play'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+      reset();
+      play(<span class="hljs-string">"play"</span>);
+  })</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>pre: none
+reset function to reset the game to that starting state
+post: game is reset for next round</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reset</span>(<span class="hljs-params"></span>)
+</span>{
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"dCard1Img"</span>).src = <span class="hljs-string">"imgs/blackjack/deck/white.jpg"</span>;
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"dCard2Img"</span>).src = <span class="hljs-string">"imgs/blackjack/deck/white.jpg"</span>;
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pCard1Img"</span>).src = <span class="hljs-string">"imgs/blackjack/deck/white.jpg"</span>;
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pCard2Img"</span>).src = <span class="hljs-string">"imgs/blackjack/deck/white.jpg"</span>;
+
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i&lt;=<span class="hljs-number">4</span>; i++)
+  {
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pHit"</span> + i + <span class="hljs-string">"Img"</span>).src = <span class="hljs-string">"imgs/blackjack/deck/white.jpg"</span>;
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"dHit"</span> + i + <span class="hljs-string">"Img"</span>).src = <span class="hljs-string">"imgs/blackjack/deck/white.jpg"</span>;
+  }
+
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i&lt;=<span class="hljs-number">6</span>; i++)
+  {
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"pHitS"</span> + i + <span class="hljs-string">"Img"</span>).src = <span class="hljs-string">"imgs/blackjack/deck/white.jpg"</span>;
+  }
+  hitSCount = <span class="hljs-number">2</span>;
+  hitCount = <span class="hljs-number">1</span>;
+  pCount = <span class="hljs-number">0</span>;
+  dCount = <span class="hljs-number">0</span>;
+  hitCount = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">if</span> (cutCount == <span class="hljs-number">10</span>)
+  {
+    posInDeck = <span class="hljs-number">0</span>;
+    shuffleDeck(deck);
+    cutCount = <span class="hljs-number">1</span>;
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cutCount == <span class="hljs-number">0</span>)
+  {
+    shuffleDeck(deck);
+    posInDeck = <span class="hljs-number">0</span>;
+  }
+}
+})</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
