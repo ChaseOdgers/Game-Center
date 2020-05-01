@@ -1,4 +1,5 @@
 function lifeEvent(student){
+  this.modType = "lifeEvent";
   this.student = student;
   this.length = 30;
 

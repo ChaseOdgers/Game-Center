@@ -19,6 +19,7 @@ function generateCommitmentName(size)
 }
 
 function commitment(scope, type, student){
+  this.modType = "commitment"
   this.student = student;
   this.scope = scope;
   this.type = type;

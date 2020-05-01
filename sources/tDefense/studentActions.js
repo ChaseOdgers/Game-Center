@@ -16,7 +16,6 @@ function student(type, currentGrade, MH, PH, sleep, social, study){
 
 
 student.prototype.modifyStudent = function(value, where){
-  debugger;
   if(where == "type")
   {
     this.type == value;

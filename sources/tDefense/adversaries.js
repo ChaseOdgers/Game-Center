@@ -1,6 +1,7 @@
 //This file deals with all the adveries which will act as mobs in the tower defense
 
 function adversaries(student){
+  this.modType = "adversaries"
   this.student = student;
   this.deterioration = Math.floor(Math.random() * 15) + 5
   this.type = getRandomAdversaryType();
