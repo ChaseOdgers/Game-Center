@@ -1,3 +1,6 @@
+/** Creates and initializes an object to hold the game state.
+    @post   Game state is created and initialized.
+    @return gameState object. */
 function initGameState() {
     let gameState = {
         "board": [...Array(10)].map(() => Array(10).fill(0)),
@@ -22,10 +25,20 @@ function initGameState() {
     return (gameState);
 };
 
+/** Finds a random integer between given min (inclusive) and max (inclusive)
+    @pre    Valid integers.
+    @param  min The mininum random number.
+    @param  max The maximum random number.
+    @return Random integer within range. */
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+/** Randomly generates an origin, and returns an array of locations 
+ *  outward from that origin in a random direction, including the origin.
+    @pre    Valid ship length: 5,4,3,2
+    @param  shipLength Corresponds to length of array to generate.
+    @return Array of locations: [[x,y],[x,y],...] */
 function generateLocations(shipLength) {
     let row = randomInt(0,9);
     let col = randomInt(0,9);
@@ -60,6 +73,13 @@ function generateLocations(shipLength) {
     return (locations);
 };
 
+/** Checks whether an array of locations intersects with any ship in a given
+ *  ships key.
+    @pre    newLocations format: [[x,y],[x,y],...]
+    @pre    ships format is given from the ships key of gameState object.
+    @param  newLocations Locations to be checked for intersect.
+    @param  ships Collection of ships to be compared against.
+    @return True if any ship intersects with newLocations, False otherwise. */
 function checkIntersect(newLocations, ships) {
     for (let ship of Object.keys(ships))
         for (let location of ships[ship].locations)
@@ -69,6 +89,10 @@ function checkIntersect(newLocations, ships) {
     return (false);
 };
 
+/** Creates and initializes the computer's gameState object. Randomly generates
+ *  ship locations for the computer and adds them to the gameState.
+    @post   Computer's gameState is ready.
+    @return The computer's complete gameState object. */
 function initStateCP() {
     let gameState = initGameState();
     let ships = gameState.ships;
@@ -84,6 +108,9 @@ function initStateCP() {
     return (gameState);
 };
 
+/** Creates and initializes the player's gameState object.
+    @post   Player's gameState is ready.
+    @return The player's complete gameState object. */
 function initStatePlayer() {
     return (initGameState());
 };
