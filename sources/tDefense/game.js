@@ -46,22 +46,47 @@ function gameStart(student){
   {
     for(let j = 0; j<5; j++)
     {
-      setTimeout(frameEvent(studentModifications, student), 1000);
+      //wait(1000);
+      frameEvent(studentModifications, student);
     }
     if(getRandomInt(100)==42)
     {
       studentModifications.push(new lifeEvent(student));
     }
-    console.log(studentModifications.length + " " + i);
+    if(student.GameOver())
+    {
+      break;
+    }
+
   }
+
+  announceGrade(student);
+
 
 
 
 }
 
+function wait(ms)
+{
+  //I didn't use setTimeout or setInterval because it did not work properly
+  //Therefore I went this round about way
+  let d = new Date();
+  let d2 = null;
+  do { d2 = new Date(); }
+  while(d2-d < ms);
+}
 
+
+//these two functions came from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomInt(max){
   return Math.floor(Math.random() * Math.floor(max));
+}
+
+function getRandomInt2(min, max){
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
 /*
@@ -71,28 +96,26 @@ Param: Student object
 */
 function frameEvent(studentModifications, student){
 
+
   for(let i = 0; i<studentModifications.length; i++)
   {
-    if(studentModifications[i] == commitment)
+    if(studentModifications[i] == "commitment")
     {
       if(studentModifications[i].length == 0)
       {
         studentModifications.splice(i,1);
-        console.log(studentModifications);
-        //TODO: Find a replacement for splice
       }
       else
       {
         studentModifications[i].fulfill();
       }
     }
-    else if(studentModifications[i] == adversaries)
+    else if(studentModifications[i].modType == "adversaries")
     {
       if(studentModifications[i].location == 1)
       {
         studentModifications[i].modifyStudent();
         studentModifications.splice(i,1);
-        console.log(studentModifications);
 
       }
       else if(studentModifications[i].deterioration <= 0)
@@ -102,15 +125,14 @@ function frameEvent(studentModifications, student){
       else
       {
         studentModifications[i].moveNextBlock();
-        updateAdvesaryPosition(studentModifications[i]);
+        //updateAdvesaryPosition([i]);
       }
     }
-    else if(studentModifications[i] == lifeEvent)
+    else if(studentModifications[i].modType == "lifeEvent")
     {
       if(studentModifications[i].length == 0)
       {
         studentModifications.splice(i,1);
-        console.log(studentModifications);
 
         student.modifyStudent(10, "willpower");
       }
@@ -119,21 +141,22 @@ function frameEvent(studentModifications, student){
         studentModifications[i].modifyStudent();
       }
     }
+  }
 
-    if(student.type == "Engineering Student")
+
+  if(student.type == "Engineering Student")
+  {
+    studentModifications.push(new adversaries(student));
+  }
+  else
+  {
+    if(getRandomInt(4)==1)
     {
       studentModifications.push(new adversaries(student));
     }
-    else
-    {
-      if(getRandomInt(4)==1)
-      {
-        studentModifications.push(new adversaries(student));
-      }
-    }
-
   }
 
+  updateGameDisplay(studentModifications, student);
 
 
 }

@@ -2,13 +2,13 @@
   <head>
     <title>The Good Student</title>
     <link rel = "stylesheet" href = styles/tDefense/tDefense.css>
-    <script type = "text/javascript" src = "sources/tDefense/adversaries.js" ></script>
-    <script type = "text/javascript" src = "sources/tDefense/displayManipulation.js" ></script>
-    <script type = "text/javascript" src = "sources/tDefense/game.js" ></script>
-    <script type = "text/javascript" src = "sources/tDefense/gameGeneration.js" ></script>
-    <script type = "text/javascript" src = "sources/tDefense/lifeEvents.js" ></script>
-    <script type = "text/javascript" src = "sources/tDefense/studentActions.js" ></script>
-    <script type = "text/javascript" src = "sources/tDefense/studentCommitments.js" ></script>
+    <script type = "text/javascript"  src = "sources/tDefense/adversaries.js" ></script>
+    <script type = "text/javascript"  src = "sources/tDefense/displayManipulation.js" ></script>
+    <script type = "text/javascript"  src = "sources/tDefense/game.js" ></script>
+    <script type = "text/javascript" async src = "sources/tDefense/gameGeneration.js" ></script>
+    <script type = "text/javascript"  src = "sources/tDefense/lifeEvents.js" ></script>
+    <script type = "text/javascript"  src = "sources/tDefense/studentActions.js" ></script>
+    <script type = "text/javascript"  src = "sources/tDefense/studentCommitments.js" ></script>
   <head>
 
   <body>
@@ -16,191 +16,273 @@
     <h1 id = "mainHeading" style = "font-size:60; text-align:center">Choose your fighter</h1><br>
 
     <!--STARTING MENU-->
-    <div id = "startingMenu" class = "starter">
-      <div>
+      <div id = "startingMenu" class = "starter">
+        <div>
+          <br>
+          <img src = "imgs/tDefense/aStudent.jpg" style = "width:300px;height:340"><br>
+          The A+ Perfectionist<br>
+          Easy<br>
+          <button id = "aStudent">Easy A</button>
+        </div>
+
+        <div>
+          <br>
+          <img src = "imgs/tDefense/seasonedCStudent.png" style = "width:300px;height:340"><br>
+          The Veteran C Student<br>
+          Medium<br>
+          <button id = "cStudent">I'll do it tomorrow</button>
+        </div>
+
+        <div>
+          <br>
+          <img src = "imgs/tDefense/partyAnimal.jpg" style = "width:300px;height:340"><br>
+          Party Animal<br>
+          Hard<br>
+          <button id = "partyAnimal">Can I copy your homework?</button>
+        </div>
+
+        <div>
         <br>
-        <img src = "imgs/tDefense/aStudent.jpg" style = "width:300px;height:340"><br>
-        The A+ Perfectionist<br>
-        Easy<br>
-        <button id = "aStudent">Easy Peasy Lemon Squeezy</button>
-      </div>
-
-      <div>
-        <br>
-        <img src = "imgs/tDefense/seasonedCStudent.png" style = "width:300px;height:340"><br>
-        The Veteran C Student<br>
-        Medium<br>
-        <button id = "cStudent">I'll do it tomorrow</button>
-      </div>
-
-      <div>
-        <br>
-        <img src = "imgs/tDefense/partyAnimal.jpg" style = "width:300px;height:340"><br>
-        Party Animal<br>
-        Hard<br>
-        <button id = "partyAnimal">Yo bro can I copy your homework?</button>
-      </div>
-
-      <div>
-      <br>
-      <img src = "imgs/tDefense/engineeringStudent.png" style = "width:300px;height:340"><br>
-      Engineering Student<br>
-      Engineering Student<br>
-      <button id = "engineeringStudent">*Crying intensifies*</button>
-      </div>
-    </div>
-
-
-    <!--Game Display-->
-    <!--The game display is divided into 5 sections: Board, grade, profile pic, events, and controls-->
-    <div class = "webGrid" id = "mainGame">
-
-
-      <div class = "board">
-        <table background = "imgs/tDefense/tableBackground.jpg">
-          <tr id = "mentalHealth">
-            <td><img src = "imgs/tDefense/mentalHealthMarker.jpg" style = "width: 180px; height: 80px"></td>
-            <td id = "MH1">X</td>
-            <td id = "MH2">X</td>
-            <td id = "MH3">X</td>
-            <td id = "MH4">X</td>
-            <td>X</td>
-          </tr>
-          <tr id = "physicalHealth">
-            <td><img src = "imgs/tDefense/physicalHealthMarker.jpg" style = "width: 180px; height: 80px"></td>
-            <td id = "PH1">X</td>
-            <td id = "PH2">X</td>
-            <td id = "PH3">X</td>
-            <td id = "PH4">X</td>
-          </tr>
-          <tr id = "sleep">
-            <td><img src = "imgs/tDefense/sleepMarker.jpg" style = "width: 180px; height: 80px"></td>
-            <td id = "sleep1">X</td>
-            <td id = "sleep2">X</td>
-            <td id = "sleep3">X</td>
-            <td id = "sleep4">X</td>
-          </tr>
-          <tr id = "study">
-            <td><img src = "imgs/tDefense/studyMarker.jpg" style = "width: 180px; height: 80px"></td>
-            <td id = "study1">X</td>
-            <td id = "study2">X</td>
-            <td id = "study3">X</td>
-            <td id = "study4">X</td>
-          </tr>
-          <tr id = "social">
-            <td><img src = "imgs/tDefense/socialMarker.jpg" style = "width: 180px; height: 80px"></td>
-            <td id = "social1">X</td>
-            <td id = "social2">X</td>
-            <td id = "social3">X</td>
-            <td id = "social4">X</td>
-          </tr>
-        </table>
+        <img src = "imgs/tDefense/engineeringStudent.png" style = "width:300px;height:340"><br>
+        Engineering Student<br>
+        Engineering Student<br>
+        <button id = "engineeringStudent">Do engineering they say, it'll be fun they say</button>
+        </div>
       </div>
 
 
-      <div class = "currentGrade">
-        <img class = "LetterGrades" src = "imgs/tDefense/ALetterGrade.jpg">
-        <img class = "LetterGrades" src = "imgs/tDefense/AmLetterGrade.jpg">
-        <img class = "LetterGrades" src = "imgs/tDefense/BpLetterGrade.jpg">
-        <img class = "LetterGrades" src = "imgs/tDefense/BLetterGrade.jpg">
-        <img class = "LetterGrades" src = "imgs/tDefense/BmLetterGrade.png">
-        <img class = "LetterGrades" src = "imgs/tDefense/CpLetterGrade.jpg">
-        <img class = "LetterGrades" src = "imgs/tDefense/CLetterGrade.jpg">
-        <img class = "LetterGrades" src = "imgs/tDefense/CmLetterGrade.jpg">
-        <img class = "LetterGrades" src = "imgs/tDefense/DpLetterGrade.jpg">
-        <img class = "LetterGrades" src = "imgs/tDefense/DLetterGrade.jpg">
-        <img class = "LetterGrades" src = "imgs/tDefense/DmLetterGrade.jpg">
-        <img class = "LetterGrades" src = "imgs/tDefense/FLetterGrade.jpg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!--Game Display-->
+      <!--The game display is divided into 5 sections: Board, grade, profile pic, events, and controls-->
+      <div class = "grid-container" id = "mainGame">
+
+
+        <div class = "grid board">
+
+
+
+            <div id = "MH0" class="grid-item">Mental Health</div>
+            <div id = "MH1" class="grid-item">2</div>
+            <div id = "MH2" class="grid-item">3</div>
+            <div id = "MH3" class="grid-item">4</div>
+            <div id = "MH4" class="grid-item">5</div>
+            <div id = "MH5" class="grid-item">6</div>
+
+            <div id = "PH0" class="grid-item">Physical Health</div>
+            <div id = "PH1" class="grid-item">2</div>
+            <div id = "PH2" class="grid-item">3</div>
+            <div id = "PH3" class="grid-item">4</div>
+            <div id = "PH4" class="grid-item">5</div>
+            <div id = "PH5" class="grid-item">6</div>
+
+            <div id = "sleep0" class="grid-item">Sleep</div>
+            <div id = "sleep1" class="grid-item">2</div>
+            <div id = "sleep2" class="grid-item">3</div>
+            <div id = "sleep3" class="grid-item">4</div>
+            <div id = "sleep4" class="grid-item">5</div>
+            <div id = "sleep5" class="grid-item">6</div>
+
+            <div id = "social0" class="grid-item">Social</div>
+            <div id = "social1" class="grid-item">2</div>
+            <div id = "social2" class="grid-item">3</div>
+            <div id = "social3" class="grid-item">4</div>
+            <div id = "social4" class="grid-item">5</div>
+            <div id = "social5" class="grid-item">6</div>
+
+            <div id = "study0" class="grid-item">Study</div>
+            <div id = "study1" class="grid-item">2</div>
+            <div id = "study2" class="grid-item">3</div>
+            <div id = "study3" class="grid-item">4</div>
+            <div id = "study4" class="grid-item">5</div>
+            <div id = "study5" class="grid-item">6</div>
+
+
+
+
+
+          <!--<div id="MHRow" class="row">
+              <div id="0" class="column"></div>
+              <div id="1" class="column"></div>
+              <div id="2" class="column"></div>
+              <div id="3" class="column"></div>
+              <div id="4" class="column"></div>
+              <div id="5" class="column"></div>
+          </div>
+
+          <div id="PHRow" class="row">
+              <div id="0" class="column"></div>
+              <div id="1" class="column"></div>
+              <div id="2" class="column"></div>
+              <div id="3" class="column"></div>
+              <div id="4" class="column"></div>
+              <div id="5" class="column"></div>
+          </div>
+
+          <div id="sleepRow" class="row">
+              <div id="0" class="column"></div>
+              <div id="1" class="column"></div>
+              <div id="2" class="column"></div>
+              <div id="3" class="column"></div>
+              <div id="4" class="column"></div>
+              <div id="5" class="column"></div>
+          </div>
+
+          <div id="studyRow" class="row">
+              <div id="0" class="column"></div>
+              <div id="1" class="column"></div>
+              <div id="2" class="column"></div>
+              <div id="3" class="column"></div>
+              <div id="4" class="column"></div>
+              <div id="5" class="column"></div>
+          </div>
+
+          <div id="socialRow" class="row">
+              <div id="0" class="column"></div>
+              <div id="1" class="column"></div>
+              <div id="2" class="column"></div>
+              <div id="3" class="column"></div>
+              <div id="4" class="column"></div>
+              <div id="5" class="column"></div>
+          </div>
+
+
+
+          <table background = "imgs/tDefense/tableBackground.jpg">
+            <tr id = "mentalHealth">
+              <td><img src = "imgs/tDefense/mentalHealthMarker.jpg" style = "width: 180px; height: 80px"></td>
+              <td id = "MH1">X</td>
+              <td id = "MH2">X</td>
+              <td id = "MH3">X</td>
+              <td id = "MH4">X</td>
+              <td>X</td>
+            </tr>
+            <tr id = "physicalHealth">
+              <td><img src = "imgs/tDefense/physicalHealthMarker.jpg" style = "width: 180px; height: 80px"></td>
+              <td id = "PH1">X</td>
+              <td id = "PH2">X</td>
+              <td id = "PH3">X</td>
+              <td id = "PH4">X</td>
+            </tr>
+            <tr id = "sleep">
+              <td><img src = "imgs/tDefense/sleepMarker.jpg" style = "width: 180px; height: 80px"></td>
+              <td id = "sleep1">X</td>
+              <td id = "sleep2">X</td>
+              <td id = "sleep3">X</td>
+              <td id = "sleep4">X</td>
+            </tr>
+            <tr id = "study">
+              <td><img src = "imgs/tDefense/studyMarker.jpg" style = "width: 180px; height: 80px"></td>
+              <td id = "study1">X</td>
+              <td id = "study2">X</td>
+              <td id = "study3">X</td>
+              <td id = "study4">X</td>
+            </tr>
+            <tr id = "social">
+              <td><img src = "imgs/tDefense/socialMarker.jpg" style = "width: 180px; height: 80px"></td>
+              <td id = "social1">X</td>
+              <td id = "social2">X</td>
+              <td id = "social3">X</td>
+              <td id = "social4">X</td>
+            </tr>
+          </table>-->
+
+
+
+        </div>
+
+
+        <div class = "grid grade">
+          <img class = "LetterGrades" src = "imgs/tDefense/ALetterGrade.jpg">
+          <img class = "LetterGrades" src = "imgs/tDefense/AmLetterGrade.jpg">
+          <img class = "LetterGrades" src = "imgs/tDefense/BpLetterGrade.jpg">
+          <img class = "LetterGrades" src = "imgs/tDefense/BLetterGrade.jpg">
+          <img class = "LetterGrades" src = "imgs/tDefense/BmLetterGrade.png">
+          <img class = "LetterGrades" src = "imgs/tDefense/CpLetterGrade.jpg">
+          <img class = "LetterGrades" src = "imgs/tDefense/CLetterGrade.jpg">
+          <img class = "LetterGrades" src = "imgs/tDefense/CmLetterGrade.jpg">
+          <img class = "LetterGrades" src = "imgs/tDefense/DpLetterGrade.jpg">
+          <img class = "LetterGrades" src = "imgs/tDefense/DLetterGrade.jpg">
+          <img class = "LetterGrades" src = "imgs/tDefense/DmLetterGrade.jpg">
+          <img class = "LetterGrades" src = "imgs/tDefense/FLetterGrade.jpg">
+        </div>
+
+  <!--Will change as the grade degrades-->
+        <div class = "grid mood">
+          <img class = "moodPics" src = "imgs/tDefense/meWhenA.png">
+          <img class = "moodPics" src = "imgs/tDefense/meWhenB.png">
+          <img class = "moodPics" src = "imgs/tDefense/meWhenC.png">
+          <img class = "moodPics" src = "imgs/tDefense/meWhenDF.png">
+        </div>
+
+
+        <div class = "grid event">
+        </div>
+
+
+        <div class = "grid stats">
+
+        </div>
+
+
+        <div class = "grid controls">
+
+                <div class = "player-buttons">Small Commitments
+
+                  <button id = "smallCommitMH">Mental Health</button>
+
+                  <button id = "smallCommitPH">Physical Health</button>
+
+                  <button id = "smallCommitSleep">Sleep</button>
+
+                  <button id = "smallCommitSocial">Social</button>
+
+                  <button id = "smallCommitStudy">Study</button>
+                </div>
+
+                <div class = "player-buttons">Medium Commitments
+
+                  <button id = "mediumCommitMH">Mental Health</button>
+
+                  <button id = "mediumCommitPH">Physical Health</button>
+
+                  <button id = "mediumCommitSleep">Sleep</button>
+
+                  <button id = "mediumCommitSocial">Social</button>
+
+                  <button id = "mediumCommitStudy">Study</button>
+
+                </div>
+
+                <div class = "player-buttons">Big Commitments
+
+                  <button id = "bigCommitMH">Mental Health</button>
+
+                  <button id = "bigCommitPH">Physical Health</button>
+
+                  <button id = "bigCommitSleep">Sleep</button>
+
+                  <button id = "bigCommitSocial">Social</button>
+
+                  <button id = "bigCommitStudy">Study</button>
+
+                </div>
+
+        </div>
+
       </div>
 
-<!--Will change as the grade degrades-->
-      <div class = "currentMood">
-        <img class = "moodPics" src = "imgs/tDefense/meWhenA.png">
-        <img class = "moodPics" src = "imgs/tDefense/meWhenB.png">
-        <img class = "moodPics" src = "imgs/tDefense/meWhenC.png">
-        <img class = "moodPics" src = "imgs/tDefense/meWhenDF.png">
-      </div>
-
-
-      <div class = "eventTab">
-        <img src = "imgs/tDefense/partyAnimal.jpg" style = "width:300px;height:340">
-      </div>
-
-
-      <div class = "playerStats">
-        <table>
-          <tr>Mental Health
-            <td id = "mentalHealthVal"></td>
-          </tr>
-          <tr>Physical Health
-            <td id = "mentalHealthVal"></td>
-          </tr>
-          <tr>Sleep
-            <td id = "mentalHealthVal"></td>
-          </tr>
-          <tr>Study
-            <td id = "mentalHealthVal"></td>
-          </tr>
-          <tr>Social
-            <td id = "mentalHealthVal"></td>
-          </tr>
-      </div>
-
-
-      <div class = "playerControl">
-        <table>
-          <tr>Small Commitments
-            <td>
-              <button id = "smallCommitMH">Mental Health</button>
-            </td>
-            <td>
-              <button id = "smallCommitPH">Physical Health</button>
-            </td>
-            <td>
-              <button id = "smallCommitSleep">Sleep</button>
-            </td>
-            <td>
-              <button id = "smallCommitSocial">Social</button>
-            </td>
-            <td>
-              <button id = "smallCommitStudy">Study</button>
-            </td>
-          </tr>
-          <tr>Medium Commitments
-            <td>
-              <button id = "mediumCommitMH">Mental Health</button>
-            </td>
-            <td>
-              <button id = "mediumCommitPH">Physical Health</button>
-            </td>
-            <td>
-              <button id = "mediumCommitSleep">Sleep</button>
-            </td>
-            <td>
-              <button id = "mediumCommitSocial">Social</button>
-            </td>
-            <td>
-              <button id = "mediumCommitStudy">Study</button>
-            </td>
-          </tr>
-          <tr>Big Commitments
-            <td>
-              <button id = "bigCommitMH">Mental Health</button>
-            </td>
-            <td>
-              <button id = "bigCommitPH">Physical Health</button>
-            </td>
-            <td>
-              <button id = "bigCommitSleep">Sleep</button>
-            </td>
-            <td>
-              <button id = "bigCommitSocial">Social</button>
-            </td>
-            <td>
-              <button id = "bigCommitStudy">Study</button>
-            </td>
-          </tr>
-      </div>
 
   </body>
 </html>

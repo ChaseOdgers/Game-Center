@@ -1,71 +1,83 @@
 
+.pageGrid{
+  display:grid;
+  grid-template-rows: 30% 70%
+}
+
 div.starter
 {
   column-count: 4;
   column-gap: 50px;
 }
 
-div.playerStats
-{
-  column-width: 20%;
-}
-
-div.board
-{
-  display: inline-block;
-  height:50px;
-  width: 50px;
-  column-width: 80%;
-}
-
-.board{grid-area: board;}
-.currentGrade{grid-area: grade;}
-.currentMood{grid-area: mood;}
-.eventTab
-{
-  grid-area: events;
-  display:list-item;
-}
-.playerStats{grid-area: stats;}
-.playerControl{grid-area: controls;}
 
 
-.webGrid
-{
+
+
+
+
+.grid-container{
   visibility: hidden;
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  justify-items:stretch;
-  align-items: stretch;
-
-
-  grid-auto-rows: minmax(100px, auto);
-
-  grid-gap: 10px;
-  padding: 10px
+  display:grid;
+  grid-auto-rows:minmax(100px, auto);
+  grid-gap:1px;
 }
 
-.webGrid > div
-{
-  text-align: center;
-  padding: 1px;
+.grid-container > div{
+  background:#eee;
+}
+
+.grid-container > div:nth-child(odd){
+  background:#ddd;
+}
+
+
+.board{
+  grid-column: 1/4;
+  grid-row: 1/4;
+  display:grid;
+  grid-template-columns: auto auto auto auto auto auto;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
   font-size: 30px;
-  background: #eee;
+  text-align: center;
 }
-.webGrid > div:nth-child(odd)
-{
-  background: #ddd
+.grade{
+  grid-column: 5;
+  grid-row: 1;
+
 }
+
+.mood{
+  grid-column: 5;
+  grid-row: 2;
+}
+
+.event{
+  grid-column: 5;
+  grid-row: 3;
+}
+
+.stats{
+  grid-column: 5;
+  grid-row: 4;
+}
+
+.controls{
+  grid-column: 1/5;
+  grid-row: 5;
+}
+
 
 table
 {
-  background-size: cover;
-  margin-left:  50px;
   border: 3px solid black;
   border-collapse: collapse;
-  display: inline-block;
-  vertical-align: middle;
-  user-select: none;
+  display: table;
 }
 
 td
@@ -76,15 +88,18 @@ td
   border: 2px;
 }
 
-.LetterGrades
-{
-  visibility: hidden;
+.LetterGrades{
+  height:100px;
+  width:150px;
+  display:none;
 }
 
-.moodPics
-{
-  visibility: hidden;
+.moodPics{
+  height:100px;
+  width:150px;
+  display:none;
 }
+
 
 a.button{
   -webkit-appearance: button;
@@ -93,4 +108,27 @@ a.button{
 
   text-decoration: none;
   color: initial;
+}
+
+.row {
+  display:grid;
+  column-gap:10px;
+  border: solid black 1px;
+  column-count: 6;
+}
+
+.row > div{
+  border: solid black 1px;
+}
+
+.column {
+    display: inline-block;
+    width: 16.42%;
+    height: 100%;
+    border: solid black 1px;
+}
+
+.gridPics{
+  width:10px;
+  height:10px;
 }

@@ -14,12 +14,23 @@ function student(type, currentGrade, MH, PH, sleep, social, study){
   this.willpower = 100;
 }
 
+student.prototype.GameOver = function(){
+  if(this.grade < 0 || this.mentalHealth < 0 || this.physicalHealth < 0 || this.sleep < 0 || this.social < 0 || this.study < 0 || this.willpower < 0)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+
+}
+
 
 student.prototype.modifyStudent = function(value, where){
-  debugger;
   if(where == "type")
   {
-    this.type == value;
+    this.type = value;
   }
   else if(where == "grade")
   {
