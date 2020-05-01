@@ -1,0 +1,15 @@
+﻿Product Backlog:
+* Game center that can play multiple games(Highest Priority, estimated time of completion: 20 days )
+   * The games that have been chosen are as follows:
+      * Battleship
+      * Chess
+      * Checkers
+      * Blackjack
+      * Connect 4
+      * Tower Defense
+* The user should be able to switch between games when they get tired of one(Lowest Priority, estimated time of completion: 3 days)
+
+
+Sprint Backlog:
+* Have all games functional 
+* Visuals are not a priority

@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
     playGame();
 });
 
+/*
+@pre: createBoard() as not been previously called
+@post: an 8x8 board is generated with an alternating color scheme 
+*/
 function createBoard() {
     let theBoard = document.getElementById("mainBoard");
     for (let i = 8; i >= 1; i--) {
@@ -24,6 +28,10 @@ function createBoard() {
     }
 }
 
+/*
+@pre: createBoard() has been previously called
+@post: the previously created board has chess pieces added to it in their starting locations
+*/
 function setupBoard() {
     let pieceList = ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"];
     for (let i = 97; i <= 104; i++) { // 97 = 'a', 104 = 'h'
@@ -55,6 +63,11 @@ function setupBoard() {
     }
 }
 
+/*
+@param: possibleMoves -> an array of board positions which the calling piece can move to
+@pre: possibleMoves has been generated using getPossibleMoves()
+@post: the boardSquares the piece can move to are highlighted in green for 1.5 seconds
+*/
 function showMoves(possibleMoves) {
     possibleMoves.forEach((move) => {
         document.getElementById(move).classList.add("move");
@@ -63,9 +76,14 @@ function showMoves(possibleMoves) {
         possibleMoves.forEach((move) => {
             document.getElementById(move).classList.remove("move");
         })
-    }, 2000);
+    }, 1500);
 }
 
+/*
+@pre: none -> called as an event listener placed upon each piece in playGame()
+@post: the clicked piece is moved to the selected position or an error message is displayed if invalid
+@brief: handles "pausing" and "activating" event listeners to make sure the right event is being listened for
+*/
 function makeMove() {
     let currentLocation = document.getElementById(this.parentNode.id);
     let pieceColor = this.id.charAt(this.id.length - 1);
@@ -97,7 +115,7 @@ function makeMove() {
             // check whether theSelectionID is a valid move 
             if (possibleMoves.includes(theSelectionID)) {
                 movePiece(currentLocation.id, theSelectionID);
-                updateCurrentPlayer(pieceColor);
+                updateCurrentPlayer();
                 if (isCheck(theSelectionID)) {
                     isGameOver = isCheckmate();
                 }
@@ -127,6 +145,13 @@ function makeMove() {
     }
 }
 
+/*
+@param: currentLocation -> the current boardSquare the selected piece is at
+        newLocation -> the location of the boardSqaure to move the selected piece to
+@pre: newLocation has been validated as an acceptable location to move the selected piece
+@post: the piece located at currentLocation is moved to newLocation
+        ***Special Case: castling will move a king to a square that is not newLocation***
+*/
 function movePiece(currentLocation, newLocation) {
     let newBoardSquare = document.getElementById(newLocation);
     let currentBoardSquare = document.getElementById(currentLocation);
@@ -163,11 +188,20 @@ function movePiece(currentLocation, newLocation) {
     }
 }
 
-function updateCurrentPlayer(currentPlayerColor) {
+/*
+@post: the currentPlayer tracker is updated to reflect a move being made
+*/
+function updateCurrentPlayer() {
     document.getElementById("W").classList.toggle("currentPlayer");
     document.getElementById("B").classList.toggle("currentPlayer");
 }
 
+/*
+@param: newStatusMessage -> the message to be displayed to the users
+        isPermanent -> a bool which specifies whether newStatusMessage is to remain permanently
+@post: newStatusMessage is displayed to the user within the playerStatus element and reset after 2 seconds,
+        if isPermanent is true, the message is never reset
+*/
 function updateStatus(newStatusMessage, isPermanent) {
     let theStatus = document.getElementById("playerStatus").firstElementChild;
     theStatus.innerText = newStatusMessage;
@@ -178,6 +212,10 @@ function updateStatus(newStatusMessage, isPermanent) {
     }
 }
 
+/*
+@pre: createBoard() and setupBoard() have been previously called
+@post: makeMove() is assigned as an event listener callback for each piece on the board
+*/
 function playGame() {
     let thePieces = document.getElementsByClassName("boardPiece");
     for (let i = 0; i < thePieces.length; i++) {
@@ -185,8 +223,16 @@ function playGame() {
     } 
 }
 
+/*
+@param: newestMovedPieceLocation -> the boardSquare location of the most recently moved piece
+@pre: newestMovedPieceLocation contains a piece and hasChildElements() [is not null]
+@post: if the most recently moved piece has put the opposing king into check, returns true,
+        returns false otherwise
+*/
 function isCheck(newestMovedPieceLocation) {
     let possibleCheckingPiece = document.getElementById(newestMovedPieceLocation);
+    /* this null check is to account for a castling move since the newLocation from movePiece() will
+       not actually contain a piece */
     if (possibleCheckingPiece.firstElementChild != null) {
         let theKing = document.getElementById("kingW");
         // if the current piece is a white, find the black king
@@ -204,6 +250,11 @@ function isCheck(newestMovedPieceLocation) {
     return false;
 }
 
+/*
+@pre: should only be called after isCheck() returns true
+@post: if the checking piece has also put the opposing king into checkmate, returns true,
+        returns false otherwise. [playerStatus message is updated to display check or checkmate]
+*/
 function isCheckmate() {
     let theKing = document.getElementById("kingW");
     let allFriendlyPieces = document.getElementsByClassName("whitePiece");

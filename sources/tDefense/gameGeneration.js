@@ -10,8 +10,7 @@ document.addEventListener("DOMContentLoaded",() => {
     document.getElementById("mainGame").style.visibility = "visible";
 
     let aStudent = new student("A Student", 90, 90, 90, 90, 90, 90);
-    //gameStart(aStudent);
-    callGameStart(aStudent);
+    gameStart(aStudent);
 
 
   });
@@ -23,8 +22,7 @@ document.addEventListener("DOMContentLoaded",() => {
     document.getElementById("mainGame").style.visibility = "visible";
 
     let cStudent = new student("C Student", 80, 80, 60, 70, 60, 60);
-    //gameStart(cStudent);
-    callGameStart(cStudent);
+    gameStart(cStudent);
 
 
 
@@ -37,8 +35,7 @@ document.addEventListener("DOMContentLoaded",() => {
     document.getElementById("mainGame").style.visibility = "visible";
 
     let partyAnimal = new student("Party Animal", 50, 40, 40, 100, 30, 50);
-    //gameStart(partyAnimal);
-    callGameStart(partyAnimal);
+    gameStart(partyAnimal);
 
 
   });
@@ -50,15 +47,10 @@ document.addEventListener("DOMContentLoaded",() => {
     document.getElementById("mainGame").style.visibility = "visible";
 
     let engineeringStudent = new student("Engineering Student", 0, 0, 0, 0, 0, 0);
-    //gameStart(engineeringStudent);
-    callGameStart(engineeringStudent);
+    gameStart(engineeringStudent);
 
 
   });
 
 
 });
-
-function callGameStart(student){
-  gameStart(student);
-}

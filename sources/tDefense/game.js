@@ -46,7 +46,7 @@ function gameStart(student){
   {
     for(let j = 0; j<5; j++)
     {
-      //wait(1000);
+      wait(1000);
       frameEvent(studentModifications, student);
     }
     if(getRandomInt(100)==42)
@@ -57,6 +57,7 @@ function gameStart(student){
     {
       break;
     }
+    console.log(i)
 
   }
 
