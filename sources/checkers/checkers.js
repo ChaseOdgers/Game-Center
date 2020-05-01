@@ -22,6 +22,9 @@ function setup() {
 }
 
 //CLASSES
+//The tile class gives every square printed when board is created its own properties, a number to reference, and x and y coordinate,
+//a color and whether or not the tile is occupied, using getters and setters I can determine all information both about a tiles location
+//and the location of pieces in respect to said tile, as well as tiles that are available for moves and jumps
 class Tile{
   constructor(number, x, y, color,occupied){
     this.color = color;
@@ -156,6 +159,10 @@ class Tile{
     this.jumphighlightbackleft =0;
   }
 }
+
+//the piece class handles all information about the circles printed on the screen, these "pieces" are represented at an x,y location, if 
+//they are a king they will display a gold circle in their center, and they also contain their own tilenumber, which allows us to know where,
+//the piece is on the board without need for referencing x,y coordinates
 class Piece{
   constructor(number,x,y,color,king,tilenumber){
     this.x = x;
@@ -235,6 +242,9 @@ class Piece{
 }
 
 //PIECE FUNCTIONS
+//The build piece function is a way to hardset the location and color values at the beginning of the program, this could be done
+//using loops however during the process of coding it was benificial to be able to start a piece in a location to test specific functionality,
+//i.e. when testing the king function I could just 
 function buildPieces(){
      pieces[0] = new Piece(0, 25,25,'blue',0,0);
      pieces[1] = new Piece(1,125,25,'blue',0,2);

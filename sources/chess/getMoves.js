@@ -1,3 +1,8 @@
+/*
+@param: aBoardPiece -> the piece to determine the possible moves for
+@pre: none -> called as a helper function within makeMove() which is event handled
+@post: an array, possibleMoves, is returned containing the board sqaure locations that aBoardPiece can move to
+*/
 function getPossibleMoves(aBoardPiece) {
     let currentLocation = aBoardPiece.parentNode.id;
     let currentColumn = currentLocation.charCodeAt(0);
