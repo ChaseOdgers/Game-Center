@@ -1,4 +1,4 @@
-﻿Product Backlog:
+Product Backlog:
 * Game center that can play multiple games(Highest Priority, estimated time of completion: 20 days )
    * The games that have been chosen are as follows:
       * Battleship
@@ -13,3 +13,143 @@
 Sprint Backlog:
 * Have all games functional 
 * Visuals are not a priority
+
+
+Meeting Notes
+4/2/20
+Game Center:
+
+Games:
+Checkers(Chase)
+Chess(Christian
+Black jack(Adam)
+Connect 4
+Tower Defense(Kerr)
+Battleship(Brian)
+
+Menu
+Options for the game
+4/3/20
+Agenda
+Finish planning by tomorrow night
+Trello will be made assigning tasks by tomorrow
+Tasks will be split up by the containers
+Plan to meet every other day starting Monday next week just to check up
+Aim to have project done by next Sunday, just to give us more time
+Notes
+Meeting times:
+Tomorrow at 9pm 
+11 am on Monday, Wednesday, Friday, and Sunday
+
+
+4/4/20
+Agenda
+Check if the current due date is ok with everyone
+Any questions about the Trello board
+Check if everyone can contribute to the github repo
+
+4/6/20
+Agenda
+Discussion about moved due date
+Stick with the set deadline
+Use the extra days to add extra features or make it pretty
+Github repo
+Wednesday, if Chase doesn’t respond we have to create a new one since we have to be collaborators
+Check up on everyone’s progress
+4/8/20
+Agenda
+Github
+Check ups
+4/10/20
+Agenda
+Just check up
+Sunday at 11 am for next meeting
+
+4/12/20
+Agenda
+Battleship
+Ongoing:
+Ship placement
+BlackJack
+Ongoing:
+The game visuals
+Aces
+Decide whose connect 4 to add
+Meeting tomorrow?
+Same time
+No later than Wednesday, we need to start working on the main menu
+4/13/20
+Updates
+Chess
+Moves for piece
+Merge all branches on Wednesday to work on main menu
+Since each game is pretty much independent from each other, there shouldn't really be merge conflicts
+
+4/15/20
+Updates
+Tower Defense
+Ongoing:
+Turns
+Frame Rate for frame control
+setTimeout() also
+Chess
+Ongoing:
+Implementing showMoves
+Checkers
+Ongoing:
+Move function
+Battleship
+DONE!(amazing)
+Meeting on Friday
+Crunch time on Sunday
+Will be on discord for most of the day if anyone wanna work together
+
+4/17/20
+Updates
+Landing page has been page
+Chess
+Ongoing: Checkmate is ongoing
+Tower Defense
+Ongoing: Game initialization
+Checkers
+Ongoing: Bases and buttons
+
+
+
+
+4/26/20
+Updates
+Chess
+Debugging checkmate
+
+
+Upcoming to-do:
+Video presentation(demo)
+Testings
+Working demo by Friday
+
+5/1/20
+Agenda
+Project 2
+Documentation 
+I will pull all the documentation from the source files at 3 then compile them to an html
+
+
+Scrum artifacts
+Project 3
+Stress testing
+All stress testing done by Monday night
+Video presentation
+Structure
+4 minute of introduction and how work was split
+Explain the product
+Show gantt chart for our timeline
+Say how work was divided up
+6 minute of demo
+Everybody do a video demo of the game they made
+One minute max
+User manual
+Screenshot tutorial on how to use our products
+Everybody can just screenshot their game and then below it have the game rules listed
+Someone needs to compile it all together
+Chase will compile them all together

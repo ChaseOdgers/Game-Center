@@ -3,6 +3,11 @@ This is sequentially what happens after the gameGeneration.js
 In this file, the frame by frame is controlled and student object is kept track of.*/
 
 function gameStart(student){
+  document.getElementById("startingMenu").remove();
+  document.getElementById("mainHeading").innerHTML = "The Good Student";
+  document.getElementById("mainGame").style.visibility = "visible";
+
+
 
   let studentModifications = [];
 
@@ -42,25 +47,32 @@ function gameStart(student){
 /*----------------------------------------------------------------------------*/
 
 
-  for(let i = 0; i<75; i++)
-  {
-    for(let j = 0; j<5; j++)
-    {
-      //wait(1000);
-      frameEvent(studentModifications, student);
-    }
-    if(getRandomInt(100)==42)
-    {
-      studentModifications.push(new lifeEvent(student));
-    }
-    if(student.GameOver())
-    {
-      break;
-    }
 
-  }
+    for(let i = 0; i<75; i++)
+    {
+        for(let j = 0; j<5; j++)
+        {
+            setInterval(()=>{
+              frameEvent(studentModifications, student);
+            },1000);
 
-  announceGrade(student);
+        }
+        if(getRandomInt(100)==42)
+        {
+          studentModifications.push(new lifeEvent(student));
+        }
+        if(student.GameOver())
+        {
+          break;
+        }
+        console.log(i);
+
+    }
+    setTimeout(()=>{
+        announceGrade(student);
+    }, 375000);
+
+
 
 
 
@@ -97,67 +109,72 @@ Param: Student object
 function frameEvent(studentModifications, student){
 
 
-  for(let i = 0; i<studentModifications.length; i++)
-  {
-    if(studentModifications[i] == "commitment")
+
+    for(let i = 0; i<studentModifications.length; i++)
     {
-      if(studentModifications[i].length == 0)
-      {
-        studentModifications.splice(i,1);
-      }
-      else
-      {
-        studentModifications[i].fulfill();
-      }
+        if(studentModifications[i] == "commitment")
+        {
+          if(studentModifications[i].length == 0)
+          {
+            studentModifications.splice(i,1);
+          }
+          else
+          {
+            studentModifications[i].fulfill();
+          }
+        }
+        else if(studentModifications[i].modType == "adversaries")
+        {
+          if(studentModifications[i].location == 1)
+          {
+            document.getElementById(studentModifications[i].type + studentModifications[i].location).innerHTML = "";
+            studentModifications[i].modifyStudent();
+            studentModifications.splice(i,1);
+          }
+          else if(studentModifications[i].deterioration <= 0)
+          {
+            document.getElementById(studentModifications[i].type + studentModifications[i].location).innerHTML = "";
+            studentModifications.splice(i, 1);
+          }
+          else
+          {
+            studentModifications[i].moveNextBlock();
+            updateAdvesaryPosition(studentModifications[i]);
+          }
+        }
+        else if(studentModifications[i].modType == "lifeEvent")
+        {
+          if(studentModifications[i].length == 0)
+          {
+            studentModifications.splice(i,1);
+
+            student.modifyStudent(10, "willpower");
+          }
+          else
+          {
+            studentModifications[i].modifyStudent();
+          }
+        }
     }
-    else if(studentModifications[i].modType == "adversaries")
-    {
-      if(studentModifications[i].location == 1)
-      {
-        studentModifications[i].modifyStudent();
-        studentModifications.splice(i,1);
 
-      }
-      else if(studentModifications[i].deterioration <= 0)
-      {
-        studentModifications.splice(i, 1);
-      }
-      else
-      {
-        studentModifications[i].moveNextBlock();
-        //updateAdvesaryPosition([i]);
-      }
-    }
-    else if(studentModifications[i].modType == "lifeEvent")
-    {
-      if(studentModifications[i].length == 0)
-      {
-        studentModifications.splice(i,1);
-
-        student.modifyStudent(10, "willpower");
-      }
-      else
-      {
-        studentModifications[i].modifyStudent();
-      }
-    }
-  }
-
-
-  if(student.type == "Engineering Student")
-  {
-    studentModifications.push(new adversaries(student));
-  }
-  else
-  {
-    if(getRandomInt(4)==1)
+/*
+*Pre: None
+*Post: This will add new adversaries to the array
+*
+*/
+    if(student.type == "Engineering Student")
     {
       studentModifications.push(new adversaries(student));
     }
-  }
+    else
+    {
+      if(getRandomInt(4)==1)
+      {
+        studentModifications.push(new adversaries(student));
+      }
+    }
 
-  updateGameDisplay(studentModifications, student);
-
+    updateGameDisplay(studentModifications, student);
 
 }
 

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>studentActions.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="adversaries.html">
+                  adversaries.js
+                </a>
+              
+                
+                <a class="source" href="displayManipulation.html">
+                  displayManipulation.js
+                </a>
+              
+                
+                <a class="source" href="game.html">
+                  game.js
+                </a>
+              
+                
+                <a class="source" href="gameGeneration.html">
+                  gameGeneration.js
+                </a>
+              
+                
+                <a class="source" href="lifeEvents.html">
+                  lifeEvents.js
+                </a>
+              
+                
+                <a class="source" href="studentActions.html">
+                  studentActions.js
+                </a>
+              
+                
+                <a class="source" href="studentCommitments.html">
+                  studentCommitments.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>studentActions.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/*The student is the core of keeping track of data. All the functions are centered
+on the student object. Which basically boils down to that all function must have
+a function that only takes in the student as a parameter and modify it using
+student.prototype.modifyStudent */</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">student</span>(<span class="hljs-params">type, currentGrade, MH, PH, sleep, social, study</span>)</span>{
+  <span class="hljs-keyword">this</span>.type = type;
+  <span class="hljs-keyword">this</span>.grade = currentGrade;
+  <span class="hljs-keyword">this</span>.mentalHealth = MH;
+  <span class="hljs-keyword">this</span>.physicalHealth = PH;
+  <span class="hljs-keyword">this</span>.sleep = sleep;
+  <span class="hljs-keyword">this</span>.social = social;
+  <span class="hljs-keyword">this</span>.study = study;
+  <span class="hljs-keyword">this</span>.willpower = <span class="hljs-number">100</span>;
+}
+
+student.prototype.GameOver = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.grade &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">this</span>.mentalHealth &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">this</span>.physicalHealth &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">this</span>.sleep &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">this</span>.social &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">this</span>.study &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">this</span>.willpower &lt; <span class="hljs-number">0</span>)
+  {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  }
+  <span class="hljs-keyword">else</span>
+  {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+}
+
+
+student.prototype.modifyStudent = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value, where</span>)</span>{
+  <span class="hljs-keyword">if</span>(where == <span class="hljs-string">"type"</span>)
+  {
+    <span class="hljs-keyword">this</span>.type = value;
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(where == <span class="hljs-string">"grade"</span>)
+  {
+    <span class="hljs-keyword">this</span>.grade += value;
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(where == <span class="hljs-string">"MH"</span>)
+  {
+    <span class="hljs-keyword">this</span>.mentalHealth += value;
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(where == <span class="hljs-string">"PH"</span>)
+  {
+    <span class="hljs-keyword">this</span>.physicalHealth += value;
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(where == <span class="hljs-string">"sleep"</span>)
+  {
+    <span class="hljs-keyword">this</span>.sleep += value;
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(where == <span class="hljs-string">"social"</span>)
+  {
+    <span class="hljs-keyword">this</span>.social += value;
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(where == <span class="hljs-string">"study"</span>)
+  {
+    <span class="hljs-keyword">this</span>.study += value;
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(where == <span class="hljs-string">"willpower"</span>)
+  {
+    <span class="hljs-keyword">this</span>.willpower += value;
+  }
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

@@ -46,17 +46,21 @@ function commitment(scope, type, student){
   if(scope == "small")
   {
     this.length = 5;
+    this.name = generateCommitmentName("small");
   }
   else if(scope == "medium")
   {
     this.length = 30;
+    this.name = generateCommitmentName("medium");
   }
   else if(scope == "big")
   {
     this.length = 150;
+    this.name = generateCommitmentName("big");
   }
 }
 
+//This function will modify the student
 commitment.prototype.fulfill = function(){
   if(this.scope == "small")
   {

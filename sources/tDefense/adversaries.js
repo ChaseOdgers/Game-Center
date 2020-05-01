@@ -25,9 +25,12 @@ function adversaries(student){
   {
     this.name = getRandomStudyAdversary();
   }
-  this.location = 4;//The location will start at the end of the row
+  this.location = 5;//The location will start at the end of the row
 }
-
+/*
+* Pre: The location is at 1
+* Post: Based on how much deterioration is left, it will subtract from the student
+*/
 adversaries.prototype.modifyStudent = function(){
   this.student.modifyStudent(-this.deterioration, this.type);
 }

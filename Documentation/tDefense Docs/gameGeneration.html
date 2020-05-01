@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>gameGeneration.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="adversaries.html">
+                  adversaries.js
+                </a>
+              
+                
+                <a class="source" href="displayManipulation.html">
+                  displayManipulation.js
+                </a>
+              
+                
+                <a class="source" href="game.html">
+                  game.js
+                </a>
+              
+                
+                <a class="source" href="gameGeneration.html">
+                  gameGeneration.js
+                </a>
+              
+                
+                <a class="source" href="lifeEvents.html">
+                  lifeEvents.js
+                </a>
+              
+                
+                <a class="source" href="studentActions.html">
+                  studentActions.js
+                </a>
+              
+                
+                <a class="source" href="studentCommitments.html">
+                  studentCommitments.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>gameGeneration.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>The game is generated here as soon as the player chooses which type of student they are</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">"DOMContentLoaded"</span>,() =&gt; {
+
+<span class="hljs-comment">/*Pre: Will listen for a button press for which student they want
+*Post: Will pass newly created student object to game start
+*/</span>
+
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"aStudent"</span>).addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+
+
+    <span class="hljs-keyword">let</span> aStudent = <span class="hljs-keyword">new</span> student(<span class="hljs-string">"A Student"</span>, <span class="hljs-number">90</span>, <span class="hljs-number">90</span>, <span class="hljs-number">90</span>, <span class="hljs-number">90</span>, <span class="hljs-number">90</span>, <span class="hljs-number">90</span>);
+    gameStart(aStudent);
+
+
+  });
+
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"cStudent"</span>).addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+
+
+
+    <span class="hljs-keyword">let</span> cStudent = <span class="hljs-keyword">new</span> student(<span class="hljs-string">"C Student"</span>, <span class="hljs-number">80</span>, <span class="hljs-number">80</span>, <span class="hljs-number">60</span>, <span class="hljs-number">70</span>, <span class="hljs-number">60</span>, <span class="hljs-number">60</span>);
+    gameStart(cStudent);
+
+
+
+  });
+
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"partyAnimal"</span>).addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+
+
+    <span class="hljs-keyword">let</span> partyAnimal = <span class="hljs-keyword">new</span> student(<span class="hljs-string">"Party Animal"</span>, <span class="hljs-number">50</span>, <span class="hljs-number">40</span>, <span class="hljs-number">40</span>, <span class="hljs-number">100</span>, <span class="hljs-number">30</span>, <span class="hljs-number">50</span>);
+    gameStart(partyAnimal);
+
+
+  });
+
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"engineeringStudent"</span>).addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+
+
+    <span class="hljs-keyword">let</span> engineeringStudent = <span class="hljs-keyword">new</span> student(<span class="hljs-string">"Engineering Student"</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+    gameStart(engineeringStudent);
+
+
+  });
+
+
+});</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

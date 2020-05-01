@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>adversaries.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="adversaries.html">
+                  adversaries.js
+                </a>
+              
+                
+                <a class="source" href="displayManipulation.html">
+                  displayManipulation.js
+                </a>
+              
+                
+                <a class="source" href="game.html">
+                  game.js
+                </a>
+              
+                
+                <a class="source" href="gameGeneration.html">
+                  gameGeneration.js
+                </a>
+              
+                
+                <a class="source" href="lifeEvents.html">
+                  lifeEvents.js
+                </a>
+              
+                
+                <a class="source" href="studentActions.html">
+                  studentActions.js
+                </a>
+              
+                
+                <a class="source" href="studentCommitments.html">
+                  studentCommitments.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>adversaries.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>This file deals with all the adveries which will act as mobs in the tower defense</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">adversaries</span>(<span class="hljs-params">student</span>)</span>{
+  <span class="hljs-keyword">this</span>.modType = <span class="hljs-string">"adversaries"</span>
+  <span class="hljs-keyword">this</span>.student = student;
+  <span class="hljs-keyword">this</span>.deterioration = getRandomInt2(<span class="hljs-number">5</span>, <span class="hljs-number">15</span>);
+  <span class="hljs-keyword">this</span>.type = getRandomAdversaryType();
+  <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"MH"</span>)
+  {
+    <span class="hljs-keyword">this</span>.name = getRandomMHAdversary();
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"PH"</span>)
+  {
+    <span class="hljs-keyword">this</span>.name = getRandomPHAdversary();
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"sleep"</span>)
+  {
+    <span class="hljs-keyword">this</span>.name = getRandomSleepAdversary();
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"social"</span>)
+  {
+    <span class="hljs-keyword">this</span>.name = getRandomSocialAdversary();
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"study"</span>)
+  {
+    <span class="hljs-keyword">this</span>.name = getRandomStudyAdversary();
+  }
+  <span class="hljs-keyword">this</span>.location = <span class="hljs-number">5</span>;<span class="hljs-comment">//The location will start at the end of the row</span>
+}
+<span class="hljs-comment">/*
+* Pre: The location is at 1
+* Post: Based on how much deterioration is left, it will subtract from the student
+*/</span>
+adversaries.prototype.modifyStudent = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">this</span>.student.modifyStudent(-<span class="hljs-keyword">this</span>.deterioration, <span class="hljs-keyword">this</span>.type);
+}
+
+adversaries.prototype.moveNextBlock = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.location &gt;= <span class="hljs-number">0</span>)
+  {
+    <span class="hljs-keyword">this</span>.location -= <span class="hljs-number">1</span>;
+  }
+
+  <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.deterioration&gt;<span class="hljs-number">0</span>)
+  {
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"MH"</span>)
+    {
+      <span class="hljs-keyword">this</span>.deterioration -= ((<span class="hljs-keyword">this</span>.student.mentalHealth)/<span class="hljs-number">10</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"PH"</span>)
+    {
+      <span class="hljs-keyword">this</span>.deterioration -= ((<span class="hljs-keyword">this</span>.student.physicalHealth)/<span class="hljs-number">10</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"sleep"</span>)
+    {
+      <span class="hljs-keyword">this</span>.deterioration -= ((<span class="hljs-keyword">this</span>.student.sleep)/<span class="hljs-number">10</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"social"</span>)
+    {
+      <span class="hljs-keyword">this</span>.deterioration -= ((<span class="hljs-keyword">this</span>.student.social)/<span class="hljs-number">10</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"study"</span>)
+    {
+      <span class="hljs-keyword">this</span>.deterioration -= ((<span class="hljs-keyword">this</span>.student.study)/<span class="hljs-number">10</span>);
+    }
+  }
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRandomMHAdversary</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">let</span> arr = [
+    <span class="hljs-string">"Burn out"</span>,
+    <span class="hljs-string">"Insecurity"</span>,
+    <span class="hljs-string">"Loneliness"</span>,
+    <span class="hljs-string">"Imposter syndrome"</span>,
+    <span class="hljs-string">"Laziness"</span>,
+    <span class="hljs-string">"Stress"</span>
+  ];
+  <span class="hljs-keyword">let</span> i = getRandomInt(arr.length);
+  <span class="hljs-keyword">return</span> arr[i];
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRandomPHAdversary</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">let</span> arr = [
+    <span class="hljs-string">"Sore Muscle"</span>,
+    <span class="hljs-string">"Food poisining"</span>,
+    <span class="hljs-string">"Hangover"</span>,
+    <span class="hljs-string">"Flu"</span>,
+    <span class="hljs-string">"Common cold"</span>
+  ];
+  <span class="hljs-keyword">let</span> i = getRandomInt(arr.length);
+  <span class="hljs-keyword">return</span> arr[i];
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRandomSleepAdversary</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">let</span> arr = [
+    <span class="hljs-string">"Phone distraction"</span>,
+    <span class="hljs-string">"Roommate threw a party"</span>,
+    <span class="hljs-string">"Stress"</span>,
+    <span class="hljs-string">"1 am already?!"</span>,
+    <span class="hljs-string">"Insomnia"</span>,
+    <span class="hljs-string">"Caffeine"</span>,
+    <span class="hljs-string">"All nighter"</span>
+  ];
+  <span class="hljs-keyword">let</span> i = getRandomInt(arr.length);
+  <span class="hljs-keyword">return</span> arr[i];
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRandomSocialAdversary</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">let</span> arr = [
+    <span class="hljs-string">"Social anxiety"</span>,
+    <span class="hljs-string">"Rejected by your crush"</span>,
+    <span class="hljs-string">"Rejected by your friends"</span>,
+    <span class="hljs-string">"Teacher is mean"</span>,
+    <span class="hljs-string">"Insecurity"</span>,
+    <span class="hljs-string">"No friends"</span>
+  ];
+  <span class="hljs-keyword">let</span> i = getRandomInt(arr.length);
+  <span class="hljs-keyword">return</span> arr[i];
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRandomStudyAdversary</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">let</span> arr = [
+    <span class="hljs-string">"Phone distraction"</span>,
+    <span class="hljs-string">"Catching up"</span>,
+    <span class="hljs-string">"Difficult subject"</span>,
+    <span class="hljs-string">"Distracting classmates"</span>,
+    <span class="hljs-string">"Laziness"</span>
+  ];
+  <span class="hljs-keyword">let</span> i = getRandomInt(arr.length);
+  <span class="hljs-keyword">return</span> arr[i];
+}
+
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRandomAdversaryType</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">let</span> arr = [<span class="hljs-string">"MH"</span>, <span class="hljs-string">"PH"</span>, <span class="hljs-string">"sleep"</span>, <span class="hljs-string">"social"</span>, <span class="hljs-string">"study"</span>];
+  <span class="hljs-keyword">let</span> i = getRandomInt(<span class="hljs-number">4</span>);
+  <span class="hljs-keyword">return</span> arr[i];
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

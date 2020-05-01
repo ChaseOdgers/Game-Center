@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>studentCommitments.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="adversaries.html">
+                  adversaries.js
+                </a>
+              
+                
+                <a class="source" href="displayManipulation.html">
+                  displayManipulation.js
+                </a>
+              
+                
+                <a class="source" href="game.html">
+                  game.js
+                </a>
+              
+                
+                <a class="source" href="gameGeneration.html">
+                  gameGeneration.js
+                </a>
+              
+                
+                <a class="source" href="lifeEvents.html">
+                  lifeEvents.js
+                </a>
+              
+                
+                <a class="source" href="studentActions.html">
+                  studentActions.js
+                </a>
+              
+                
+                <a class="source" href="studentCommitments.html">
+                  studentCommitments.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>studentCommitments.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateCommitmentName</span>(<span class="hljs-params">size</span>)
+</span>{
+  <span class="hljs-keyword">if</span>(size == <span class="hljs-string">"small"</span>)
+  {
+    <span class="hljs-keyword">let</span> listOfSmallCommitments = [
+      <span class="hljs-string">"Going to bed early"</span>,
+      <span class="hljs-string">"Moving study area"</span>,
+      <span class="hljs-string">"Turning your phone to do not disturb"</span>,
+      <span class="hljs-string">"Finding a study group"</span>,
+      <span class="hljs-string">"Meditate"</span>
+    ]
+    <span class="hljs-keyword">let</span> i = getRandomInt(listOfSmallCommitments.length);
+    <span class="hljs-keyword">return</span> listOfSmallCommitments[i];
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(size == <span class="hljs-string">"medium"</span>)
+  {
+    <span class="hljs-keyword">let</span> listOfMediumCommitments = [
+      <span class="hljs-string">"Working out"</span>,
+      <span class="hljs-string">"Cutting less on caffeine"</span>,
+      <span class="hljs-string">"Working together with a buddy"</span>,
+      <span class="hljs-string">"Ask professor for help"</span>
+    ]
+    <span class="hljs-keyword">let</span> i = getRandomInt(listOfMediumCommitments.length);
+    <span class="hljs-keyword">return</span> listOfMediumCommitments[i];
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(size == <span class="hljs-string">"big"</span>)
+  {
+    <span class="hljs-keyword">let</span> listofBigCommitments = [
+      <span class="hljs-string">"Work out everyday"</span>,
+      <span class="hljs-string">"Meditate everyday"</span>,
+    ]
+    <span class="hljs-keyword">let</span> i = getRandomInt(listOfSmallCommitments.length);
+    <span class="hljs-keyword">return</span> listOfMediumCommitments[i];
+
+  }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">commitment</span>(<span class="hljs-params">scope, type, student</span>)</span>{
+  <span class="hljs-keyword">this</span>.modType = <span class="hljs-string">"commitment"</span>
+  <span class="hljs-keyword">this</span>.student = student;
+  <span class="hljs-keyword">this</span>.scope = scope;
+  <span class="hljs-keyword">this</span>.type = type;
+
+  <span class="hljs-keyword">if</span>(scope == <span class="hljs-string">"small"</span>)
+  {
+    <span class="hljs-keyword">this</span>.length = <span class="hljs-number">5</span>;
+    <span class="hljs-keyword">this</span>.name = generateCommitmentName(<span class="hljs-string">"small"</span>);
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(scope == <span class="hljs-string">"medium"</span>)
+  {
+    <span class="hljs-keyword">this</span>.length = <span class="hljs-number">30</span>;
+    <span class="hljs-keyword">this</span>.name = generateCommitmentName(<span class="hljs-string">"medium"</span>);
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(scope == <span class="hljs-string">"big"</span>)
+  {
+    <span class="hljs-keyword">this</span>.length = <span class="hljs-number">150</span>;
+    <span class="hljs-keyword">this</span>.name = generateCommitmentName(<span class="hljs-string">"big"</span>);
+  }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>This function will modify the student</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>commitment.prototype.fulfill = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.scope == <span class="hljs-string">"small"</span>)
+  {
+    <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">-1</span>, <span class="hljs-string">"willpower"</span>);
+
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"MH"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">1</span>, <span class="hljs-string">"MH"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"PH"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">1</span>, <span class="hljs-string">"PH"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"sleep"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">1</span>, <span class="hljs-string">"sleep"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"social"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">1</span>, <span class="hljs-string">"social"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"study"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">1</span>, <span class="hljs-string">"study"</span>);
+    }
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.scope == <span class="hljs-string">"medium"</span>)
+  {
+    <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">-0.5</span>, <span class="hljs-string">"willpower"</span>);
+
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"MH"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">0.5</span>, <span class="hljs-string">"MH"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"PH"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">0.5</span>, <span class="hljs-string">"PH"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"sleep"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">0.5</span>, <span class="hljs-string">"sleep"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"social"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">0.5</span>, <span class="hljs-string">"social"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"study"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">0.5</span>, <span class="hljs-string">"study"</span>);
+    }
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.scope == <span class="hljs-string">"big"</span>)
+  {
+    <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">-0.1</span>, <span class="hljs-string">"willpower"</span>);
+
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"MH"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">0.1</span>, <span class="hljs-string">"MH"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"PH"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">0.1</span>, <span class="hljs-string">"PH"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"sleep"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">0.1</span>, <span class="hljs-string">"sleep"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"social"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">0.1</span>, <span class="hljs-string">"social"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"study"</span>)
+    {
+      <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">0.1</span>, <span class="hljs-string">"study"</span>);
+    }
+  }
+
+
+  <span class="hljs-keyword">this</span>.length -= <span class="hljs-number">1</span>;
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

@@ -27,37 +27,22 @@
 
 
 
-    document.getElementById("event-list").innerHTML = eventList;
-    document.getElementById("stats").innerHTML = studentStat;
+      document.getElementById("event-list").innerHTML = eventList;
+      document.getElementById("stats").innerHTML = studentStat;
 
 
 
-    updateStudentStats(student);
+
+
+
   }
 
-    function updateAdvesaryPosition(adversaries)
+  function updateAdvesaryPosition(adversaries)
+  {
+    if(adversaries.length < 5)
     {
-      if(adveries.length < 5)
-      {
-        console.log(adversaries.type + (adversaries.location+1));
-        document.getElementById(adversaries.type + (adversaries.location+1)).innerHTML = "";
-      }
-
-        document.getElementById(adversaries.type + adversaries.location).innerHTML = this.name;
-
+      document.getElementById(adversaries.type + (adversaries.location+1)).innerHTML = "";
     }
 
-
-    function updateStudentStats(student)
-    {
-
-    }
-
-
-    function removeFromEventTab(Event){
-
-    }
-
-    function addToEventTab(Event){
-
-    }
+      document.getElementById(adversaries.type + adversaries.location).innerHTML = adversaries.name;
+  }

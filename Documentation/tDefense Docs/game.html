@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>game.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="adversaries.html">
+                  adversaries.js
+                </a>
+              
+                
+                <a class="source" href="displayManipulation.html">
+                  displayManipulation.js
+                </a>
+              
+                
+                <a class="source" href="game.html">
+                  game.js
+                </a>
+              
+                
+                <a class="source" href="gameGeneration.html">
+                  gameGeneration.js
+                </a>
+              
+                
+                <a class="source" href="lifeEvents.html">
+                  lifeEvents.js
+                </a>
+              
+                
+                <a class="source" href="studentActions.html">
+                  studentActions.js
+                </a>
+              
+                
+                <a class="source" href="studentCommitments.html">
+                  studentCommitments.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>game.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/*This is where the center of the game where all the game actions happen.
+This is sequentially what happens after the gameGeneration.js
+In this file, the frame by frame is controlled and student object is kept track of.*/</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">gameStart</span>(<span class="hljs-params">student</span>)</span>{
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"startingMenu"</span>).remove();
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"mainHeading"</span>).innerHTML = <span class="hljs-string">"The Good Student"</span>;
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"mainGame"</span>).style.visibility = <span class="hljs-string">"visible"</span>;
+
+
+
+  <span class="hljs-keyword">let</span> studentModifications = [];
+
+<span class="hljs-comment">/*---------------------Player Controlled Button Listeners--------------------*/</span>
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"smallCommitMH"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"small"</span>, <span class="hljs-string">"MH"</span>, student))});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"smallCommitPH"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"small"</span>, <span class="hljs-string">"PH"</span>, student))});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"smallCommitSleep"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"small"</span>, <span class="hljs-string">"sleep"</span>, student))});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"smallCommitSocial"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"small"</span>, <span class="hljs-string">"social"</span>, student))});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"smallCommitStudy"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"small"</span>, <span class="hljs-string">"study"</span>, student))});
+
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"mediumCommitMH"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"medium"</span>, <span class="hljs-string">"MH"</span>, student));});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"mediumCommitPH"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"medium"</span>, <span class="hljs-string">"PH"</span>, student));});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"mediumCommitSleep"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"medium"</span>, <span class="hljs-string">"sleep"</span>, student));});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"mediumCommitSocial"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"medium"</span>, <span class="hljs-string">"social"</span>, student));});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"mediumCommitStudy"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"medium"</span>, <span class="hljs-string">"study"</span>, student));});
+
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"bigCommitMH"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"big"</span>, <span class="hljs-string">"MH"</span>, student));});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"bigCommitPH"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"big"</span>, <span class="hljs-string">"MH"</span>, student));});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"bigCommitSleep"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"big"</span>, <span class="hljs-string">"MH"</span>, student));});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"bigCommitSocial"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"big"</span>, <span class="hljs-string">"MH"</span>, student));});
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"bigCommitStudy"</span>).addEventListener(<span class="hljs-string">"click"</span>, () =&gt;
+  {studentModifications.push(<span class="hljs-keyword">new</span> commitment(<span class="hljs-string">"big"</span>, <span class="hljs-string">"MH"</span>, student));});
+<span class="hljs-comment">/*----------------------------------------------------------------------------*/</span>
+
+
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i&lt;<span class="hljs-number">75</span>; i++)
+    {
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j&lt;<span class="hljs-number">5</span>; j++)
+        {
+            setInterval(<span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{
+              frameEvent(studentModifications, student);
+            },<span class="hljs-number">1000</span>);
+
+        }
+        <span class="hljs-keyword">if</span>(getRandomInt(<span class="hljs-number">100</span>)==<span class="hljs-number">42</span>)
+        {
+          studentModifications.push(<span class="hljs-keyword">new</span> lifeEvent(student));
+        }
+        <span class="hljs-keyword">if</span>(student.GameOver())
+        {
+          <span class="hljs-keyword">break</span>;
+        }
+        <span class="hljs-built_in">console</span>.log(i);
+
+    }
+    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{
+        announceGrade(student);
+    }, <span class="hljs-number">375000</span>);
+
+
+
+
+
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wait</span>(<span class="hljs-params">ms</span>)
+</span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>I didn’t use setTimeout or setInterval because it did not work properly
+Therefore I went this round about way</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">let</span> d = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
+  <span class="hljs-keyword">let</span> d2 = <span class="hljs-literal">null</span>;
+  <span class="hljs-keyword">do</span> { d2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(); }
+  <span class="hljs-keyword">while</span>(d2-d &lt; ms);
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>these two functions came from <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRandomInt</span>(<span class="hljs-params">max</span>)</span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-built_in">Math</span>.floor(max));
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRandomInt2</span>(<span class="hljs-params">min, max</span>)</span>{
+  min = <span class="hljs-built_in">Math</span>.ceil(min);
+  max = <span class="hljs-built_in">Math</span>.floor(max);
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * (max - min)) + min; <span class="hljs-comment">//The maximum is exclusive and the minimum is inclusive</span>
+}
+
+<span class="hljs-comment">/*
+Pre: The student object in the game will be pased to get its stats updated.
+Post: All the functions in studentModifications[] get executed and adjusted.
+Param: Student object
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">frameEvent</span>(<span class="hljs-params">studentModifications, student</span>)</span>{
+
+
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i&lt;studentModifications.length; i++)
+    {
+        <span class="hljs-keyword">if</span>(studentModifications[i] == <span class="hljs-string">"commitment"</span>)
+        {
+          <span class="hljs-keyword">if</span>(studentModifications[i].length == <span class="hljs-number">0</span>)
+          {
+            studentModifications.splice(i,<span class="hljs-number">1</span>);
+          }
+          <span class="hljs-keyword">else</span>
+          {
+            studentModifications[i].fulfill();
+          }
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(studentModifications[i].modType == <span class="hljs-string">"adversaries"</span>)
+        {
+          <span class="hljs-keyword">if</span>(studentModifications[i].location == <span class="hljs-number">1</span>)
+          {
+            <span class="hljs-built_in">document</span>.getElementById(studentModifications[i].type + studentModifications[i].location).innerHTML = <span class="hljs-string">""</span>;
+            studentModifications[i].modifyStudent();
+            studentModifications.splice(i,<span class="hljs-number">1</span>);
+          }
+          <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(studentModifications[i].deterioration &lt;= <span class="hljs-number">0</span>)
+          {
+            <span class="hljs-built_in">document</span>.getElementById(studentModifications[i].type + studentModifications[i].location).innerHTML = <span class="hljs-string">""</span>;
+            studentModifications.splice(i, <span class="hljs-number">1</span>);
+          }
+          <span class="hljs-keyword">else</span>
+          {
+            studentModifications[i].moveNextBlock();
+            updateAdvesaryPosition(studentModifications[i]);
+          }
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(studentModifications[i].modType == <span class="hljs-string">"lifeEvent"</span>)
+        {
+          <span class="hljs-keyword">if</span>(studentModifications[i].length == <span class="hljs-number">0</span>)
+          {
+            studentModifications.splice(i,<span class="hljs-number">1</span>);
+
+            student.modifyStudent(<span class="hljs-number">10</span>, <span class="hljs-string">"willpower"</span>);
+          }
+          <span class="hljs-keyword">else</span>
+          {
+            studentModifications[i].modifyStudent();
+          }
+        }
+    }
+
+<span class="hljs-comment">/*
+*Pre: None
+*Post: This will add new adversaries to the array
+*
+*/</span>
+    <span class="hljs-keyword">if</span>(student.type == <span class="hljs-string">"Engineering Student"</span>)
+    {
+      studentModifications.push(<span class="hljs-keyword">new</span> adversaries(student));
+    }
+    <span class="hljs-keyword">else</span>
+    {
+      <span class="hljs-keyword">if</span>(getRandomInt(<span class="hljs-number">4</span>)==<span class="hljs-number">1</span>)
+      {
+        studentModifications.push(<span class="hljs-keyword">new</span> adversaries(student));
+      }
+    }
+
+    updateGameDisplay(studentModifications, student);
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">announceGrade</span>(<span class="hljs-params">student</span>)</span>{
+  alert(<span class="hljs-string">"Congratulations! You ended the semester with a "</span> + student.grade);
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>lifeEvents.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="adversaries.html">
+                  adversaries.js
+                </a>
+              
+                
+                <a class="source" href="displayManipulation.html">
+                  displayManipulation.js
+                </a>
+              
+                
+                <a class="source" href="game.html">
+                  game.js
+                </a>
+              
+                
+                <a class="source" href="gameGeneration.html">
+                  gameGeneration.js
+                </a>
+              
+                
+                <a class="source" href="lifeEvents.html">
+                  lifeEvents.js
+                </a>
+              
+                
+                <a class="source" href="studentActions.html">
+                  studentActions.js
+                </a>
+              
+                
+                <a class="source" href="studentCommitments.html">
+                  studentCommitments.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>lifeEvents.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">lifeEvent</span>(<span class="hljs-params">student</span>)</span>{
+  <span class="hljs-keyword">this</span>.modType = <span class="hljs-string">"lifeEvent"</span>;
+  <span class="hljs-keyword">this</span>.student = student;
+  <span class="hljs-keyword">this</span>.length = <span class="hljs-number">30</span>;
+
+  <span class="hljs-keyword">if</span>(getRandomInt(<span class="hljs-number">2</span>)==<span class="hljs-number">1</span>)
+  {
+    <span class="hljs-keyword">this</span>.type = <span class="hljs-string">"negative"</span>;
+    <span class="hljs-keyword">this</span>.name = generateRandomBadLifeEventName();
+  }
+  <span class="hljs-keyword">else</span>
+  {
+    <span class="hljs-keyword">this</span>.type = <span class="hljs-string">"positive"</span>;
+    <span class="hljs-keyword">this</span>.name = generateRandomGoodLifeEventName();
+  }
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateRandomBadLifeEventName</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">let</span> arr = [
+    <span class="hljs-string">"Car accident"</span>,
+    <span class="hljs-string">"Coronavirus"</span>,
+    <span class="hljs-string">"You died"</span>
+  ];
+  <span class="hljs-keyword">let</span> i = getRandomInt(arr.length);
+  <span class="hljs-keyword">return</span> arr[i];
+
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateRandomGoodLifeEventName</span>(<span class="hljs-params"></span>)</span>{
+<span class="hljs-keyword">let</span> arr = [
+  <span class="hljs-string">"Won the lottery"</span>,
+  <span class="hljs-string">"Planned a vacation"</span>,
+  <span class="hljs-string">"Had a good day"</span>
+];
+<span class="hljs-keyword">let</span> i = getRandomInt(arr.length);
+<span class="hljs-keyword">return</span> arr[i];
+
+}
+
+lifeEvent.prototype.modifyStudent = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.type == <span class="hljs-string">"positive"</span>)
+  {
+    <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">0.2</span>, <span class="hljs-string">"willpower"</span>);
+    <span class="hljs-keyword">this</span>.length -= <span class="hljs-number">0.2</span>;
+  }
+  <span class="hljs-keyword">else</span>
+  {
+    <span class="hljs-keyword">this</span>.student.modifyStudent(<span class="hljs-number">-0.2</span>, <span class="hljs-string">"willpower"</span>);
+    <span class="hljs-keyword">this</span>.length -= <span class="hljs-number">0.2</span>;
+  }
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
