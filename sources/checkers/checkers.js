@@ -274,11 +274,13 @@ function buildPieces(){
      pieces[22] = new Piece(22,275,375,'orange',0,61);
      pieces[23] = new Piece(23,375,375,'orange',0,63);
 }
+//displays all the pieces
 function showPieces(){
   for(let i=0; i<24;i++){
     pieces[i].showPiece();
   }
 }
+//checks if the piece has been clicked
 function hasPieceBeenClicked(_x,_y){
   for(let i=0; i<24; i++){
     pieces[i].checkClick(_x,_y);
@@ -286,6 +288,7 @@ function hasPieceBeenClicked(_x,_y){
 }
 
 //TILE FUNCTIONS
+//builds the board
 function buildBoard(){
   for(let row=0; row<8; row++){
   //if in an even row
@@ -316,21 +319,25 @@ function buildBoard(){
     }
   }
 }
+//displays all the tiles
 function showBoard(){
   for(let i=0; i<64; i++){
     boardArray[i].showTile();;
   }
 }
+//checks whether the tile has been clicked on
 function hasTileBeenClicked(_x,_y){
     for(let i=0; i<64; i++){
       boardArray[i].checkClick(_x,_y);
     }
 }
+//iterates across all tiles at start and the tiles get numbered
 function numberTiles(){
   for(let i=0; i<64; i++){
     boardArray[i].showNumber();
   }
 }
+//marks the occupied tiles iterating across all of them
 function markOccupied(){
   tileX = 0;
   tileY = 0;
@@ -354,6 +361,7 @@ function markOccupied(){
 }
 
 //CHECKERS FUNCTIONS
+//Resets game...
 function resetGame(){
   buildBoard();
   showBoard();
@@ -366,6 +374,7 @@ function resetGame(){
   clickedPiece = -1;
   currentPlayer = 1;
 }
+//sets the pieces new location and removes it from old location, then marks its tile as occupied
 function movePieceToClicked(){
   if((clickedPiece !== -1) && (clickedTile !== -1) && (boardArray[clickedTile].getOccupied()==0) && (boardArray[clickedTile].getColor()!== 'white')){
   pieces[clickedPiece].setXcoord(boardArray[clickedTile].getXcoord()+25);
@@ -377,11 +386,13 @@ function movePieceToClicked(){
   switchCurrentPlayer();
   }
 }
+//resets highlights after clicks
 function resetHighlights(){
   for(let i=0; i<64; i++){
     boardArray[i].setNotHighlighted();
   }
 }
+//checks if the tile clicked can be moved to
 function tileClickedisHighlighted(){
   if(boardArray[clickedTile].getHighlightValue() == 1){
     return true;
@@ -424,6 +435,7 @@ function tileClickedisHighlighted(){
   }
   else{ return false;}
 }
+//checks if the piece clicked on should be set as the current users piece
 function isThisTheCurrentUsersPiece(){
   if((pieces[clickedPiece].getColor() == 'orange') && (currentPlayer == 2)){
     return true;
@@ -435,8 +447,8 @@ function isThisTheCurrentUsersPiece(){
         console.log('else');
     return false;
   }
-
 }
+// switches the current player after click
 function switchCurrentPlayer(){
   if (currentPlayer == 1){
     currentPlayer = 2;
@@ -447,6 +459,7 @@ function switchCurrentPlayer(){
     console.log('current player is now 1');
   }
 }
+//Checks for the color of the piece in the tile
 function colorOfPieceinTile(tile){
   tileToTest = tile;
   for(let i=0; i<24; i++){
@@ -455,6 +468,7 @@ function colorOfPieceinTile(tile){
     }
   }
 }
+//GETTERS SETTERS below serve to find the tile numbers that the piece could possibly jump to 
 function getJumpLeftTileNumber(){
   if((pieces[clickedPiece].getColor()=='orange')){
     //console.log('orange');
@@ -599,6 +613,7 @@ function checkWinner(){
   }
   else{return false;}
 }
+//Checks to see if any pieces are in a position to be switched to king
 function checkKing(){
   for(let i =0; i<24;i++){
     if(pieces[i].getColor()=='orange'){
@@ -631,11 +646,13 @@ function checkKing(){
     }
   }
 }
+//refreshes the game back to start
 function refresh(){
   markOccupied();
   showBoard();
   showPieces();
 }
+//prints who the current player is
 function currentPlayerMessage(){
   if(currentPlayer == 1){
     fill('white');
@@ -654,6 +671,8 @@ function currentPlayerMessage(){
     text('Player '+ currentPlayer + 's turn', 530,80);
   }
 }
+
+//prints the rules of checkers below the board
 function rulesMessage(){
   fill('magenta');
   textSize(15);
@@ -670,11 +689,14 @@ function rulesMessage(){
   text('This game was made for EECS 448 at the University of Kansas, Professor Andy Gill, Spring 2020. By:CHASE ODGERS using P5.JS library',0,525);
 }
 //P5 FUNCTIONS
+//mousePressed is a function from the P5.js library that waits for the click of any mouse button, and on the press of the button 
+//all the functions get called within it.
 function mousePressed(){
   resetHighlights();
   hasPieceBeenClicked(mouseX,mouseY);
   hasTileBeenClicked(mouseX,mouseY);
 }
+//Checks to see if there are no more pieces on the other team
 function winMessage(){
   strokeWeight(2);
   stroke(50);
@@ -683,6 +705,7 @@ function winMessage(){
   fill(50);
   text('Player '+ winner + ' WINS!!', 175,300);
 }
+//Stock p5.js function which runs the real time updating
 function draw() {
   if((piecehasbeenclicked == 1)&&(isThisTheCurrentUsersPiece())){
     highlightAvailableMoves();
