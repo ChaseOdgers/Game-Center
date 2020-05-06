@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded",() => {
 
 
     let aStudent = new student("A Student", 90, 90, 90, 90, 90, 90);
+
     gameStart(aStudent);
 
 
@@ -44,5 +45,5 @@ document.addEventListener("DOMContentLoaded",() => {
 
   });
 
-
+console.log('oh man');
 });

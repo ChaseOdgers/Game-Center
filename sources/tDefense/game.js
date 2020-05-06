@@ -3,6 +3,7 @@ This is sequentially what happens after the gameGeneration.js
 In this file, the frame by frame is controlled and student object is kept track of.*/
 
 function gameStart(student){
+
   document.getElementById("startingMenu").remove();
   document.getElementById("mainHeading").innerHTML = "The Good Student";
   document.getElementById("mainGame").style.visibility = "visible";
@@ -10,6 +11,8 @@ function gameStart(student){
 
 
   let studentModifications = [];
+  let gameStatus = {gameOver:false, dayCount:0}
+
 
 /*---------------------Player Controlled Button Listeners--------------------*/
   document.getElementById("smallCommitMH").addEventListener("click", () =>
@@ -48,36 +51,41 @@ function gameStart(student){
 
 
 
-    for(let i = 0; i<75; i++)
+setTimeout(()=>{
+
+
+
+
+while(gameStatus.gameOver == false || gameStatus.dayCount < 75){
+document.getElementById("NextDay").addEventListener("click", (gameStatus,studentModifications, student)=>{
+
+  console.log('trouble');
+    for(let j = 0; j<5; j++)
     {
-        for(let j = 0; j<5; j++)
-        {
-            setInterval(()=>{
-              frameEvent(studentModifications, student);
-            },1000);
-
-        }
-        if(getRandomInt(100)==42)
-        {
-          studentModifications.push(new lifeEvent(student));
-        }
-        if(student.GameOver())
-        {
-          break;
-        }
-        console.log(i);
-
+        frameEvent(studentModifications, student);
     }
-    setTimeout(()=>{
-        announceGrade(student);
-    }, 375000);
+    if(getRandomInt(100)==42)
+    {
+      studentModifications.push(new lifeEvent(student));
+    }
+    if(student.GameOver())
+    {
+      gameStatus.gameOver = true;
+    }
+    gameStatus.dayCount++;
 
-
-
-
-
+});
 
 }
+
+if(gameStatus.gameOver == true || gameStatus.dayCount >=75){
+      announceGrade(student);
+}
+
+},1000);
+}
+
+
 
 function wait(ms)
 {
@@ -112,6 +120,7 @@ function frameEvent(studentModifications, student){
 
     for(let i = 0; i<studentModifications.length; i++)
     {
+      //debugger;
         if(studentModifications[i] == "commitment")
         {
           if(studentModifications[i].length == 0)
@@ -162,6 +171,9 @@ function frameEvent(studentModifications, student){
 *Post: This will add new adversaries to the array
 *
 */
+
+
+
     if(student.type == "Engineering Student")
     {
       studentModifications.push(new adversaries(student));
@@ -175,6 +187,8 @@ function frameEvent(studentModifications, student){
     }
 
     updateGameDisplay(studentModifications, student);
+
+
 
 }
 
